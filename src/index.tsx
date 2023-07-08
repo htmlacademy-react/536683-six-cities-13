@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Main } from './components/main/main';
+import { App } from './components/app/app';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+enum Settings {
+  Offers = 20,
+}
+
 root.render(
   <React.StrictMode>
-    <Main />
+    <App offerCount={Settings.Offers} />
   </React.StrictMode>
 );
