@@ -18,8 +18,8 @@ const Main = (props: MainProps) => {
                   className="header__logo"
                   src="img/logo.svg"
                   alt="6 cities logo"
-                  width="81"
-                  height="41"
+                  width={81}
+                  height={41}
                 />
               </a>
             </div>
@@ -47,7 +47,6 @@ const Main = (props: MainProps) => {
           </div>
         </div>
       </header>
-
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -97,8 +96,8 @@ const Main = (props: MainProps) => {
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
                   Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
+                  <svg className="places__sorting-arrow" width={7} height={4}>
+                    <use xlinkHref="#icon-arrow-select" />
                   </svg>
                 </span>
                 <ul className="places__options places__options--custom places__options--opened">
@@ -128,7 +127,7 @@ const Main = (props: MainProps) => {
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map" />
             </div>
           </div>
         </div>
