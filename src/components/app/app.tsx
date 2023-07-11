@@ -27,7 +27,7 @@ const App = (props: AppProps) => {
         <Route path={AppRoute.Login} element={<Login />} />
         <Route path={AppRoute.Favorites} element={<Favorites />} />
         <Route path={AppRoute.DevFavotites} element={<FavoritesEmpty />} />
-        <Route path={AppRoute.Offer} element={<Offer />} />
+        <Route path={`${AppRoute.Offer}/:id`} element={<Offer />} />
         <Route path={AppRoute.DevOffer} element={<OfferNotLogged />} />
         <Route path={AppRoute.NotFound} element={<NotFound />} />
       </Routes>
