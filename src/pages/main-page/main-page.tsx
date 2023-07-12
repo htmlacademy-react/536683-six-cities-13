@@ -4,7 +4,7 @@ type MainProps = {
   offerCount: number;
 };
 
-const Main = (props: MainProps) => {
+const MainPage = (props: MainProps) => {
   const { offerCount } = props;
 
   return (
@@ -136,4 +136,4 @@ const Main = (props: MainProps) => {
   );
 };
 
-export { Main };
+export { MainPage };
