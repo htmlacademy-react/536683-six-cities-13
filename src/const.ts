@@ -13,4 +13,10 @@ enum AppRoute {
   DevRoot = '/dev-root',
 }
 
-export { Settings, AppRoute };
+enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
+
+export { Settings, AppRoute, AuthorizationStatus };

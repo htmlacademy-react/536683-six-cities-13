@@ -1,4 +1,4 @@
-import { PlaceCard } from '../../components/place-card/place-card';
+import { OfferCard } from '../../components/offer-card/offer-card';
 
 type MainProps = {
   offerCount: number;
@@ -119,11 +119,11 @@ const Main = (props: MainProps) => {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
+                <OfferCard />
+                <OfferCard />
+                <OfferCard />
+                <OfferCard />
+                <OfferCard />
               </div>
             </section>
             <div className="cities__right-section">
