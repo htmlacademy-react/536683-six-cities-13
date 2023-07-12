@@ -1,10 +1,11 @@
-import { PlaceCard } from '../place-card/place-card';
+import { Logo } from '../../components/logo/logo';
+import { OfferCard } from '../../components/offer-card/offer-card';
 
 type MainProps = {
   offerCount: number;
 };
 
-const Main = (props: MainProps) => {
+const MainPage = (props: MainProps) => {
   const { offerCount } = props;
 
   return (
@@ -13,15 +14,7 @@ const Main = (props: MainProps) => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link header__logo-link--active">
-                <img
-                  className="header__logo"
-                  src="img/logo.svg"
-                  alt="6 cities logo"
-                  width="81"
-                  height="41"
-                />
-              </a>
+              <Logo />
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -47,7 +40,6 @@ const Main = (props: MainProps) => {
           </div>
         </div>
       </header>
-
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -97,8 +89,8 @@ const Main = (props: MainProps) => {
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
                   Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
+                  <svg className="places__sorting-arrow" width={7} height={4}>
+                    <use xlinkHref="#icon-arrow-select" />
                   </svg>
                 </span>
                 <ul className="places__options places__options--custom places__options--opened">
@@ -120,15 +112,15 @@ const Main = (props: MainProps) => {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
+                <OfferCard />
+                <OfferCard />
+                <OfferCard />
+                <OfferCard />
+                <OfferCard />
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map" />
             </div>
           </div>
         </div>
@@ -137,4 +129,4 @@ const Main = (props: MainProps) => {
   );
 };
 
-export { Main };
+export { MainPage };
