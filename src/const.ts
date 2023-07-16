@@ -15,4 +15,9 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export { AppRoute, AuthorizationStatus };
+enum OfferCardType {
+  Cities = 'cities',
+  Favorites = 'favorites',
+}
+
+export { AppRoute, AuthorizationStatus, OfferCardType };

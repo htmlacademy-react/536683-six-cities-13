@@ -1,10 +1,11 @@
 import { SyntheticEvent, useState } from 'react';
 import { TOffer } from '../../mocks/offers';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, OfferCardType } from '../../const';
 
 type TOfferCardProps = {
   offer: TOffer;
+  cardType?: string;
   onOfferHover: (offerId: string) => void;
 };
 
@@ -14,7 +15,11 @@ const calculateRating = (rating: number): number => {
   return (rating * 100) / MAX_RATING;
 };
 
-const OfferCard = ({ offer, onOfferHover }: TOfferCardProps) => {
+const OfferCard = ({
+  offer,
+  cardType = OfferCardType.Cities,
+  onOfferHover,
+}: TOfferCardProps) => {
   const {
     id,
     title,
@@ -27,6 +32,11 @@ const OfferCard = ({ offer, onOfferHover }: TOfferCardProps) => {
   } = offer;
   const [isOfferFavorite, setIsOfferFavorite] = useState<boolean>(isFavorite);
 
+  const cardTypeClassName =
+    cardType === OfferCardType.Cities
+      ? OfferCardType.Cities
+      : OfferCardType.Favorites;
+
   const handleFavoriteClick = (evt: SyntheticEvent) => {
     evt.preventDefault();
 
@@ -35,7 +45,7 @@ const OfferCard = ({ offer, onOfferHover }: TOfferCardProps) => {
 
   return (
     <article
-      className="cities__card place-card"
+      className={`${cardTypeClassName}__card place-card`}
       onMouseOver={() => onOfferHover(id)}
     >
       {isPremium && (
@@ -44,7 +54,9 @@ const OfferCard = ({ offer, onOfferHover }: TOfferCardProps) => {
         </div>
       )}
 
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div
+        className={`${cardTypeClassName}__image-wrapper place-card__image-wrapper`}
+      >
         <a href="#">
           <img
             className="place-card__image"
@@ -55,7 +67,7 @@ const OfferCard = ({ offer, onOfferHover }: TOfferCardProps) => {
           />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={`${cardTypeClassName}__card-info place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
