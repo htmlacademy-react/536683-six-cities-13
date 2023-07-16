@@ -42,7 +42,7 @@ const OFFERS: TOffer[] = [
       longitude: 2.342499,
       zoom: 16,
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: false,
     rating: 2.4,
   },
@@ -65,7 +65,7 @@ const OFFERS: TOffer[] = [
       longitude: 2.330499,
       zoom: 16,
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     rating: 1.4,
   },
@@ -76,7 +76,7 @@ const OFFERS: TOffer[] = [
     price: 192,
     previewImage: 'https://13.design.pages.academy/static/hotel/17.jpg',
     city: {
-      name: 'Paris',
+      name: 'Cologne',
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -88,7 +88,7 @@ const OFFERS: TOffer[] = [
       longitude: 2.335499,
       zoom: 16,
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: false,
     rating: 3.5,
   },
@@ -99,7 +99,7 @@ const OFFERS: TOffer[] = [
     price: 453,
     previewImage: 'https://13.design.pages.academy/static/hotel/19.jpg',
     city: {
-      name: 'Paris',
+      name: 'Cologne',
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -111,7 +111,7 @@ const OFFERS: TOffer[] = [
       longitude: 2.358499,
       zoom: 16,
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     rating: 3.8,
   },

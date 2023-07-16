@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './not-found-page.module.css';
 import { AppRoute } from '../../const';
 import { Logo } from '../../components/logo/logo';
+import { Footer } from '../../components/footer/footer';
 
 const NotFoundPage = () => (
   <div className={`page ${styles['page--not-found']}`}>
@@ -48,17 +49,7 @@ const NotFoundPage = () => (
         </section>
       </div>
     </main>
-    <footer className="footer">
-      <a className="footer__logo-link" href="main.html">
-        <img
-          className="footer__logo"
-          src="img/logo.svg"
-          alt="6 cities logo"
-          width={64}
-          height={33}
-        />
-      </a>
-    </footer>
+    <Footer />
   </div>
 );
 

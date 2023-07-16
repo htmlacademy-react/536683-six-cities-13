@@ -2,11 +2,12 @@ import { SyntheticEvent, useState } from 'react';
 import { TOffer } from '../../mocks/offers';
 import { Link } from 'react-router-dom';
 import { AppRoute, OfferCardType } from '../../const';
+import styles from './offer-card.module.css';
 
 type TOfferCardProps = {
   offer: TOffer;
   cardType?: string;
-  onOfferHover: (offerId: string) => void;
+  onOfferHover?: (offerId: string) => void;
 };
 
 const calculateRating = (rating: number): number => {
@@ -36,6 +37,10 @@ const OfferCard = ({
     cardType === OfferCardType.Cities
       ? OfferCardType.Cities
       : OfferCardType.Favorites;
+  const cardImageClassName =
+    cardType === OfferCardType.Cities
+      ? `${styles['cities__card-info']}`
+      : `${styles['favorites__card-info']}`;
 
   const handleFavoriteClick = (evt: SyntheticEvent) => {
     evt.preventDefault();
@@ -46,7 +51,7 @@ const OfferCard = ({
   return (
     <article
       className={`${cardTypeClassName}__card place-card`}
-      onMouseOver={() => onOfferHover(id)}
+      onMouseOver={() => onOfferHover && onOfferHover(id)}
     >
       {isPremium && (
         <div className="place-card__mark">
@@ -59,10 +64,8 @@ const OfferCard = ({
       >
         <a href="#">
           <img
-            className="place-card__image"
+            className={`${cardImageClassName} place-card__image`}
             src={previewImage}
-            width="260"
-            height="200"
             alt="Place image"
           />
         </a>

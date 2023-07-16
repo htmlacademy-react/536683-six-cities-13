@@ -9,7 +9,7 @@ import { MainEmptyPage } from '../../pages/main-empty-page/main-empty-page';
 import { OfferNotLoggedPage } from '../../pages/offer-not-logged-page/offer-not-logged-page';
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { PrivateRoute } from '../private-route/private-route';
-import { TOffer } from '../../mocks/offers';
+import { OFFERS, TOffer } from '../../mocks/offers';
 import { Offer } from '../offer/offer';
 
 type TAppProps = {
@@ -30,7 +30,10 @@ const App = ({ offers }: TAppProps) => (
         path={AppRoute.Favorites}
         element={
           <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-            <FavoritesPage authorizationStatus={AuthorizationStatus.Auth} />
+            <FavoritesPage
+              offers={OFFERS}
+              authorizationStatus={AuthorizationStatus.Auth}
+            />
           </PrivateRoute>
         }
       />
