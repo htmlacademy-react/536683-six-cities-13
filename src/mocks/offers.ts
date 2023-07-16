@@ -1,28 +1,28 @@
-type CityLocation = {
+type TCityLocation = {
   latitude: number;
   longitude: number;
   zoom: number;
 };
 
-type City = {
+type TCity = {
   name: string;
-  location: CityLocation;
+  location: TCityLocation;
 };
 
-type Offer = {
+export type TOffer = {
   id: string;
   title: string;
   type: string;
   price: number;
   previewImage: string;
-  city: City;
-  location: CityLocation;
+  city: TCity;
+  location: TCityLocation;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
 };
 
-const OFFERS: Offer[] = [
+const OFFERS: TOffer[] = [
   {
     id: '6cedd5f6-ca3e-42ff-9bad-7f1c4f52f5a9',
     title: 'Wood and stone place',

@@ -1,11 +1,11 @@
 import { Logo } from '../../components/logo/logo';
 import { OfferCard } from '../../components/offer-card/offer-card';
 
-type MainProps = {
+type TMainProps = {
   offerCount: number;
 };
 
-const MainPage = (props: MainProps) => {
+const MainPage = (props: TMainProps) => {
   const { offerCount } = props;
 
   return (

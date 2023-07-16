@@ -9,14 +9,19 @@ import { MainEmptyPage } from '../../pages/main-empty-page/main-empty-page';
 import { OfferNotLoggedPage } from '../../pages/offer-not-logged-page/offer-not-logged-page';
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { PrivateRoute } from '../private-route/private-route';
+import { TOffer } from '../../mocks/offers';
 import { Offer } from '../offer/offer';
 
-type AppProps = {
+type TAppProps = {
   offerCount: number;
+  offers: TOffer[];
 };
 
-const App = (props: AppProps) => {
-  const { offerCount } = props;
+const App = (props: TAppProps) => {
+  const { offerCount, offers } = props;
+
+  // eslint-disable-next-line no-console
+  console.log(offers);
 
   return (
     <BrowserRouter>
