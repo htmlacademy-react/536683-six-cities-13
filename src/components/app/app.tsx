@@ -13,15 +13,11 @@ import { TOffer } from '../../mocks/offers';
 import { Offer } from '../offer/offer';
 
 type TAppProps = {
-  offerCount: number;
   offers: TOffer[];
 };
 
 const App = (props: TAppProps) => {
-  const { offerCount, offers } = props;
-
-  // eslint-disable-next-line no-console
-  console.log(offers);
+  const { offers } = props;
 
   return (
     <BrowserRouter>
@@ -29,7 +25,7 @@ const App = (props: TAppProps) => {
         <Route
           index
           path={AppRoute.Root}
-          element={<MainPage offerCount={offerCount} />}
+          element={<MainPage offers={offers} />}
         />
         <Route path={AppRoute.DevRoot} index element={<MainEmptyPage />} />
         <Route path={AppRoute.Login} element={<LoginPage />} />

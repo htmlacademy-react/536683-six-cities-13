@@ -1,7 +1,3 @@
-enum Settings {
-  Offers = 20,
-}
-
 enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
@@ -19,4 +15,4 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export { Settings, AppRoute, AuthorizationStatus };
+export { AppRoute, AuthorizationStatus };
