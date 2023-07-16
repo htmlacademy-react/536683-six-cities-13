@@ -3,12 +3,21 @@ import { TOffer } from '../../mocks/offers';
 
 type TOfferCardProps = {
   offer: TOffer;
+  onOfferHover: (offerId: string) => void;
 };
 
-const OfferCard = (props: TOfferCardProps) => {
-  const { title, type, price, previewImage, isFavorite, isPremium, rating } =
-    props.offer;
-  const [isOfferFavorite, setIsOfferFavorite] = useState(isFavorite);
+const OfferCard = ({ offer, onOfferHover }: TOfferCardProps) => {
+  const {
+    id,
+    title,
+    type,
+    price,
+    previewImage,
+    isFavorite,
+    isPremium,
+    rating,
+  } = offer;
+  const [isOfferFavorite, setIsOfferFavorite] = useState<boolean>(isFavorite);
 
   const handleFavoriteClick = (evt: SyntheticEvent) => {
     evt.preventDefault();
@@ -17,7 +26,10 @@ const OfferCard = (props: TOfferCardProps) => {
   };
 
   return (
-    <article className="cities__card place-card">
+    <article
+      className="cities__card place-card"
+      onMouseOver={() => onOfferHover(id)}
+    >
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>

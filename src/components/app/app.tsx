@@ -16,36 +16,32 @@ type TAppProps = {
   offers: TOffer[];
 };
 
-const App = (props: TAppProps) => {
-  const { offers } = props;
-
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          index
-          path={AppRoute.Root}
-          element={<MainPage offers={offers} />}
-        />
-        <Route path={AppRoute.DevRoot} index element={<MainEmptyPage />} />
-        <Route path={AppRoute.Login} element={<LoginPage />} />
-        <Route
-          path={AppRoute.Favorites}
-          element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <FavoritesPage />
-            </PrivateRoute>
-          }
-        />
-        <Route path={AppRoute.DevFavotites} element={<FavoritesEmptyPage />} />
-        <Route path={AppRoute.Offer} element={<OfferPage />}>
-          <Route path=":id" element={<Offer />} />
-        </Route>
-        <Route path={AppRoute.DevOffer} element={<OfferNotLoggedPage />} />
-        <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
-  );
-};
+const App = ({ offers }: TAppProps) => (
+  <BrowserRouter>
+    <Routes>
+      <Route
+        index
+        path={AppRoute.Root}
+        element={<MainPage offers={offers} />}
+      />
+      <Route path={AppRoute.DevRoot} index element={<MainEmptyPage />} />
+      <Route path={AppRoute.Login} element={<LoginPage />} />
+      <Route
+        path={AppRoute.Favorites}
+        element={
+          <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+            <FavoritesPage />
+          </PrivateRoute>
+        }
+      />
+      <Route path={AppRoute.DevFavotites} element={<FavoritesEmptyPage />} />
+      <Route path={AppRoute.Offer} element={<OfferPage />}>
+        <Route path=":id" element={<Offer />} />
+      </Route>
+      <Route path={AppRoute.DevOffer} element={<OfferNotLoggedPage />} />
+      <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
+    </Routes>
+  </BrowserRouter>
+);
 
 export { App };

@@ -6,14 +6,11 @@ type TPrivateRouteProps = PropsWithChildren<{
   authorizationStatus: AuthorizationStatus;
 }>;
 
-const PrivateRoute = (props: TPrivateRouteProps) => {
-  const { authorizationStatus, children } = props;
-
-  return authorizationStatus === AuthorizationStatus.Auth ? (
+const PrivateRoute = ({ authorizationStatus, children }: TPrivateRouteProps) =>
+  authorizationStatus === AuthorizationStatus.Auth ? (
     children
   ) : (
     <Navigate to={AppRoute.Login} replace />
   );
-};
 
 export { PrivateRoute };
