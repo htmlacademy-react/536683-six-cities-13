@@ -6,7 +6,7 @@ type THost = {
   avatarUrl: string;
 };
 
-type TDetail = Omit<TOffer, 'previewImage'> & {
+export type TDetail = Omit<TOffer, 'previewImage'> & {
   description: string;
   images: string[];
   goods: string[];

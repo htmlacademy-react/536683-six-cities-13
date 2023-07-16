@@ -10,12 +10,14 @@ import { OfferNotLoggedPage } from '../../pages/offer-not-logged-page/offer-not-
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { PrivateRoute } from '../private-route/private-route';
 import { OFFERS, TOffer } from '../../mocks/offers';
+import { TDetail } from '../../mocks/details';
 
 type TAppProps = {
   offers: TOffer[];
+  details: TDetail[];
 };
 
-const App = ({ offers }: TAppProps) => (
+const App = ({ offers, details }: TAppProps) => (
   <BrowserRouter>
     <Routes>
       <Route
@@ -37,7 +39,10 @@ const App = ({ offers }: TAppProps) => (
         }
       />
       <Route path={AppRoute.DevFavotites} element={<FavoritesEmptyPage />} />
-      <Route path={`${AppRoute.Offer}/:id`} element={<OfferPage />} />
+      <Route
+        path={`${AppRoute.Offer}/:id`}
+        element={<OfferPage details={details} />}
+      />
       <Route path={AppRoute.DevOffer} element={<OfferNotLoggedPage />} />
       <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
     </Routes>
