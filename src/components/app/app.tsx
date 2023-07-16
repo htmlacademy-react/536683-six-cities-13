@@ -29,7 +29,7 @@ const App = ({ offers }: TAppProps) => (
       <Route
         path={AppRoute.Favorites}
         element={
-          <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+          <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
             <FavoritesPage />
           </PrivateRoute>
         }

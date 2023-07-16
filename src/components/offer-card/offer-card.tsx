@@ -1,9 +1,17 @@
 import { SyntheticEvent, useState } from 'react';
 import { TOffer } from '../../mocks/offers';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 type TOfferCardProps = {
   offer: TOffer;
   onOfferHover: (offerId: string) => void;
+};
+
+const calculateRating = (rating: number): number => {
+  const MAX_RATING = 5;
+
+  return (rating * 100) / MAX_RATING;
 };
 
 const OfferCard = ({ offer, onOfferHover }: TOfferCardProps) => {
@@ -68,12 +76,12 @@ const OfferCard = ({ offer, onOfferHover }: TOfferCardProps) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${(rating * 100) / 5}%` }}></span>
+            <span style={{ width: `${calculateRating(rating)}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
