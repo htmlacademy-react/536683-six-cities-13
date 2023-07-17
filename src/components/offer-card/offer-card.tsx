@@ -3,17 +3,12 @@ import { TOffer } from '../../mocks/offers';
 import { Link } from 'react-router-dom';
 import { AppRoute, OfferCardType } from '../../const';
 import styles from './offer-card.module.css';
+import { calculateRating } from '../../utils';
 
 type TOfferCardProps = {
   offer: TOffer;
   cardType?: string;
   onOfferHover?: (offerId: string) => void;
-};
-
-const calculateRating = (rating: number): number => {
-  const MAX_RATING = 5;
-
-  return (rating * 100) / MAX_RATING;
 };
 
 const OfferCard = ({
@@ -51,7 +46,7 @@ const OfferCard = ({
   return (
     <article
       className={`${cardTypeClassName}__card place-card`}
-      onMouseOver={() => onOfferHover && onOfferHover(id)}
+      onMouseEnter={() => onOfferHover && onOfferHover(id)}
     >
       {isPremium && (
         <div className="place-card__mark">
