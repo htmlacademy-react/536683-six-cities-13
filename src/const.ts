@@ -20,4 +20,9 @@ enum OfferCardType {
   Favorites = 'favorites',
 }
 
-export { AppRoute, AuthorizationStatus, OfferCardType };
+enum RatingType {
+  Cities = 'cities',
+  Offer = 'offer',
+}
+
+export { AppRoute, AuthorizationStatus, OfferCardType, RatingType };

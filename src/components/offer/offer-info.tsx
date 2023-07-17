@@ -1,4 +1,6 @@
+import { RatingType } from '../../const';
 import { TDetail } from '../../mocks/details';
+import { Rating } from '../rating/rating';
 import { OfferFeatures } from './offer-features';
 import { OfferGoods } from './offer-goods';
 
@@ -7,7 +9,8 @@ type TOfferInfoProps = {
 };
 
 const OfferInfo = ({ offer }: TOfferInfoProps) => {
-  const { isPremium, title, type, bedrooms, maxAdults, price, goods } = offer;
+  const { rating, isPremium, title, type, bedrooms, maxAdults, price, goods } =
+    offer;
 
   return (
     <>
@@ -25,15 +28,8 @@ const OfferInfo = ({ offer }: TOfferInfoProps) => {
           <span className="visually-hidden">To bookmarks</span>
         </button>
       </div>
-      {/* todo rating вынести в отдельный компонент  */}
-      <div className="offer__rating rating">
-        <div className="offer__stars rating__stars">
-          <span style={{ width: '80%' }} />
-          <span className="visually-hidden">Rating</span>
-        </div>
-        <span className="offer__rating-value rating__value">4.8</span>
-      </div>
-      {/* todo rating вынести в отдельный компонент  */}
+      <Rating ratingValue={rating} ratingType={RatingType.Offer} />
+
       <OfferFeatures features={{ type, bedrooms, maxAdults }} />
       <div className="offer__price">
         <b className="offer__price-value">€{price}</b>

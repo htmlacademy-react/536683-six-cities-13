@@ -3,7 +3,7 @@ import { TOffer } from '../../mocks/offers';
 import { Link } from 'react-router-dom';
 import { AppRoute, OfferCardType } from '../../const';
 import styles from './offer-card.module.css';
-import { calculateRating } from '../../utils';
+import { Rating } from '../rating/rating';
 
 type TOfferCardProps = {
   offer: TOffer;
@@ -84,12 +84,7 @@ const OfferCard = ({
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{ width: `${calculateRating(rating)}%` }}></span>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating ratingValue={rating} />
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>
