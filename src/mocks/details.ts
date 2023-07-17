@@ -17,7 +17,7 @@ export type TDetail = Omit<TOffer, 'previewImage'> & {
 
 const DETAILS: TDetail[] = [
   {
-    id: '6cedd5f6-ca3e-42ff-9bad-7f1c4f52f5a9',
+    id: '34f50f68-803c-43a9-8d59-9556fb9c0eaa',
     title: 'Wood and stone place',
     description:
       'This is a place for dreamers to reset, reflect, and create. Designed with a "slow" pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.',
@@ -68,7 +68,7 @@ const DETAILS: TDetail[] = [
     maxAdults: 6,
   },
   {
-    id: '161281b0-e649-475f-b5cf-f3753d69ef31',
+    id: '4b658388-7118-4e47-806a-fa5b0d41e8b0',
     title: 'Penthouse, 4-5 rooms + 5 balconies',
     description:
       'Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.',
@@ -115,7 +115,7 @@ const DETAILS: TDetail[] = [
     maxAdults: 9,
   },
   {
-    id: '68eabb8a-fa4a-400d-8826-5f3039a37707',
+    id: 'c99c9239-7836-4115-a767-ee81c4b835ad',
     title: 'Canal View Prinsengracht',
     description:
       'I rent out a very sunny and bright apartment only 7 minutes walking distance to the metro station. The apartment has a spacious living room with a kitchen, one bedroom and a bathroom with mit bath. A terrace can be used in summer.',

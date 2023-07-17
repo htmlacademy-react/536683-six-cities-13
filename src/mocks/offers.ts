@@ -24,7 +24,7 @@ export type TOffer = {
 
 const OFFERS: TOffer[] = [
   {
-    id: '6cedd5f6-ca3e-42ff-9bad-7f1c4f52f5a9',
+    id: '34f50f68-803c-43a9-8d59-9556fb9c0eaa',
     title: 'Wood and stone place',
     type: 'apartment',
     price: 163,
@@ -47,7 +47,7 @@ const OFFERS: TOffer[] = [
     rating: 2.4,
   },
   {
-    id: '161281b0-e649-475f-b5cf-f3753d69ef31',
+    id: '4b658388-7118-4e47-806a-fa5b0d41e8b0',
     title: 'Penthouse, 4-5 rooms + 5 balconies',
     type: 'house',
     price: 169,
@@ -93,7 +93,7 @@ const OFFERS: TOffer[] = [
     rating: 3.5,
   },
   {
-    id: '68eabb8a-fa4a-400d-8826-5f3039a37707',
+    id: 'c99c9239-7836-4115-a767-ee81c4b835ad',
     title: 'Canal View Prinsengracht',
     type: 'hotel',
     price: 453,
