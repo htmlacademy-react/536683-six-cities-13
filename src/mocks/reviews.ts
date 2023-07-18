@@ -12,15 +12,15 @@ type TComments = {
   user: TUser;
 };
 
-type TReview = {
+export type TReview = {
   id: string;
-  reviews: TComments[];
+  comments: TComments[];
 };
 
 const REVIEWS: TReview[] = [
   {
     id: '34f50f68-803c-43a9-8d59-9556fb9c0eaa',
-    reviews: [
+    comments: [
       {
         id: '5abcc770-15be-46cb-85ba-07bbc0c50bdf',
         comment:
@@ -49,7 +49,7 @@ const REVIEWS: TReview[] = [
   },
   {
     id: '4b658388-7118-4e47-806a-fa5b0d41e8b0',
-    reviews: [
+    comments: [
       {
         id: '9ba18db5-0e99-420b-9a58-cde37c6240b8',
         comment:
@@ -66,7 +66,7 @@ const REVIEWS: TReview[] = [
   },
   {
     id: 'c99c9239-7836-4115-a767-ee81c4b835ad',
-    reviews: [
+    comments: [
       {
         id: '066bbea7-f41f-43bd-b597-b22c6efd351e',
         comment:

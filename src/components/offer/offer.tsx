@@ -1,4 +1,5 @@
 import { TDetail } from '../../mocks/details';
+import { TReview } from '../../mocks/reviews';
 import { Reviews } from '../reviews/reviews';
 import { OfferGallery } from './offer-gallery';
 import { OfferHost } from './offer-host';
@@ -6,9 +7,10 @@ import { OfferInfo } from './offer-info';
 
 type TOfferProps = {
   offerDetails: TDetail;
+  review?: TReview;
 };
 
-const Offer = ({ offerDetails }: TOfferProps) => {
+const Offer = ({ offerDetails, review }: TOfferProps) => {
   const { images, host, description } = offerDetails;
 
   return (
@@ -26,7 +28,7 @@ const Offer = ({ offerDetails }: TOfferProps) => {
                 description,
               }}
             />
-            <Reviews />
+            {review && <Reviews review={review} />}
           </div>
         </div>
         <section className="offer__map map" />

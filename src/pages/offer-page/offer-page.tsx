@@ -3,16 +3,20 @@ import { Logo } from '../../components/logo/logo';
 import { TDetail } from '../../mocks/details';
 import { Offer } from '../../components/offer/offer';
 import { NotFoundPage } from '../not-found-page/not-found-page';
+import { TReview } from '../../mocks/reviews';
 
 type TOfferPageProps = {
   details: TDetail[];
+  reviews: TReview[];
 };
 
-const OfferPage = ({ details }: TOfferPageProps) => {
+const OfferPage = ({ details, reviews }: TOfferPageProps) => {
   const { id } = useParams();
   const currentDetails = details.find((detail) => detail.id === id);
+  const currentReviews = reviews.find((review) => review.id === id);
+
   const pageContent = currentDetails ? (
-    <Offer offerDetails={currentDetails} />
+    <Offer offerDetails={currentDetails} review={currentReviews} />
   ) : (
     <NotFoundPage />
   );
