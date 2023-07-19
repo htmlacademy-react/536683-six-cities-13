@@ -28,7 +28,7 @@ const OfferInfo = ({ offer }: TOfferInfoProps) => {
           <span className="visually-hidden">To bookmarks</span>
         </button>
       </div>
-      <Rating ratingValue={rating} ratingType={RatingType.Offer} />
+      <Rating ratingValue={rating} ratingType={RatingType.Offer} showDigits />
 
       <OfferFeatures features={{ type, bedrooms, maxAdults }} />
       <div className="offer__price">

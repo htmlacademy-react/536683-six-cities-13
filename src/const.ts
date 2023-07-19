@@ -23,6 +23,12 @@ enum OfferCardType {
 enum RatingType {
   Cities = 'cities',
   Offer = 'offer',
+  Reviews = 'reviews',
 }
 
-export { AppRoute, AuthorizationStatus, OfferCardType, RatingType };
+enum ReviewInfo {
+  MaxCommentLength = 60,
+  MinRating = 0,
+}
+
+export { AppRoute, AuthorizationStatus, OfferCardType, RatingType, ReviewInfo };

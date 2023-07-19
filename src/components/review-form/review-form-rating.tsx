@@ -1,16 +1,14 @@
-import { SyntheticEvent } from 'react';
+import { ChangeEvent } from 'react';
 
 type TReviewRating = {
   onRatingChange: (rating: number) => void;
 };
 
 const ReviewRating = ({ onRatingChange }: TReviewRating) => {
-  const handleRatingChange = (evt: SyntheticEvent) => {
-    if (evt.target instanceof HTMLInputElement) {
-      const rating = Number(evt.target.value);
+  const handleRatingChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    const rating = Number(target.value);
 
-      onRatingChange(rating);
-    }
+    onRatingChange(rating);
   };
 
   return (

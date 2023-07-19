@@ -1,5 +1,6 @@
+import { ReviewInfo } from '../../const';
 import { ReviewRating } from './review-form-rating';
-import { SyntheticEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
 export type TReviewForm = {
   rating: number;
@@ -12,22 +13,23 @@ const ReviewForm = () => {
     comment: '',
   });
   const isSubmitDisabled = Boolean(
-    reviewInfo.comment.length < 60 || reviewInfo.rating <= 0
+    reviewInfo.comment.length < ReviewInfo.MaxCommentLength ||
+      reviewInfo.rating <= ReviewInfo.MinRating
   );
 
   const handleRatingChange = (rating: number) => {
     setReviewInfo((prevReviewInfo) => ({ ...prevReviewInfo, rating }));
   };
 
-  const handleCommentChange = (evt: SyntheticEvent) => {
-    if (evt.target instanceof HTMLTextAreaElement) {
-      const comment = evt.target.value;
+  const handleCommentChange = ({
+    target,
+  }: ChangeEvent<HTMLTextAreaElement>) => {
+    const comment = target.value;
 
-      setReviewInfo((prevReviewInfo) => ({ ...prevReviewInfo, comment }));
-    }
+    setReviewInfo((prevReviewInfo) => ({ ...prevReviewInfo, comment }));
   };
 
-  const handleFormSubmit = (evt: SyntheticEvent) => {
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     // eslint-disable-next-line no-console

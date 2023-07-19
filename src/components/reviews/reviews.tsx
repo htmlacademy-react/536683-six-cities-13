@@ -1,5 +1,7 @@
+import { RatingType } from '../../const';
 import { TReview } from '../../types/review';
-import { calculateRating, getCommentDate, getMachineDate } from '../../utils';
+import { getCommentDate, getMachineDate } from '../../utils';
+import { Rating } from '../rating/rating';
 import { ReviewForm } from '../review-form/review-form';
 
 type TReviewsProps = {
@@ -39,12 +41,8 @@ const Reviews = ({ review }: TReviewsProps) => {
                 <span className="reviews__user-name">{name}</span>
               </div>
               <div className="reviews__info">
-                <div className="reviews__rating rating">
-                  <div className="reviews__stars rating__stars">
-                    <span style={{ width: `${calculateRating(rating)}%` }} />
-                    <span className="visually-hidden">Rating</span>
-                  </div>
-                </div>
+                <Rating ratingValue={rating} ratingType={RatingType.Reviews} />
+
                 <p className="reviews__text">{userComment}</p>
                 <time className="reviews__time" dateTime={getMachineDate(date)}>
                   {getCommentDate(date)}
