@@ -1,5 +1,5 @@
 import { OfferCardType } from '../../const';
-import { TOffer } from '../../mocks/offers';
+import { TOffer } from '../../types/offer';
 import { OfferCard } from '../offer-card/offer-card';
 
 type TFavoritesListProps = {

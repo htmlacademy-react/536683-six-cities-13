@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { Logo } from '../../components/logo/logo';
-import { TDetail } from '../../mocks/details';
 import { Offer } from '../../components/offer/offer';
 import { NotFoundPage } from '../not-found-page/not-found-page';
-import { TReview } from '../../mocks/reviews';
+import { TDetail } from '../../types/details';
+import { TReview } from '../../types/review';
 
 type TOfferPageProps = {
   details: TDetail[];

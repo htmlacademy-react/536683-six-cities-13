@@ -1,9 +1,10 @@
 import { SyntheticEvent, useState } from 'react';
-import { TOffer } from '../../mocks/offers';
+
 import { Link } from 'react-router-dom';
 import { AppRoute, OfferCardType } from '../../const';
 import styles from './offer-card.module.css';
 import { Rating } from '../rating/rating';
+import { TOffer } from '../../types/offer';
 
 type TOfferCardProps = {
   offer: TOffer;

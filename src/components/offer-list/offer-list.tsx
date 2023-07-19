@@ -1,7 +1,7 @@
 import { OffersSorting } from '../offers-sorting/offers-soritng';
-import { TOffer } from '../../mocks/offers';
 import { OfferCard } from '../offer-card/offer-card';
 import { useState } from 'react';
+import { TOffer } from '../../types/offer';
 
 type TOfferListProps = {
   offers: TOffer[];

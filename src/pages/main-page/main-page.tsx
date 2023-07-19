@@ -1,6 +1,6 @@
 import { Logo } from '../../components/logo/logo';
 import { OfferList } from '../../components/offer-list/offer-list';
-import { TOffer } from '../../mocks/offers';
+import { TOffer } from '../../types/offer';
 
 type TMainProps = {
   offers: TOffer[];

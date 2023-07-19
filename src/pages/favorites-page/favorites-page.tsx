@@ -3,7 +3,7 @@ import { Footer } from '../../components/footer/footer';
 import { Logo } from '../../components/logo/logo';
 import { UserMenu } from '../../components/user-menu/user-menu';
 import { AuthorizationStatus } from '../../const';
-import { TOffer } from '../../mocks/offers';
+import { TOffer } from '../../types/offer';
 
 type TFavoritesPageProps = {
   offers: TOffer[];

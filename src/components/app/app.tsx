@@ -9,9 +9,10 @@ import { MainEmptyPage } from '../../pages/main-empty-page/main-empty-page';
 import { OfferNotLoggedPage } from '../../pages/offer-not-logged-page/offer-not-logged-page';
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { PrivateRoute } from '../private-route/private-route';
-import { OFFERS, TOffer } from '../../mocks/offers';
-import { TDetail } from '../../mocks/details';
-import { TReview } from '../../mocks/reviews';
+import { OFFERS } from '../../mocks/offers';
+import { TOffer } from '../../types/offer';
+import { TDetail } from '../../types/details';
+import { TReview } from '../../types/review';
 
 type TAppProps = {
   offers: TOffer[];

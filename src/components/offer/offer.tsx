@@ -1,5 +1,5 @@
-import { TDetail } from '../../mocks/details';
-import { TReview } from '../../mocks/reviews';
+import { TDetail } from '../../types/details';
+import { TReview } from '../../types/review';
 import { Reviews } from '../reviews/reviews';
 import { OfferGallery } from './offer-gallery';
 import { OfferHost } from './offer-host';

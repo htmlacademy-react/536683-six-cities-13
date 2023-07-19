@@ -1,5 +1,5 @@
 import { RatingType } from '../../const';
-import { TDetail } from '../../mocks/details';
+import { TDetail } from '../../types/details';
 import { Rating } from '../rating/rating';
 import { OfferFeatures } from './offer-features';
 import { OfferGoods } from './offer-goods';

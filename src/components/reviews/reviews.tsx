@@ -1,4 +1,4 @@
-import { TReview } from '../../mocks/reviews';
+import { TReview } from '../../types/review';
 import { calculateRating, getCommentDate, getMachineDate } from '../../utils';
 import { ReviewForm } from '../review-form/review-form';
 
