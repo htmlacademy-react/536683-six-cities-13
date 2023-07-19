@@ -1,7 +1,3 @@
-enum Settings {
-  Offers = 20,
-}
-
 enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
@@ -19,4 +15,40 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export { Settings, AppRoute, AuthorizationStatus };
+enum OfferCardType {
+  Cities = 'cities',
+  Favorites = 'favorites',
+}
+
+enum RatingType {
+  Cities = 'cities',
+  Offer = 'offer',
+  Reviews = 'reviews',
+}
+
+enum ReviewInfo {
+  MaxCommentLength = 60,
+  MinRating = 0,
+}
+
+type TReviewRating = {
+  ratingValue: number;
+  ratingText: string;
+};
+
+const REVIEW_RATINGS: TReviewRating[] = [
+  { ratingValue: 5, ratingText: 'perfect' },
+  { ratingValue: 4, ratingText: 'good' },
+  { ratingValue: 3, ratingText: 'not bad' },
+  { ratingValue: 2, ratingText: 'badly' },
+  { ratingValue: 1, ratingText: 'terribly' },
+];
+
+export {
+  AppRoute,
+  AuthorizationStatus,
+  OfferCardType,
+  RatingType,
+  ReviewInfo,
+  REVIEW_RATINGS,
+};
