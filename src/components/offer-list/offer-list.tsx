@@ -1,18 +1,14 @@
 import { OffersSorting } from '../offers-sorting/offers-soritng';
 import { OfferCard } from '../offer-card/offer-card';
-import { useState } from 'react';
 import { TOffer } from '../../types/offer';
 
 type TOfferListProps = {
   offers: TOffer[];
+  onOfferHover: (offerId: string) => void;
 };
 
-const OfferList = ({ offers }: TOfferListProps) => {
-  const [hoveredOffer, setHoveredOffer] = useState<string>('');
+const OfferList = ({ offers, onOfferHover }: TOfferListProps) => {
   const offerCount = offers.length;
-
-  // eslint-disable-next-line no-console
-  console.log(hoveredOffer);
 
   return (
     <section className="cities__places places">
@@ -23,11 +19,7 @@ const OfferList = ({ offers }: TOfferListProps) => {
 
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer) => (
-          <OfferCard
-            key={offer.id}
-            offer={offer}
-            onOfferHover={setHoveredOffer}
-          />
+          <OfferCard key={offer.id} offer={offer} onOfferHover={onOfferHover} />
         ))}
       </div>
     </section>

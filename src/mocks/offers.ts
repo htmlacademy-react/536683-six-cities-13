@@ -54,7 +54,7 @@ const OFFERS: TOffer[] = [
     price: 192,
     previewImage: 'https://13.design.pages.academy/static/hotel/17.jpg',
     city: {
-      name: 'Cologne',
+      name: 'Paris',
       location: {
         latitude: 48.85661,
         longitude: 2.351499,
@@ -77,7 +77,7 @@ const OFFERS: TOffer[] = [
     price: 453,
     previewImage: 'https://13.design.pages.academy/static/hotel/19.jpg',
     city: {
-      name: 'Cologne',
+      name: 'Paris',
       location: {
         latitude: 48.85661,
         longitude: 2.351499,

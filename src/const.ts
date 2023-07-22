@@ -44,6 +44,11 @@ const REVIEW_RATINGS: TReviewRating[] = [
   { ratingValue: 1, ratingText: 'terribly' },
 ];
 
+const BASE_MARKER_URL =
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/';
+const URL_MARKER_DEFAULT = `${BASE_MARKER_URL}pin.svg`;
+const URL_MARKER_CURRENT = `${BASE_MARKER_URL}main-pin.svg`;
+
 export {
   AppRoute,
   AuthorizationStatus,
@@ -51,4 +56,6 @@ export {
   RatingType,
   ReviewInfo,
   REVIEW_RATINGS,
+  URL_MARKER_CURRENT,
+  URL_MARKER_DEFAULT,
 };

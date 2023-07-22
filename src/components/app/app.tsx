@@ -10,7 +10,7 @@ import { OfferNotLoggedPage } from '../../pages/offer-not-logged-page/offer-not-
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { PrivateRoute } from '../private-route/private-route';
 import { OFFERS } from '../../mocks/offers';
-import { TOffer } from '../../types/offer';
+import { TCity, TOffer } from '../../types/offer';
 import { TDetail } from '../../types/details';
 import { TReview } from '../../types/review';
 
@@ -18,15 +18,16 @@ type TAppProps = {
   offers: TOffer[];
   details: TDetail[];
   reviews: TReview[];
+  city: TCity;
 };
 
-const App = ({ offers, details, reviews }: TAppProps) => (
+const App = ({ city, offers, details, reviews }: TAppProps) => (
   <BrowserRouter>
     <Routes>
       <Route
         index
         path={AppRoute.Root}
-        element={<MainPage offers={offers} />}
+        element={<MainPage city={city} offers={offers} />}
       />
       <Route path={AppRoute.DevRoot} index element={<MainEmptyPage />} />
       <Route path={AppRoute.Login} element={<LoginPage />} />
