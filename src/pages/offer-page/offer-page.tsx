@@ -21,9 +21,6 @@ const OfferPage = ({ details, reviews }: TOfferPageProps) => {
     <NotFoundPage />
   );
 
-  // eslint-disable-next-line no-console
-  console.log('id', id, currentDetails);
-
   return (
     <div className="page">
       <header className="header">

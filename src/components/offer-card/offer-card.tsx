@@ -47,7 +47,7 @@ const OfferCard = ({
   return (
     <article
       className={`${cardTypeClassName}__card place-card`}
-      onMouseEnter={() => onOfferHover && onOfferHover(id)}
+      onMouseEnter={() => onOfferHover?.(id)}
     >
       {isPremium && (
         <div className="place-card__mark">
