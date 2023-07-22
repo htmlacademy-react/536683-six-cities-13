@@ -1,10 +1,10 @@
 import { TCity } from '../types/offer';
 
 const CITY: TCity = {
-  name: 'Paris',
+  name: 'Amsterdam',
   location: {
-    latitude: 48.85661,
-    longitude: 2.351499,
+    latitude: 52.37454,
+    longitude: 4.897976,
     zoom: 13,
   },
 };
