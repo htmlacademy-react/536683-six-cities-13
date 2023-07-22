@@ -1,6 +1,5 @@
-import { OfferCardType } from '../../const';
 import { TOffer } from '../../types/offer';
-import { OfferCard } from '../offer-card/offer-card';
+import { OfferCardFavorites } from '../offer-card/offer-card-favorites';
 
 type TFavoritesListProps = {
   offers: TOffer[];
@@ -33,13 +32,7 @@ const FavoritesList = ({ offers }: TFavoritesListProps) => {
                 const { id, city: favoriteCity } = favorite;
 
                 if (favoriteCity.name === city) {
-                  return (
-                    <OfferCard
-                      cardType={OfferCardType.Favorites}
-                      key={id}
-                      offer={favorite}
-                    />
-                  );
+                  return <OfferCardFavorites key={id} offer={favorite} />;
                 }
 
                 return null;

@@ -1,20 +1,30 @@
 import { SyntheticEvent, useState } from 'react';
-
 import { Link } from 'react-router-dom';
-import { AppRoute, OfferCardType } from '../../const';
-import styles from './offer-card.module.css';
+import { AppRoute } from '../../const';
 import { Rating } from '../rating/rating';
 import { TOffer } from '../../types/offer';
 
-type TOfferCardProps = {
+export type TOfferCardProxyProps = Omit<
+  TOfferCardProps,
+  'className' | 'imageSize'
+>;
+
+export type TImageSize = {
+  width: number;
+  height: number;
+};
+
+export type TOfferCardProps = {
   offer: TOffer;
-  cardType?: string;
+  className: string;
+  imageSize: TImageSize;
   onOfferHover?: (offerId: string) => void;
 };
 
 const OfferCard = ({
   offer,
-  cardType = OfferCardType.Cities,
+  className = '',
+  imageSize,
   onOfferHover,
 }: TOfferCardProps) => {
   const {
@@ -29,15 +39,6 @@ const OfferCard = ({
   } = offer;
   const [isOfferFavorite, setIsOfferFavorite] = useState<boolean>(isFavorite);
 
-  const cardTypeClassName =
-    cardType === OfferCardType.Cities
-      ? OfferCardType.Cities
-      : OfferCardType.Favorites;
-  const cardImageClassName =
-    cardType === OfferCardType.Cities
-      ? `${styles['cities__card-info']}`
-      : `${styles['favorites__card-info']}`;
-
   const handleFavoriteClick = (evt: SyntheticEvent) => {
     evt.preventDefault();
 
@@ -46,7 +47,7 @@ const OfferCard = ({
 
   return (
     <article
-      className={`${cardTypeClassName}__card place-card`}
+      className={`${className}__card place-card`}
       onMouseEnter={() => onOfferHover?.(id)}
     >
       {isPremium && (
@@ -55,18 +56,17 @@ const OfferCard = ({
         </div>
       )}
 
-      <div
-        className={`${cardTypeClassName}__image-wrapper place-card__image-wrapper`}
-      >
+      <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
           <img
-            className={`${cardImageClassName} place-card__image`}
+            className="place-card__image"
             src={previewImage}
             alt="Place image"
+            {...imageSize}
           />
         </a>
       </div>
-      <div className={`${cardTypeClassName}__card-info place-card__info`}>
+      <div className={`${className}__card-info place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>

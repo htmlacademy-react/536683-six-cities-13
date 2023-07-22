@@ -15,9 +15,10 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-enum OfferCardType {
-  Cities = 'cities',
+enum OfferCardClassName {
   Favorites = 'favorites',
+  Main = 'cities',
+  Near = 'near-places',
 }
 
 enum RatingType {
@@ -52,7 +53,7 @@ const URL_MARKER_CURRENT = `${BASE_MARKER_URL}main-pin.svg`;
 export {
   AppRoute,
   AuthorizationStatus,
-  OfferCardType,
+  OfferCardClassName,
   RatingType,
   ReviewInfo,
   REVIEW_RATINGS,

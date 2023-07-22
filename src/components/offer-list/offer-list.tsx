@@ -1,6 +1,6 @@
 import { OffersSorting } from '../offers-sorting/offers-soritng';
-import { OfferCard } from '../offer-card/offer-card';
 import { TOffer } from '../../types/offer';
+import { OfferCardMain } from '../offer-card/offer-card-main';
 
 type TOfferListProps = {
   offers: TOffer[];
@@ -19,7 +19,11 @@ const OfferList = ({ offers, onOfferHover }: TOfferListProps) => {
 
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer) => (
-          <OfferCard key={offer.id} offer={offer} onOfferHover={onOfferHover} />
+          <OfferCardMain
+            key={offer.id}
+            offer={offer}
+            onOfferHover={onOfferHover}
+          />
         ))}
       </div>
     </section>
