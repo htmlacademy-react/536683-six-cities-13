@@ -1,4 +1,5 @@
 import { SyntheticEvent, useState } from 'react';
+import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Rating } from '../rating/rating';
@@ -73,9 +74,9 @@ const OfferCard = ({
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button
-            className={`place-card__bookmark-button ${
-              isOfferFavorite ? 'place-card__bookmark-button--active' : ''
-            } button`}
+            className={`place-card__bookmark-button ${cn({
+              'place-card__bookmark-button--active': isOfferFavorite,
+            })} button`}
             onClick={handleFavoriteClick}
             type="button"
           >

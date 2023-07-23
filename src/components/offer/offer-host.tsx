@@ -1,3 +1,5 @@
+import cn from 'classnames';
+
 type TOfferHostProps = {
   hostInfo: {
     isPro: boolean;
@@ -9,14 +11,15 @@ type TOfferHostProps = {
 
 const OfferHost = ({ hostInfo }: TOfferHostProps) => {
   const { isPro, name, avatarUrl, description } = hostInfo;
-  const userStatusClassName = isPro ? 'offer__avatar-wrapper--pro' : '';
 
   return (
     <div className="offer__host">
       <h2 className="offer__host-title">Meet the host</h2>
       <div className="offer__host-user user">
         <div
-          className={`offer__avatar-wrapper  user__avatar-wrapper ${userStatusClassName}`}
+          className={`offer__avatar-wrapper  user__avatar-wrapper ${cn({
+            'offer__avatar-wrapper--pro': isPro,
+          })}`}
         >
           <img
             className="offer__avatar user__avatar"
