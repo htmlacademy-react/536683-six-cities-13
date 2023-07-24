@@ -13,13 +13,12 @@ import { OFFERS } from '../../mocks/offers';
 import { TCity, TOffer } from '../../types/offer';
 import { TDetail } from '../../types/details';
 import { TReview } from '../../types/review';
-import { TNearPlace } from '../../types/near-places';
 
 type TAppProps = {
   offers: TOffer[];
   details: TDetail[];
   reviews: TReview[];
-  nearPlaces: TNearPlace[];
+  nearPlaces: TOffer[];
   city: TCity;
 };
 

@@ -1,6 +1,8 @@
+import { MAX_NEAR_PLACES } from '../../const';
 import { TDetail } from '../../types/details';
-import { TNearPlace } from '../../types/near-places';
+import { TOffer } from '../../types/offer';
 import { TReview } from '../../types/review';
+import { Map } from '../map/map';
 import { Reviews } from '../reviews/reviews';
 import { OfferGallery } from './offer-gallery';
 import { OfferHost } from './offer-host';
@@ -10,11 +12,13 @@ import { OfferNearPlaces } from './offer-near-places';
 type TOfferProps = {
   offerDetails: TDetail;
   review?: TReview;
-  nearPlaces?: TNearPlace;
+  nearPlaces: TOffer[];
 };
 
 const Offer = ({ offerDetails, review, nearPlaces }: TOfferProps) => {
   const { images, host, description } = offerDetails;
+  const places = nearPlaces.slice(0, MAX_NEAR_PLACES);
+  const [place] = places;
 
   return (
     <main className="page__main page__main--offer">
@@ -34,10 +38,12 @@ const Offer = ({ offerDetails, review, nearPlaces }: TOfferProps) => {
             {review && <Reviews review={review} />}
           </div>
         </div>
-        <section className="offer__map map" />
+        <section className="offer__map map">
+          <Map city={place.city} points={places} />
+        </section>
       </section>
       <div className="container">
-        {nearPlaces && <OfferNearPlaces nearPlaces={nearPlaces.nearPlaces} />}
+        <OfferNearPlaces nearPlaces={places} />
       </div>
     </main>
   );
