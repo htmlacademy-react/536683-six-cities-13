@@ -1,3 +1,5 @@
+import { TOfferCardImageSize, TReviewRating } from './types/const';
+
 enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
@@ -15,13 +17,14 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-enum OfferCardType {
-  Cities = 'cities',
+enum OfferCardClassName {
   Favorites = 'favorites',
+  Main = 'cities',
+  Near = 'near-places',
 }
 
-enum RatingType {
-  Cities = 'cities',
+enum RatingClassName {
+  Main = 'place-card',
   Offer = 'offer',
   Reviews = 'reviews',
 }
@@ -31,11 +34,6 @@ enum ReviewInfo {
   MinRating = 0,
 }
 
-type TReviewRating = {
-  ratingValue: number;
-  ratingText: string;
-};
-
 const REVIEW_RATINGS: TReviewRating[] = [
   { ratingValue: 5, ratingText: 'perfect' },
   { ratingValue: 4, ratingText: 'good' },
@@ -44,11 +42,25 @@ const REVIEW_RATINGS: TReviewRating[] = [
   { ratingValue: 1, ratingText: 'terribly' },
 ];
 
+const OFFER_CARD_IMAGE_SIZE: TOfferCardImageSize = {
+  near: { width: 260, height: 200 },
+  favorites: { width: 150, height: 110 },
+  main: { width: 260, height: 200 },
+};
+
+const BASE_MARKER_URL =
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/';
+const URL_MARKER_DEFAULT = `${BASE_MARKER_URL}pin.svg`;
+const URL_MARKER_CURRENT = `${BASE_MARKER_URL}main-pin.svg`;
+
 export {
   AppRoute,
   AuthorizationStatus,
-  OfferCardType,
-  RatingType,
+  OfferCardClassName,
+  RatingClassName,
   ReviewInfo,
   REVIEW_RATINGS,
+  URL_MARKER_CURRENT,
+  URL_MARKER_DEFAULT,
+  OFFER_CARD_IMAGE_SIZE,
 };

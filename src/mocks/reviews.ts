@@ -2,43 +2,38 @@ import { TReview } from '../types/review';
 
 const REVIEWS: TReview[] = [
   {
-    id: '34f50f68-803c-43a9-8d59-9556fb9c0eaa',
+    id: '372dcd05-d179-4a2a-be70-0b08daada439',
     comments: [
       {
-        id: '5abcc770-15be-46cb-85ba-07bbc0c50bdf',
+        id: 'e64b03ed-f0a8-44c5-b20e-a991092a0dd7',
         comment:
-          'This villa is perfect in every way: the view on mountains and waterfalls, the hot tub and the villa itself. The evening here became a great continuation of our journeys over country.',
-        date: '2023-06-23T21:00:00.624Z',
-        rating: 1,
+          'I stayed here for one night and it was an unpleasant experience.',
+        date: '2023-06-29T21:00:00.490Z',
+        rating: 5,
         user: {
           name: 'Mollie',
-          avatarUrl: 'https://13.design.pages.academy/static/avatar/6.jpg',
-          isPro: true,
-        },
-      },
-      {
-        id: '77797f88-718b-44b4-95fd-23a9056d4cb6',
-        comment:
-          'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
-        date: '2023-06-21T21:00:00.624Z',
-        rating: 1,
-        user: {
-          name: 'Christina',
           avatarUrl: 'https://13.design.pages.academy/static/avatar/10.jpg',
           isPro: false,
         },
       },
-    ],
-  },
-  {
-    id: '4b658388-7118-4e47-806a-fa5b0d41e8b0',
-    comments: [
       {
-        id: '9ba18db5-0e99-420b-9a58-cde37c6240b8',
+        id: '185f44a5-a6ca-469c-aadd-a368531f67a4',
         comment:
-          'We loved it so much, the house, the veiw, the location just great.. Highly reccomend :)',
-        date: '2023-06-23T21:00:00.624Z',
-        rating: 2,
+          'Beautiful space, fantastic location and atmosphere, really a wonderful place to spend a few days. Will be back.',
+        date: '2023-06-29T21:00:00.490Z',
+        rating: 3,
+        user: {
+          name: 'Mollie',
+          avatarUrl: 'https://13.design.pages.academy/static/avatar/7.jpg',
+          isPro: true,
+        },
+      },
+      {
+        id: '794e803b-c626-49f7-8525-8ee56501014e',
+        comment:
+          'This villa is perfect in every way: the view on mountains and waterfalls, the hot tub and the villa itself. The evening here became a great continuation of our journeys over country.',
+        date: '2023-06-29T21:00:00.490Z',
+        rating: 5,
         user: {
           name: 'Isaac',
           avatarUrl: 'https://13.design.pages.academy/static/avatar/10.jpg',
@@ -48,42 +43,70 @@ const REVIEWS: TReview[] = [
     ],
   },
   {
-    id: 'c99c9239-7836-4115-a767-ee81c4b835ad',
+    id: '768226ff-11f3-4bec-b13c-a903de1da7de',
     comments: [
       {
-        id: '066bbea7-f41f-43bd-b597-b22c6efd351e',
+        id: '77135728-b48f-4b02-8f93-ce152a51ec1b',
+        comment:
+          'Beautiful space, fantastic location and atmosphere, really a wonderful place to spend a few days. Will be back.',
+        date: '2023-06-28T21:00:00.490Z',
+        rating: 1,
+        user: {
+          name: 'Emely',
+          avatarUrl: 'https://13.design.pages.academy/static/avatar/6.jpg',
+          isPro: false,
+        },
+      },
+      {
+        id: '6588c25d-d4f1-448f-82ec-e6797c6cb8e8',
         comment:
           'This villa is perfect in every way: the view on mountains and waterfalls, the hot tub and the villa itself. The evening here became a great continuation of our journeys over country.',
-        date: '2023-06-26T21:00:00.624Z',
-        rating: 5,
+        date: '2023-06-26T21:00:00.490Z',
+        rating: 4,
         user: {
-          name: 'Kendall',
-          avatarUrl: 'https://13.design.pages.academy/static/avatar/5.jpg',
+          name: 'Sophie',
+          avatarUrl: 'https://13.design.pages.academy/static/avatar/8.jpg',
+          isPro: false,
+        },
+      },
+      {
+        id: '59b2964d-019c-426d-8652-c39e5216b377',
+        comment:
+          'This villa is perfect in every way: the view on mountains and waterfalls, the hot tub and the villa itself. The evening here became a great continuation of our journeys over country.',
+        date: '2023-06-23T21:00:00.490Z',
+        rating: 4,
+        user: {
+          name: 'Corey',
+          avatarUrl: 'https://13.design.pages.academy/static/avatar/7.jpg',
+          isPro: false,
+        },
+      },
+    ],
+  },
+  {
+    id: 'f21b1d07-4ed8-456f-92ac-fd13b5cf6c19',
+    comments: [
+      {
+        id: 'c815d444-899c-4a5e-b150-e5834a1c8f2a',
+        comment:
+          'The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you.',
+        date: '2023-06-29T21:00:00.490Z',
+        rating: 3,
+        user: {
+          name: 'Max',
+          avatarUrl: 'https://13.design.pages.academy/static/avatar/6.jpg',
           isPro: true,
         },
       },
       {
-        id: 'ae9f4cd1-2a61-4681-a01e-3b1c45260776',
-        comment:
-          'Home is amazing. It"s like staying in a museum. The rooms, furnishings and artworks are incredible. The views of My Vesuvius',
-        date: '2023-06-24T21:00:00.624Z',
-        rating: 2,
+        id: 'a3a9e293-b23f-4a11-9169-5a391441f1b8',
+        comment: 'Bathed in the nature. Completely unplugged. Unforgettable.',
+        date: '2023-06-27T21:00:00.490Z',
+        rating: 1,
         user: {
           name: 'Christina',
-          avatarUrl: 'https://13.design.pages.academy/static/avatar/9.jpg',
-          isPro: false,
-        },
-      },
-      {
-        id: 'c55f149a-cc97-4c08-8158-9692779aa586',
-        comment:
-          'This villa is perfect in every way: the view on mountains and waterfalls, the hot tub and the villa itself. The evening here became a great continuation of our journeys over country.',
-        date: '2023-06-22T21:00:00.624Z',
-        rating: 4,
-        user: {
-          name: 'Jack',
-          avatarUrl: 'https://13.design.pages.academy/static/avatar/4.jpg',
-          isPro: false,
+          avatarUrl: 'https://13.design.pages.academy/static/avatar/2.jpg',
+          isPro: true,
         },
       },
     ],

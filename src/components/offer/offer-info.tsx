@@ -1,6 +1,5 @@
-import { RatingType } from '../../const';
 import { TDetail } from '../../types/details';
-import { Rating } from '../rating/rating';
+import { RatingOffer } from '../rating/rating-offer';
 import { OfferFeatures } from './offer-features';
 import { OfferGoods } from './offer-goods';
 
@@ -28,7 +27,7 @@ const OfferInfo = ({ offer }: TOfferInfoProps) => {
           <span className="visually-hidden">To bookmarks</span>
         </button>
       </div>
-      <Rating ratingValue={rating} ratingType={RatingType.Offer} showDigits />
+      <RatingOffer ratingValue={rating} />
 
       <OfferFeatures features={{ type, bedrooms, maxAdults }} />
       <div className="offer__price">
