@@ -1,3 +1,5 @@
+import { TOfferCardImageSize, TReviewRating } from './types/const';
+
 enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
@@ -32,11 +34,6 @@ enum ReviewInfo {
   MinRating = 0,
 }
 
-type TReviewRating = {
-  ratingValue: number;
-  ratingText: string;
-};
-
 const REVIEW_RATINGS: TReviewRating[] = [
   { ratingValue: 5, ratingText: 'perfect' },
   { ratingValue: 4, ratingText: 'good' },
@@ -44,6 +41,12 @@ const REVIEW_RATINGS: TReviewRating[] = [
   { ratingValue: 2, ratingText: 'badly' },
   { ratingValue: 1, ratingText: 'terribly' },
 ];
+
+const OFFER_CARD_IMAGE_SIZE: TOfferCardImageSize = {
+  near: { width: 260, height: 200 },
+  favorites: { width: 150, height: 110 },
+  main: { width: 260, height: 200 },
+};
 
 const BASE_MARKER_URL =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/';
@@ -59,4 +62,5 @@ export {
   REVIEW_RATINGS,
   URL_MARKER_CURRENT,
   URL_MARKER_DEFAULT,
+  OFFER_CARD_IMAGE_SIZE,
 };

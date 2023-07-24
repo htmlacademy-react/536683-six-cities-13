@@ -13,15 +13,17 @@ import { OFFERS } from '../../mocks/offers';
 import { TCity, TOffer } from '../../types/offer';
 import { TDetail } from '../../types/details';
 import { TReview } from '../../types/review';
+import { TNearPlace } from '../../types/near-places';
 
 type TAppProps = {
   offers: TOffer[];
   details: TDetail[];
   reviews: TReview[];
+  nearPlaces: TNearPlace[];
   city: TCity;
 };
 
-const App = ({ city, offers, details, reviews }: TAppProps) => (
+const App = ({ city, offers, details, reviews, nearPlaces }: TAppProps) => (
   <BrowserRouter>
     <Routes>
       <Route
@@ -45,7 +47,13 @@ const App = ({ city, offers, details, reviews }: TAppProps) => (
       <Route path={AppRoute.DevFavotites} element={<FavoritesEmptyPage />} />
       <Route
         path={`${AppRoute.Offer}/:id`}
-        element={<OfferPage details={details} reviews={reviews} />}
+        element={
+          <OfferPage
+            details={details}
+            nearPlaces={nearPlaces}
+            reviews={reviews}
+          />
+        }
       />
       <Route path={AppRoute.DevOffer} element={<OfferNotLoggedPage />} />
       <Route path={AppRoute.NotFound} element={<NotFoundPage />} />

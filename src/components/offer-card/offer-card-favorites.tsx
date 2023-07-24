@@ -1,4 +1,4 @@
-import { OfferCardClassName } from '../../const';
+import { OFFER_CARD_IMAGE_SIZE, OfferCardClassName } from '../../const';
 import { OfferCard, TOfferCardProxyProps } from './offer-card';
 
 const OfferCardFavorites = (props: TOfferCardProxyProps) => {
@@ -6,7 +6,7 @@ const OfferCardFavorites = (props: TOfferCardProxyProps) => {
 
   return (
     <OfferCard
-      imageSize={{ width: 150, height: 110 }}
+      imageSize={OFFER_CARD_IMAGE_SIZE.favorites}
       className={OfferCardClassName.Favorites}
       {...restProps}
     />

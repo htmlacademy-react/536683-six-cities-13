@@ -1,4 +1,4 @@
-import { OfferCardClassName } from '../../const';
+import { OFFER_CARD_IMAGE_SIZE, OfferCardClassName } from '../../const';
 import { OfferCard, TOfferCardProxyProps } from './offer-card';
 
 const OfferCardNearPlace = (props: TOfferCardProxyProps) => {
@@ -6,7 +6,7 @@ const OfferCardNearPlace = (props: TOfferCardProxyProps) => {
 
   return (
     <OfferCard
-      imageSize={{ width: 150, height: 110 }}
+      imageSize={OFFER_CARD_IMAGE_SIZE.near}
       className={OfferCardClassName.Near}
       {...restProps}
     />

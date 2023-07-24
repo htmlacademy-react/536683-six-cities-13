@@ -5,6 +5,7 @@ import { OFFERS } from './mocks/offers';
 import { DETAILS } from './mocks/details';
 import { REVIEWS } from './mocks/reviews';
 import { CITY } from './mocks/city';
+import { NEAR_PLACES } from './mocks/near-places';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,6 +13,12 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App city={CITY} offers={OFFERS} details={DETAILS} reviews={REVIEWS} />
+    <App
+      city={CITY}
+      nearPlaces={NEAR_PLACES}
+      offers={OFFERS}
+      details={DETAILS}
+      reviews={REVIEWS}
+    />
   </React.StrictMode>
 );

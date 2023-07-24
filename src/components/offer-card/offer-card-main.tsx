@@ -1,4 +1,4 @@
-import { OfferCardClassName } from '../../const';
+import { OFFER_CARD_IMAGE_SIZE, OfferCardClassName } from '../../const';
 import { OfferCard, TOfferCardProxyProps } from './offer-card';
 
 const OfferCardMain = (props: TOfferCardProxyProps) => {
@@ -6,7 +6,7 @@ const OfferCardMain = (props: TOfferCardProxyProps) => {
 
   return (
     <OfferCard
-      imageSize={{ width: 260, height: 200 }}
+      imageSize={OFFER_CARD_IMAGE_SIZE.main}
       className={OfferCardClassName.Main}
       {...restProps}
     />
