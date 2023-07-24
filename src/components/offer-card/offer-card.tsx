@@ -2,8 +2,8 @@ import { SyntheticEvent, useState } from 'react';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { Rating } from '../rating/rating';
 import { TOffer } from '../../types/offer';
+import { RatingMain } from '../rating/rating-main';
 
 export type TOfferCardProxyProps = Omit<
   TOfferCardProps,
@@ -86,7 +86,7 @@ const OfferCard = ({
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
-        <Rating ratingValue={rating} />
+        <RatingMain ratingValue={rating} />
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>

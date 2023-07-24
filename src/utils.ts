@@ -1,7 +1,7 @@
 const calculateRating = (rating: number): number => {
   const MAX_RATING = 5;
 
-  return (rating * 100) / MAX_RATING;
+  return (Math.round(rating) * 100) / MAX_RATING;
 };
 
 const getCommentDate = (date: string): string => {

@@ -1,7 +1,6 @@
-import { RatingType } from '../../const';
 import { TReview } from '../../types/review';
 import { getCommentDate, getMachineDate } from '../../utils';
-import { Rating } from '../rating/rating';
+import { RatingReviews } from '../rating/rating-reviews';
 import { ReviewForm } from '../review-form/review-form';
 
 type TReviewsProps = {
@@ -41,7 +40,7 @@ const Reviews = ({ review }: TReviewsProps) => {
                 <span className="reviews__user-name">{name}</span>
               </div>
               <div className="reviews__info">
-                <Rating ratingValue={rating} ratingType={RatingType.Reviews} />
+                <RatingReviews ratingValue={rating} />
 
                 <p className="reviews__text">{userComment}</p>
                 <time className="reviews__time" dateTime={getMachineDate(date)}>

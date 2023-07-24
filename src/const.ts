@@ -23,8 +23,8 @@ enum OfferCardClassName {
   Near = 'near-places',
 }
 
-enum RatingType {
-  Cities = 'cities',
+enum RatingClassName {
+  Main = 'place-card',
   Offer = 'offer',
   Reviews = 'reviews',
 }
@@ -57,7 +57,7 @@ export {
   AppRoute,
   AuthorizationStatus,
   OfferCardClassName,
-  RatingType,
+  RatingClassName,
   ReviewInfo,
   REVIEW_RATINGS,
   URL_MARKER_CURRENT,
