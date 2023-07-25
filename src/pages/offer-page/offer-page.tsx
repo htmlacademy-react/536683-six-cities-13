@@ -4,24 +4,23 @@ import { Offer } from '../../components/offer/offer';
 import { NotFoundPage } from '../not-found-page/not-found-page';
 import { TDetail } from '../../types/details';
 import { TReview } from '../../types/review';
-import { TNearPlace } from '../../types/near-places';
+import { TOffer } from '../../types/offer';
 
 type TOfferPageProps = {
   details: TDetail[];
   reviews: TReview[];
-  nearPlaces: TNearPlace[];
+  nearPlaces: TOffer[];
 };
 
 const OfferPage = ({ details, reviews, nearPlaces }: TOfferPageProps) => {
   const { id } = useParams();
   const currentDetails = details.find((detail) => detail.id === id);
   const currentReviews = reviews.find((review) => review.id === id);
-  const currentNearPlaces = nearPlaces.find((nearPlace) => nearPlace.id === id);
 
   const pageContent = currentDetails ? (
     <Offer
       offerDetails={currentDetails}
-      nearPlaces={currentNearPlaces}
+      nearPlaces={nearPlaces}
       review={currentReviews}
     />
   ) : (

@@ -1,7 +1,6 @@
 import { TReview } from '../../types/review';
-import { getCommentDate, getMachineDate } from '../../utils';
-import { RatingReviews } from '../rating/rating-reviews';
 import { ReviewForm } from '../review-form/review-form';
+import { Review } from './review';
 
 type TReviewsProps = {
   review: TReview;
@@ -16,40 +15,9 @@ const Reviews = ({ review }: TReviewsProps) => {
         Reviews · <span className="reviews__amount">{comments.length}</span>
       </h2>
       <ul className="reviews__list">
-        {comments.map((comment) => {
-          const {
-            id,
-            comment: userComment,
-            date,
-            rating,
-            user: { name, avatarUrl },
-          } = comment;
-
-          return (
-            <li key={id} className="reviews__item">
-              <div className="reviews__user user">
-                <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                  <img
-                    className="reviews__avatar user__avatar"
-                    src={avatarUrl}
-                    width={54}
-                    height={54}
-                    alt="Reviews avatar"
-                  />
-                </div>
-                <span className="reviews__user-name">{name}</span>
-              </div>
-              <div className="reviews__info">
-                <RatingReviews ratingValue={rating} />
-
-                <p className="reviews__text">{userComment}</p>
-                <time className="reviews__time" dateTime={getMachineDate(date)}>
-                  {getCommentDate(date)}
-                </time>
-              </div>
-            </li>
-          );
-        })}
+        {comments.map((comment) => (
+          <Review key={comment.id} {...comment} />
+        ))}
       </ul>
       <ReviewForm />
     </section>

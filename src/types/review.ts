@@ -4,7 +4,7 @@ type TUser = {
   isPro: boolean;
 };
 
-type TComments = {
+export type TComment = {
   id: string;
   comment: string;
   date: string;
@@ -14,5 +14,5 @@ type TComments = {
 
 export type TReview = {
   id: string;
-  comments: TComments[];
+  comments: TComment[];
 };

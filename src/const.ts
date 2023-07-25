@@ -48,6 +48,8 @@ const OFFER_CARD_IMAGE_SIZE: TOfferCardImageSize = {
   main: { width: 260, height: 200 },
 };
 
+const MAX_NEAR_PLACES = 3;
+
 const BASE_MARKER_URL =
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/';
 const URL_MARKER_DEFAULT = `${BASE_MARKER_URL}pin.svg`;
@@ -63,4 +65,5 @@ export {
   URL_MARKER_CURRENT,
   URL_MARKER_DEFAULT,
   OFFER_CARD_IMAGE_SIZE,
+  MAX_NEAR_PLACES,
 };
