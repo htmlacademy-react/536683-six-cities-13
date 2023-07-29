@@ -48,6 +48,15 @@ const OFFER_CARD_IMAGE_SIZE: TOfferCardImageSize = {
   main: { width: 260, height: 200 },
 };
 
+const LOCATIONS: string[] = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+];
+
 const MAX_NEAR_PLACES = 3;
 
 const BASE_MARKER_URL =
@@ -66,4 +75,5 @@ export {
   URL_MARKER_DEFAULT,
   OFFER_CARD_IMAGE_SIZE,
   MAX_NEAR_PLACES,
+  LOCATIONS,
 };
