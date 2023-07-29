@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
-import { TCity, TOffer } from '../types/offer';
+import { TOffer } from '../types/offer';
 
-const changeCity = createAction('nav/changeCity', (city: TCity) => ({
+const changeLocation = createAction('nav/changeLocation', (city: string) => ({
   payload: city,
 }));
 const fillOfferList = createAction(
@@ -11,4 +11,4 @@ const fillOfferList = createAction(
   })
 );
 
-export { changeCity, fillOfferList };
+export { changeLocation, fillOfferList };

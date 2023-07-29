@@ -30,6 +30,9 @@ const Map = ({ city, points, selectedPoint }: MapProps) => {
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
+      const { latitude, longitude, zoom } = city.location;
+
+      map.setView([latitude, longitude], zoom);
 
       points.forEach((point) => {
         const marker = new Marker({
@@ -50,7 +53,7 @@ const Map = ({ city, points, selectedPoint }: MapProps) => {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, points, selectedPoint]);
+  }, [map, city, points, selectedPoint]);
 
   return <div style={{ height: '100%' }} ref={mapRef}></div>;
 };
