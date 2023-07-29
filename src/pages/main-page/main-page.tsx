@@ -2,14 +2,12 @@ import { useState } from 'react';
 import { Logo } from '../../components/logo/logo';
 import { Map } from '../../components/map/map';
 import { OfferList } from '../../components/offer-list/offer-list';
-import { TCity, TOffer } from '../../types/offer';
+import { TOffer } from '../../types/offer';
+import { useAppSelector } from '../../hooks/use-app-selector';
 
-type TMainProps = {
-  offers: TOffer[];
-  city: TCity;
-};
-
-const MainPage = ({ city, offers }: TMainProps) => {
+const MainPage = () => {
+  const city = useAppSelector((store) => store.city);
+  const offers = useAppSelector((store) => store.offers);
   const [hoveredOffer, setHoveredOffer] = useState<TOffer | undefined>(
     undefined
   );
