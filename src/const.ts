@@ -57,8 +57,14 @@ const LOCATIONS: string[] = [
   'Dusseldorf',
 ];
 
-const MAX_NEAR_PLACES = 3;
+const SORT_TYPES: string[] = [
+  'Popular',
+  'Price: low to high',
+  'Price: high to low',
+  'Top rated first',
+];
 
+const MAX_NEAR_PLACES = 3;
 const BASE_MARKER_PATH = './markup/img/';
 const PATH_MARKER_DEFAULT = `${BASE_MARKER_PATH}pin.svg`;
 const PATH_MARKER_CURRENT = `${BASE_MARKER_PATH}pin-active.svg`;
@@ -75,4 +81,5 @@ export {
   OFFER_CARD_IMAGE_SIZE,
   MAX_NEAR_PLACES,
   LOCATIONS,
+  SORT_TYPES,
 };
