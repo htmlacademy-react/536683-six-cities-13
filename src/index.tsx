@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './components/app/app';
-import { OFFERS } from './mocks/offers';
 import { DETAILS } from './mocks/details';
 import { REVIEWS } from './mocks/reviews';
-import { CITY } from './mocks/city';
 import { NEAR_PLACES } from './mocks/near-places';
 
 const root = ReactDOM.createRoot(
@@ -13,12 +11,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App
-      city={CITY}
-      nearPlaces={NEAR_PLACES}
-      offers={OFFERS}
-      details={DETAILS}
-      reviews={REVIEWS}
-    />
+    <App nearPlaces={NEAR_PLACES} details={DETAILS} reviews={REVIEWS} />
   </React.StrictMode>
 );

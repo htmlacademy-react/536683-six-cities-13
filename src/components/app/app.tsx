@@ -10,54 +10,52 @@ import { OfferNotLoggedPage } from '../../pages/offer-not-logged-page/offer-not-
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { PrivateRoute } from '../private-route/private-route';
 import { OFFERS } from '../../mocks/offers';
-import { TCity, TOffer } from '../../types/offer';
+import { TOffer } from '../../types/offer';
 import { TDetail } from '../../types/details';
 import { TReview } from '../../types/review';
+import { Provider } from 'react-redux';
+import { store } from '../../store';
 
 type TAppProps = {
-  offers: TOffer[];
   details: TDetail[];
   reviews: TReview[];
   nearPlaces: TOffer[];
-  city: TCity;
 };
 
-const App = ({ city, offers, details, reviews, nearPlaces }: TAppProps) => (
-  <BrowserRouter>
-    <Routes>
-      <Route
-        index
-        path={AppRoute.Root}
-        element={<MainPage city={city} offers={offers} />}
-      />
-      <Route path={AppRoute.DevRoot} index element={<MainEmptyPage />} />
-      <Route path={AppRoute.Login} element={<LoginPage />} />
-      <Route
-        path={AppRoute.Favorites}
-        element={
-          <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-            <FavoritesPage
-              offers={OFFERS}
-              authorizationStatus={AuthorizationStatus.Auth}
+const App = ({ details, reviews, nearPlaces }: TAppProps) => (
+  <Provider store={store}>
+    <BrowserRouter>
+      <Routes>
+        <Route index path={AppRoute.Root} element={<MainPage />} />
+        <Route path={AppRoute.DevRoot} index element={<MainEmptyPage />} />
+        <Route path={AppRoute.Login} element={<LoginPage />} />
+        <Route
+          path={AppRoute.Favorites}
+          element={
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <FavoritesPage
+                offers={OFFERS}
+                authorizationStatus={AuthorizationStatus.Auth}
+              />
+            </PrivateRoute>
+          }
+        />
+        <Route path={AppRoute.DevFavotites} element={<FavoritesEmptyPage />} />
+        <Route
+          path={`${AppRoute.Offer}/:id`}
+          element={
+            <OfferPage
+              details={details}
+              nearPlaces={nearPlaces}
+              reviews={reviews}
             />
-          </PrivateRoute>
-        }
-      />
-      <Route path={AppRoute.DevFavotites} element={<FavoritesEmptyPage />} />
-      <Route
-        path={`${AppRoute.Offer}/:id`}
-        element={
-          <OfferPage
-            details={details}
-            nearPlaces={nearPlaces}
-            reviews={reviews}
-          />
-        }
-      />
-      <Route path={AppRoute.DevOffer} element={<OfferNotLoggedPage />} />
-      <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
-    </Routes>
-  </BrowserRouter>
+          }
+        />
+        <Route path={AppRoute.DevOffer} element={<OfferNotLoggedPage />} />
+        <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
+      </Routes>
+    </BrowserRouter>
+  </Provider>
 );
 
 export { App };

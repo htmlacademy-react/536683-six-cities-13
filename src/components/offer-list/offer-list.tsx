@@ -9,14 +9,15 @@ type TOfferListProps = {
 
 const OfferList = ({ offers, onOfferHover }: TOfferListProps) => {
   const offerCount = offers.length;
+  const [offerCity] = offers;
 
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{offerCount} places to stay in Amsterdam</b>
-
+      <b className="places__found">
+        {offerCount} places to stay in {offerCity.city.name}
+      </b>
       <OffersSorting />
-
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer) => (
           <OfferCardMain
