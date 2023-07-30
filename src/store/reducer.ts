@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { OFFERS } from '../mocks/offers';
-import { changeLocation, fillOfferList } from './action';
+import { changeLocation, fillOfferList } from './actions';
 
 const DEFAULT_LOCATION = 'Paris';
 

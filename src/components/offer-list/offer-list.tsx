@@ -17,9 +17,7 @@ const OfferList = ({ offers, onOfferHover }: TOfferListProps) => {
       <b className="places__found">
         {offerCount} places to stay in {offerCity.city.name}
       </b>
-
       <OffersSorting />
-
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer) => (
           <OfferCardMain

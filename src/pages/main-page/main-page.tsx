@@ -3,10 +3,12 @@ import { Logo } from '../../components/logo/logo';
 import { Map } from '../../components/map/map';
 import { OfferList } from '../../components/offer-list/offer-list';
 import { TOffer } from '../../types/offer';
-import { useAppDispatch, useAppSelector } from '../../hooks/use-app-selector';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { LocationList } from '../../components/location-list/location-list';
 import { LOCATIONS } from '../../const';
-import { changeLocation } from '../../store/action';
+import { changeLocation } from '../../store/actions';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { NoDataMessage } from '../../components/no-data-message/no-data-message';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
@@ -73,19 +75,25 @@ const MainPage = () => {
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <OfferList
-              offers={currentLocationOffers}
-              onOfferHover={handleOfferHover}
-            />
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map
-                  city={currentLocationOffer.city}
-                  points={currentLocationOffers}
-                  selectedPoint={hoveredOffer}
+            {!currentLocationOffers.length ? (
+              <NoDataMessage />
+            ) : (
+              <>
+                <OfferList
+                  offers={currentLocationOffers}
+                  onOfferHover={handleOfferHover}
                 />
-              </section>
-            </div>
+                <div className="cities__right-section">
+                  <section className="cities__map map">
+                    <Map
+                      city={currentLocationOffer.city}
+                      points={currentLocationOffers}
+                      selectedPoint={hoveredOffer}
+                    />
+                  </section>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </main>
