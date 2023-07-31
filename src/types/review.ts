@@ -14,5 +14,5 @@ export type TComment = {
 
 export type TReview = {
   id: string;
-  comments: TComment[];
+  reviewComments: TComment[];
 };

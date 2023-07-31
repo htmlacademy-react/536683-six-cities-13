@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { SORT_TYPES } from '../../const';
 import cn from 'classnames';
 
-const OffersSorting = () => {
+type TOffersSortingProps = {
+  onSortTypeClick: (sortIndex: number) => void;
+};
+
+const OffersSorting = ({ onSortTypeClick }: TOffersSortingProps) => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const sortTypeName = SORT_TYPES[activeIndex];
@@ -36,7 +40,11 @@ const OffersSorting = () => {
               'places__option--active': activeIndex === index,
             })}`}
             tabIndex={0}
-            onClick={() => setActiveIndex(index)}
+            onClick={() => {
+              setActiveIndex(index);
+              setIsOpened(false);
+              onSortTypeClick(index);
+            }}
           >
             {sortType}
           </li>

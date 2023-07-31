@@ -1,6 +1,8 @@
 import { OffersSorting } from '../offers-sorting/offers-soritng';
 import { TOffer } from '../../types/offer';
 import { OfferCardMain } from '../offer-card/offer-card-main';
+import { Sort } from '../../sort';
+import { useState } from 'react';
 
 type TOfferListProps = {
   offers: TOffer[];
@@ -8,8 +10,14 @@ type TOfferListProps = {
 };
 
 const OfferList = ({ offers, onOfferHover }: TOfferListProps) => {
+  const [currentSortIndex, setCurrentSortIndex] = useState<number>(0);
   const offerCount = offers.length;
   const [offerCity] = offers;
+  const sortedOffers = Sort[currentSortIndex](offers);
+
+  const handleSortTypeClick = (sortIndex: number) => {
+    setCurrentSortIndex(sortIndex);
+  };
 
   return (
     <section className="cities__places places">
@@ -17,9 +25,9 @@ const OfferList = ({ offers, onOfferHover }: TOfferListProps) => {
       <b className="places__found">
         {offerCount} places to stay in {offerCity.city.name}
       </b>
-      <OffersSorting />
+      <OffersSorting onSortTypeClick={handleSortTypeClick} />
       <div className="cities__places-list places__list tabs__content">
-        {offers.map((offer) => (
+        {sortedOffers.map((offer) => (
           <OfferCardMain
             key={offer.id}
             offer={offer}

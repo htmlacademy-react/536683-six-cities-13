@@ -11,11 +11,11 @@ import { OfferNearPlaces } from './offer-near-places';
 
 type TOfferProps = {
   offerDetails: TDetail;
-  review?: TReview;
+  reviews?: TReview;
   nearPlaces: TOffer[];
 };
 
-const Offer = ({ offerDetails, review, nearPlaces }: TOfferProps) => {
+const Offer = ({ offerDetails, reviews, nearPlaces }: TOfferProps) => {
   const { images, host, description } = offerDetails;
   const places = nearPlaces.slice(0, MAX_NEAR_PLACES);
   const [place] = places;
@@ -35,7 +35,7 @@ const Offer = ({ offerDetails, review, nearPlaces }: TOfferProps) => {
                 description,
               }}
             />
-            {review && <Reviews review={review} />}
+            {reviews && <Reviews reviews={reviews} />}
           </div>
         </div>
         <section className="offer__map map">
