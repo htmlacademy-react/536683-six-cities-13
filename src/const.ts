@@ -57,12 +57,17 @@ const LOCATIONS: string[] = [
   'Dusseldorf',
 ];
 
-const MAX_NEAR_PLACES = 3;
+const SORT_TYPES: string[] = [
+  'Popular',
+  'Price: low to high',
+  'Price: high to low',
+  'Top rated first',
+];
 
-const BASE_MARKER_URL =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/';
-const URL_MARKER_DEFAULT = `${BASE_MARKER_URL}pin.svg`;
-const URL_MARKER_CURRENT = `${BASE_MARKER_URL}main-pin.svg`;
+const MAX_NEAR_PLACES = 3;
+const BASE_MARKER_PATH = './markup/img/';
+const PATH_MARKER_DEFAULT = `${BASE_MARKER_PATH}pin.svg`;
+const PATH_MARKER_CURRENT = `${BASE_MARKER_PATH}pin-active.svg`;
 
 export {
   AppRoute,
@@ -71,9 +76,10 @@ export {
   RatingClassName,
   ReviewInfo,
   REVIEW_RATINGS,
-  URL_MARKER_CURRENT,
-  URL_MARKER_DEFAULT,
+  PATH_MARKER_CURRENT,
+  PATH_MARKER_DEFAULT,
   OFFER_CARD_IMAGE_SIZE,
   MAX_NEAR_PLACES,
   LOCATIONS,
+  SORT_TYPES,
 };

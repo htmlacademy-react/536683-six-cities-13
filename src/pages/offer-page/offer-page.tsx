@@ -21,7 +21,7 @@ const OfferPage = ({ details, reviews, nearPlaces }: TOfferPageProps) => {
     <Offer
       offerDetails={currentDetails}
       nearPlaces={nearPlaces}
-      review={currentReviews}
+      reviews={currentReviews}
     />
   ) : (
     <NotFoundPage />

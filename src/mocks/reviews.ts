@@ -3,7 +3,7 @@ import { TReview } from '../types/review';
 const REVIEWS: TReview[] = [
   {
     id: '372dcd05-d179-4a2a-be70-0b08daada439',
-    comments: [
+    reviewComments: [
       {
         id: 'e64b03ed-f0a8-44c5-b20e-a991092a0dd7',
         comment:
@@ -44,7 +44,7 @@ const REVIEWS: TReview[] = [
   },
   {
     id: '768226ff-11f3-4bec-b13c-a903de1da7de',
-    comments: [
+    reviewComments: [
       {
         id: '77135728-b48f-4b02-8f93-ce152a51ec1b',
         comment:
@@ -85,7 +85,7 @@ const REVIEWS: TReview[] = [
   },
   {
     id: 'f21b1d07-4ed8-456f-92ac-fd13b5cf6c19',
-    comments: [
+    reviewComments: [
       {
         id: 'c815d444-899c-4a5e-b150-e5834a1c8f2a',
         comment:
