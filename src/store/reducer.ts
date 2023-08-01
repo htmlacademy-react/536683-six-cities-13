@@ -2,7 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { OFFERS } from '../mocks/offers';
 import { changeLocation, fillOfferList } from './actions';
 
-const DEFAULT_LOCATION = 'Paris';
+export const DEFAULT_LOCATION = 'Paris';
 
 const initialState = {
   location: DEFAULT_LOCATION,
@@ -16,7 +16,10 @@ const reducer = createReducer(initialState, (builder) => [
   builder.addCase(fillOfferList, (state, action) => {
     state.offers = action.payload;
   }),
-  builder.addDefaultCase((state) => state),
+  builder.addDefaultCase((state) => {
+    state.location = initialState.location;
+    state.offers = initialState.offers;
+  }),
 ]);
 
 export { reducer };
