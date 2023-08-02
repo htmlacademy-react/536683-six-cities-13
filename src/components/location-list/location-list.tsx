@@ -1,6 +1,6 @@
 import { SyntheticEvent, useState } from 'react';
-import { DEFAULT_LOCATION } from '../../store/reducer';
 import cn from 'classnames';
+import { DEFAULT_LOCATION } from '../../const';
 
 type TLocationListProps = {
   locations: string[];

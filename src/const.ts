@@ -57,6 +57,8 @@ const LOCATIONS: string[] = [
   'Dusseldorf',
 ];
 
+const DEFAULT_LOCATION = 'Paris';
+
 const SORT_TYPES: string[] = [
   'Popular',
   'Price: low to high',
@@ -80,6 +82,7 @@ export {
   PATH_MARKER_DEFAULT,
   OFFER_CARD_IMAGE_SIZE,
   MAX_NEAR_PLACES,
+  DEFAULT_LOCATION,
   LOCATIONS,
   SORT_TYPES,
 };
