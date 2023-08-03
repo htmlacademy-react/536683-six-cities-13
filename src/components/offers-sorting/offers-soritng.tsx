@@ -15,6 +15,8 @@ const OffersSorting = ({ onSortTypeClick }: TOffersSortingProps) => {
     setIsOpened((prevIsOpened) => !prevIsOpened);
   };
 
+  const arrowStyle = isOpened ? 'translateY(-50%) rotate(-180deg)' : '';
+
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by </span>
@@ -24,7 +26,12 @@ const OffersSorting = ({ onSortTypeClick }: TOffersSortingProps) => {
         onClick={handleSortClick}
       >
         {sortTypeName}
-        <svg className="places__sorting-arrow" width={7} height={4}>
+        <svg
+          className="places__sorting-arrow"
+          style={{ transform: arrowStyle }}
+          width={7}
+          height={4}
+        >
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
