@@ -1,3 +1,15 @@
+import { TOffer } from './types/offer';
+
+const getUniqueFavoriteCities = (offers: TOffer[]) => [
+  ...offers.reduce((initial, current) => {
+    if (current.isFavorite) {
+      return initial.add(current.city.name);
+    }
+
+    return initial;
+  }, new Set<string>()),
+];
+
 const calculateRating = (rating: number): number => {
   const MAX_RATING = 5;
 
@@ -30,6 +42,7 @@ const capitalizeFirstLetter = (word: string): string =>
   `${word.charAt(0).toUpperCase()}${word.slice(1)}`;
 
 export {
+  getUniqueFavoriteCities,
   calculateRating,
   capitalizeFirstLetter,
   getCommentDate,

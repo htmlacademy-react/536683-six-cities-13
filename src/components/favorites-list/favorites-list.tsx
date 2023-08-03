@@ -1,4 +1,5 @@
 import { TOffer } from '../../types/offer';
+import { getUniqueFavoriteCities } from '../../utils';
 import { OfferCardFavorites } from '../offer-card/offer-card-favorites';
 
 type TFavoritesListProps = {
@@ -6,12 +7,7 @@ type TFavoritesListProps = {
 };
 
 const FavoritesList = ({ offers }: TFavoritesListProps) => {
-  const cities: string[] = [
-    ...offers.reduce(
-      (initial, current) => initial.add(current.city.name),
-      new Set<string>()
-    ),
-  ];
+  const cities: string[] = getUniqueFavoriteCities(offers);
   const favorites = offers.filter((offer) => offer.isFavorite);
 
   return (
