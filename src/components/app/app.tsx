@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { FavoritesPage } from '../../pages/favorites-page/favorites-page';
 import { LoginPage } from '../../pages/login-page/login-page';
@@ -12,8 +13,8 @@ import { OFFERS } from '../../mocks/offers';
 import { TOffer } from '../../types/offer';
 import { TDetail } from '../../types/details';
 import { TReview } from '../../types/review';
-import { Provider } from 'react-redux';
-import { store } from '../../store';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { loadOffers } from '../../store/async-actions';
 
 type TAppProps = {
   details: TDetail[];
@@ -21,8 +22,14 @@ type TAppProps = {
   nearPlaces: TOffer[];
 };
 
-const App = ({ details, reviews, nearPlaces }: TAppProps) => (
-  <Provider store={store}>
+const App = ({ details, reviews, nearPlaces }: TAppProps) => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(loadOffers());
+  }, [dispatch]);
+
+  return (
     <BrowserRouter>
       <Routes>
         <Route index path={AppRoute.Root} element={<MainPage />} />
@@ -53,7 +60,7 @@ const App = ({ details, reviews, nearPlaces }: TAppProps) => (
         <Route path={AppRoute.NotFound} element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
-  </Provider>
-);
+  );
+};
 
 export { App };

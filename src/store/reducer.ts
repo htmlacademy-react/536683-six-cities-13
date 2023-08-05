@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { OFFERS } from '../mocks/offers';
 import { changeLocation, fetchOffers } from './actions';
+import { OFFERS } from '../mocks/offers';
 import { DEFAULT_LOCATION } from '../const';
 
 const initialState = {
