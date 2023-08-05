@@ -1,11 +1,20 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeLocation, fetchOffers } from './actions';
-import { OFFERS } from '../mocks/offers';
-import { DEFAULT_LOCATION } from '../const';
+import { changeLocation, changeRequestStatus, fetchOffers } from './actions';
+import { DEFAULT_LOCATION, RequestStatus } from '../const';
+import { TOffer } from '../types/offer';
 
-const initialState = {
+export type TRequestStatus = 'loading' | 'success' | 'error';
+
+type TInitialState = {
+  location: string;
+  offers: TOffer[];
+  status: TRequestStatus;
+};
+
+const initialState: TInitialState = {
   location: DEFAULT_LOCATION,
-  offers: OFFERS,
+  offers: [],
+  status: RequestStatus.Loading,
 };
 
 const reducer = createReducer(initialState, (builder) => [
@@ -14,6 +23,9 @@ const reducer = createReducer(initialState, (builder) => [
   }),
   builder.addCase(fetchOffers, (state, action) => {
     state.offers = action.payload;
+  }),
+  builder.addCase(changeRequestStatus, (state, action) => {
+    state.status = action.payload;
   }),
   builder.addDefaultCase((state) => {
     state.location = initialState.location;

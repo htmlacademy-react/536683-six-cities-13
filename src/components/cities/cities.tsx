@@ -1,6 +1,7 @@
 import { TOffer } from '../../types/offer';
 import { Map } from '../map/map';
 import { OfferList } from '../offer-list/offer-list';
+import { CitiesEmpty } from './cities-empty';
 
 type TCitiesProps = {
   offers: TOffer[];
@@ -11,7 +12,7 @@ type TCitiesProps = {
 const Cities = ({ offers, selectedPoint, onOfferHover }: TCitiesProps) => {
   const [currentOffer] = offers;
 
-  return (
+  const citiesContent = offers.length ? (
     <div className="cities__places-container container">
       <OfferList offers={offers} onOfferHover={onOfferHover} />
       <div className="cities__right-section">
@@ -24,7 +25,11 @@ const Cities = ({ offers, selectedPoint, onOfferHover }: TCitiesProps) => {
         </section>
       </div>
     </div>
+  ) : (
+    <CitiesEmpty locationCity={currentOffer.city.name} />
   );
+
+  return <div className="cities">{citiesContent}</div>;
 };
 
 export { Cities };

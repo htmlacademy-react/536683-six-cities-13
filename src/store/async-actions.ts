@@ -1,13 +1,20 @@
 import { fetchData } from '.';
-import { BASE_URL } from '../const';
+import { BASE_URL, RequestStatus } from '../const';
 import { TOffer } from '../types/offer';
 import { TAppDispatch } from '../types/state';
-import { fetchOffers } from './actions';
+import { changeRequestStatus, fetchOffers } from './actions';
 
 const loadOffers = () => async (dispatch: TAppDispatch) => {
-  const response = await fetchData.get<TOffer[]>(`${BASE_URL}/offers`);
+  dispatch(changeRequestStatus(RequestStatus.Loading));
 
-  dispatch(fetchOffers(response.data));
+  try {
+    const response = await fetchData.get<TOffer[]>(`${BASE_URL}/offers`);
+
+    dispatch(fetchOffers(response.data));
+    dispatch(changeRequestStatus(RequestStatus.Success));
+  } catch (error) {
+    dispatch(changeRequestStatus(RequestStatus.Error));
+  }
 };
 
 export { loadOffers };
