@@ -26,6 +26,9 @@ const reducer = createReducer(initialState, (builder) => [
     state.status = action.payload;
   }),
   builder.addCase(requireAuth, (state, action) => {
+    // eslint-disable-next-line no-console
+    console.log(action.payload);
+
     state.authStatus = action.payload;
   }),
 ]);
