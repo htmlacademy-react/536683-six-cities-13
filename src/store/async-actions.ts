@@ -4,8 +4,9 @@ import { TOffer } from '../types/offer';
 import { TAppDispatch, TRootState } from '../types/state';
 import { AxiosInstance } from 'axios';
 import { changeRequestStatus, fetchOffers, requireAuth } from './actions';
-// import { TAuthData } from '../types/auth-data';
-// import { TUserData } from '../types/user-data';
+import { TAuthData } from '../types/auth-data';
+import { TUserData } from '../types/user-data';
+import { setToken } from '../services/token';
 
 const loadOffers = createAsyncThunk<
   void,
@@ -36,20 +37,24 @@ const checkAuthStatus = createAsyncThunk<
   }
 });
 
-// const login = createAsyncThunk<
-//   void,
-//   TAuthData,
-//   { dispatch: TAppDispatch; state: TRootState; extra: AxiosInstance }
-// >(
-//   'user/login',
-//   async ({ login: email, password }, { dispatch, extra: fetchData }) => {
-//     const {
-//       data: { token },
-//     } = await fetchData.get<TUserData>(APIRoute.Login);
+const login = createAsyncThunk<
+  void,
+  TAuthData,
+  { dispatch: TAppDispatch; state: TRootState; extra: AxiosInstance }
+>('user/login', async ({ email, password }, { dispatch, extra: fetchData }) => {
+  try {
+    const {
+      data: { token },
+    } = await fetchData.post<TUserData>(APIRoute.Login, {
+      email,
+      password,
+    });
 
-//     // eslint-disable-next-line no-console
-//     console.log(token);
-//   }
-// );
+    setToken(token);
+    dispatch(requireAuth(AuthStatus.Auth));
+  } catch (error) {
+    dispatch(requireAuth(AuthStatus.NoAuth));
+  }
+});
 
-export { loadOffers, checkAuthStatus };
+export { loadOffers, checkAuthStatus, login };
