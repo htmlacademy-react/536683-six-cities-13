@@ -14,6 +14,11 @@ type TOfferPageProps = {
 
 const OfferPage = ({ details, reviews, nearPlaces }: TOfferPageProps) => {
   const { id } = useParams();
+  // что бы получить инфу, вызываем dispatch + асинхронное действие
+  // которое заключает в себе axios, который принимает id
+  // сервер будет отдавать инфу по текущему id
+  // стор обновляется
+  // через useSelector берём нужный кусок стора
   const currentDetails = details.find((detail) => detail.id === id);
   const currentReviews = reviews.find((review) => review.id === id);
 

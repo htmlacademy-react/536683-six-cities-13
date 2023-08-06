@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute, AuthStatus } from '../../const';
 
 type TUserMenuProps = {
-  authorizationStatus: AuthorizationStatus;
+  authStatus: AuthStatus;
 };
 
-const UserMenu = ({ authorizationStatus }: TUserMenuProps) => {
+const UserMenu = ({ authStatus }: TUserMenuProps) => {
   const userInfo =
-    authorizationStatus === AuthorizationStatus.Auth ? (
+    authStatus === AuthStatus.Auth ? (
       <Link
         className="header__nav-link header__nav-link--profile"
         to={AppRoute.Favorites}
@@ -25,7 +25,7 @@ const UserMenu = ({ authorizationStatus }: TUserMenuProps) => {
       </a>
     );
   const userStatus =
-    authorizationStatus === AuthorizationStatus.Auth ? (
+    authStatus === AuthStatus.Auth ? (
       <li className="header__nav-item">
         <a className="header__nav-link" href="#">
           <span className="header__signout">Sign out</span>

@@ -1,0 +1,6 @@
+.empty {
+  background-image: url('../img/no-places@2x.png');
+  background-position: right center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

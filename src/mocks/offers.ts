@@ -185,52 +185,7 @@ const OFFERS: TOffer[] = [
     isPremium: true,
     rating: 4.3,
   },
-  {
-    id: '58f051ce-9f57-46ad-8a65-6e1f7078bbe0',
-    title: 'Canal View Prinsengracht',
-    type: 'room',
-    price: 154,
-    previewImage: 'https://13.design.pages.academy/static/hotel/11.jpg',
-    city: {
-      name: 'Cologne',
-      location: {
-        latitude: 50.938361,
-        longitude: 6.959974,
-        zoom: 13,
-      },
-    },
-    location: {
-      latitude: 50.949361,
-      longitude: 6.976974,
-      zoom: 16,
-    },
-    isFavorite: false,
-    isPremium: false,
-    rating: 3.7,
-  },
-  {
-    id: '04391293-7e38-41e8-a04a-4c3b4caad2c5',
-    title: 'House in countryside',
-    type: 'apartment',
-    price: 284,
-    previewImage: 'https://13.design.pages.academy/static/hotel/16.jpg',
-    city: {
-      name: 'Cologne',
-      location: {
-        latitude: 50.938361,
-        longitude: 6.959974,
-        zoom: 13,
-      },
-    },
-    location: {
-      latitude: 50.913361,
-      longitude: 6.9509739999999995,
-      zoom: 16,
-    },
-    isFavorite: false,
-    isPremium: false,
-    rating: 3.3,
-  },
+
   {
     id: 'c6788ace-1dbd-45f0-8f7d-b5255f8e6af1',
     title: 'Wood and stone place',

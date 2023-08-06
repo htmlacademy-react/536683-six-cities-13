@@ -11,7 +11,16 @@ enum AppRoute {
   DevRoot = '/dev-root',
 }
 
-enum AuthorizationStatus {
+enum APIRoute {
+  Offers = '/offers',
+  Nearby = '/nearby',
+  Favorite = '/favorite',
+  Comments = '/comments',
+  Login = '/login',
+  Logout = '/logout',
+}
+
+enum AuthStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
@@ -32,6 +41,12 @@ enum RatingClassName {
 enum ReviewInfo {
   MaxCommentLength = 60,
   MinRating = 0,
+}
+
+enum RequestStatus {
+  Loading = 'loading',
+  Success = 'success',
+  Error = 'error',
 }
 
 const REVIEW_RATINGS: TReviewRating[] = [
@@ -57,6 +72,8 @@ const LOCATIONS: string[] = [
   'Dusseldorf',
 ];
 
+const DEFAULT_LOCATION = 'Paris';
+
 const SORT_TYPES: string[] = [
   'Popular',
   'Price: low to high',
@@ -65,21 +82,28 @@ const SORT_TYPES: string[] = [
 ];
 
 const MAX_NEAR_PLACES = 3;
+const REQUEST_TIMEOUT = 5000;
+const BASE_URL = 'https://13.design.pages.academy/six-cities';
 const BASE_MARKER_PATH = './markup/img/';
 const PATH_MARKER_DEFAULT = `${BASE_MARKER_PATH}pin.svg`;
 const PATH_MARKER_CURRENT = `${BASE_MARKER_PATH}pin-active.svg`;
 
 export {
+  APIRoute,
   AppRoute,
-  AuthorizationStatus,
+  AuthStatus,
   OfferCardClassName,
   RatingClassName,
   ReviewInfo,
+  RequestStatus,
   REVIEW_RATINGS,
   PATH_MARKER_CURRENT,
   PATH_MARKER_DEFAULT,
   OFFER_CARD_IMAGE_SIZE,
   MAX_NEAR_PLACES,
+  DEFAULT_LOCATION,
   LOCATIONS,
   SORT_TYPES,
+  BASE_URL,
+  REQUEST_TIMEOUT,
 };

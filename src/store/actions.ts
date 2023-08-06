@@ -1,14 +1,13 @@
 import { createAction } from '@reduxjs/toolkit';
 import { TOffer } from '../types/offer';
+import { AuthStatus } from '../const';
+import { TRequestStatus } from '../types/state';
 
-const changeLocation = createAction('nav/changeLocation', (city: string) => ({
-  payload: city,
-}));
-const fillOfferList = createAction(
-  'offers/fillOfferList',
-  (offers: TOffer[]) => ({
-    payload: offers,
-  })
+const requireAuth = createAction<AuthStatus>('user/requireAuth');
+const changeLocation = createAction<string>('nav/changeLocation');
+const fetchOffers = createAction<TOffer[]>('offers/fetchOffers');
+const changeRequestStatus = createAction<TRequestStatus>(
+  'request/changeRequestStatus'
 );
 
-export { changeLocation, fillOfferList };
+export { requireAuth, changeLocation, fetchOffers, changeRequestStatus };
