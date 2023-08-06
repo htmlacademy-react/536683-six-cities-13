@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute, AuthStatus } from '../../const';
 import { FavoritesPage } from '../../pages/favorites-page/favorites-page';
 import { LoginPage } from '../../pages/login-page/login-page';
 import { MainPage } from '../../pages/main-page/main-page';
@@ -37,11 +37,8 @@ const App = ({ details, reviews, nearPlaces }: TAppProps) => {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <FavoritesPage
-                offers={OFFERS}
-                authorizationStatus={AuthorizationStatus.Auth}
-              />
+            <PrivateRoute>
+              <FavoritesPage offers={OFFERS} authStatus={AuthStatus.Auth} />
             </PrivateRoute>
           }
         />

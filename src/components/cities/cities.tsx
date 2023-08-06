@@ -7,9 +7,15 @@ type TCitiesProps = {
   offers: TOffer[];
   onOfferHover: (offerId: string) => void;
   selectedPoint?: TOffer;
+  locationCity: string;
 };
 
-const Cities = ({ offers, selectedPoint, onOfferHover }: TCitiesProps) => {
+const Cities = ({
+  offers,
+  selectedPoint,
+  locationCity,
+  onOfferHover,
+}: TCitiesProps) => {
   const [currentOffer] = offers;
 
   const citiesContent = offers.length ? (
@@ -26,7 +32,7 @@ const Cities = ({ offers, selectedPoint, onOfferHover }: TCitiesProps) => {
       </div>
     </div>
   ) : (
-    <CitiesEmpty locationCity={currentOffer.city.name} />
+    <CitiesEmpty locationCity={locationCity} />
   );
 
   return <div className="cities">{citiesContent}</div>;

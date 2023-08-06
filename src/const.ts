@@ -11,7 +11,7 @@ enum AppRoute {
   DevRoot = '/dev-root',
 }
 
-enum AuthorizationStatus {
+enum AuthStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
@@ -81,7 +81,7 @@ const PATH_MARKER_CURRENT = `${BASE_MARKER_PATH}pin-active.svg`;
 
 export {
   AppRoute,
-  AuthorizationStatus,
+  AuthStatus,
   OfferCardClassName,
   RatingClassName,
   ReviewInfo,

@@ -2,18 +2,15 @@ import { FavoritesList } from '../../components/favorites-list/favorites-list';
 import { Footer } from '../../components/footer/footer';
 import { Logo } from '../../components/logo/logo';
 import { UserMenu } from '../../components/user-menu/user-menu';
-import { AuthorizationStatus } from '../../const';
+import { AuthStatus } from '../../const';
 import { TOffer } from '../../types/offer';
 
 type TFavoritesPageProps = {
   offers: TOffer[];
-  authorizationStatus: AuthorizationStatus;
+  authStatus: AuthStatus;
 };
 
-const FavoritesPage = ({
-  offers,
-  authorizationStatus,
-}: TFavoritesPageProps) => (
+const FavoritesPage = ({ offers, authStatus }: TFavoritesPageProps) => (
   <div className="page">
     <header className="header">
       <div className="container">
@@ -21,7 +18,7 @@ const FavoritesPage = ({
           <div className="header__left">
             <Logo />
           </div>
-          <UserMenu authorizationStatus={authorizationStatus} />
+          <UserMenu authStatus={authStatus} />
         </div>
       </div>
     </header>

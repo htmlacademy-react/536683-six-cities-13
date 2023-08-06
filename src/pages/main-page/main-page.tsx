@@ -36,6 +36,7 @@ const MainPage = () => {
       <Cities
         offers={currentLocationOffers}
         selectedPoint={hoveredOffer}
+        locationCity={locationCity}
         onOfferHover={handleOfferHover}
       />
     ) : (
