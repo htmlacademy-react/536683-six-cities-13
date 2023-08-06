@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { reducer } from './reducer';
-import axios from '../services/api';
+import { createApi } from '../services/api';
 
-export const fetchData = axios;
+export const fetchData = createApi();
 
 const store = configureStore({
   reducer,

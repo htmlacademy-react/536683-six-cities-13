@@ -73,7 +73,7 @@ const SORT_TYPES: string[] = [
 ];
 
 const MAX_NEAR_PLACES = 3;
-const TIMEOUT = 5000;
+const REQUEST_TIMEOUT = 5000;
 const BASE_URL = 'https://13.design.pages.academy/six-cities';
 const BASE_MARKER_PATH = './markup/img/';
 const PATH_MARKER_DEFAULT = `${BASE_MARKER_PATH}pin.svg`;
@@ -95,5 +95,5 @@ export {
   LOCATIONS,
   SORT_TYPES,
   BASE_URL,
-  TIMEOUT,
+  REQUEST_TIMEOUT,
 };
