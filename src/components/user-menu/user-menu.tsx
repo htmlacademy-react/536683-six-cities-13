@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthStatus } from '../../const';
+import { useAppSelector } from '../../hooks/use-app-selector';
 
-type TUserMenuProps = {
-  authStatus: AuthStatus;
-};
+const UserMenu = () => {
+  const authStatus = useAppSelector((store) => store.authStatus);
 
-const UserMenu = ({ authStatus }: TUserMenuProps) => {
   const userInfo =
     authStatus === AuthStatus.Auth ? (
       <Link
@@ -19,10 +18,13 @@ const UserMenu = ({ authStatus }: TUserMenuProps) => {
         <span className="header__favorite-count">3</span>
       </Link>
     ) : (
-      <a className="header__nav-link header__nav-link--profile" href="#">
+      <Link
+        className="header__nav-link header__nav-link--profile"
+        to={AppRoute.Login}
+      >
         <div className="header__avatar-wrapper user__avatar-wrapper"></div>
         <span className="header__login">Sign in</span>
-      </a>
+      </Link>
     );
   const userStatus =
     authStatus === AuthStatus.Auth ? (
