@@ -6,10 +6,13 @@ import { REVIEWS } from './mocks/reviews';
 import { NEAR_PLACES } from './mocks/near-places';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { loadOffers } from './store/async-actions';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+store.dispatch(loadOffers());
 
 root.render(
   <React.StrictMode>

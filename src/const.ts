@@ -11,6 +11,15 @@ enum AppRoute {
   DevRoot = '/dev-root',
 }
 
+enum APIRoute {
+  Offers = '/offers',
+  Nearby = '/nearby',
+  Favorite = '/favorite',
+  Comments = '/comments',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 enum AuthStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
@@ -80,6 +89,7 @@ const PATH_MARKER_DEFAULT = `${BASE_MARKER_PATH}pin.svg`;
 const PATH_MARKER_CURRENT = `${BASE_MARKER_PATH}pin-active.svg`;
 
 export {
+  APIRoute,
   AppRoute,
   AuthStatus,
   OfferCardClassName,

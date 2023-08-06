@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 import { TOffer } from '../types/offer';
-import { TRequestStatus } from './reducer';
 import { AuthStatus } from '../const';
+import { TRequestStatus } from '../types/state';
 
 const requireAuth = createAction<AuthStatus>('user/requireAuth');
 const changeLocation = createAction<string>('nav/changeLocation');

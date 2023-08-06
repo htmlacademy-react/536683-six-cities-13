@@ -17,6 +17,7 @@ const MainPage = () => {
   const [hoveredOffer, setHoveredOffer] = useState<TOffer | undefined>(
     undefined
   );
+
   const currentLocationOffers = offers.filter(
     (offer) => offer.city.name === locationCity
   );

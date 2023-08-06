@@ -6,18 +6,9 @@ import {
   requireAuth,
 } from './actions';
 import { AuthStatus, DEFAULT_LOCATION, RequestStatus } from '../const';
-import { TOffer } from '../types/offer';
+import { TState } from '../types/state';
 
-export type TRequestStatus = 'loading' | 'success' | 'error';
-
-type TInitialState = {
-  authStatus: AuthStatus;
-  location: string;
-  offers: TOffer[];
-  status: TRequestStatus;
-};
-
-const initialState: TInitialState = {
+const initialState: TState = {
   authStatus: AuthStatus.Unknown,
   location: DEFAULT_LOCATION,
   offers: [],
@@ -36,10 +27,6 @@ const reducer = createReducer(initialState, (builder) => [
   }),
   builder.addCase(requireAuth, (state, action) => {
     state.authStatus = action.payload;
-  }),
-  builder.addDefaultCase((state) => {
-    state.location = initialState.location;
-    state.offers = initialState.offers;
   }),
 ]);
 
