@@ -1,15 +1,19 @@
 import { SyntheticEvent, useState } from 'react';
 import cn from 'classnames';
-import { DEFAULT_LOCATION } from '../../const';
 
 type TLocationListProps = {
   locations: string[];
+  currentLocation: string;
   onLocationClick: (location: string) => void;
 };
 
-const LocationList = ({ locations, onLocationClick }: TLocationListProps) => {
+const LocationList = ({
+  locations,
+  currentLocation,
+  onLocationClick,
+}: TLocationListProps) => {
   const [selectedLocation, setSelectedLocation] =
-    useState<string>(DEFAULT_LOCATION);
+    useState<string>(currentLocation);
 
   return (
     <section className="locations container">

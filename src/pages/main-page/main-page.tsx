@@ -55,6 +55,7 @@ const MainPage = () => {
         <div className="tabs">
           <LocationList
             locations={LOCATIONS}
+            currentLocation={locationCity}
             onLocationClick={handleLocationClick}
           />
         </div>

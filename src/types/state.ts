@@ -8,6 +8,7 @@ export type TRequestStatus = 'loading' | 'success' | 'error';
 
 export type TState = {
   authStatus: AuthStatus;
+  userEmail: string;
   location: string;
   offers: TOffer[];
   status: TRequestStatus;

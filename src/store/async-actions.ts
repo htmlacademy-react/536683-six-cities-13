@@ -3,10 +3,15 @@ import { APIRoute, AuthStatus, RequestStatus } from '../const';
 import { TOffer } from '../types/offer';
 import { TAppDispatch, TRootState } from '../types/state';
 import { AxiosInstance } from 'axios';
-import { changeRequestStatus, fetchOffers, requireAuth } from './actions';
+import {
+  changeRequestStatus,
+  fetchOffers,
+  requireAuth,
+  setUserEmail,
+} from './actions';
 import { TAuthData } from '../types/auth-data';
 import { TUserData } from '../types/user-data';
-import { setToken } from '../services/token';
+import { dropToken, setToken } from '../services/token';
 
 const loadOffers = createAsyncThunk<
   void,
@@ -44,7 +49,7 @@ const login = createAsyncThunk<
 >('user/login', async ({ email, password }, { dispatch, extra: fetchData }) => {
   try {
     const {
-      data: { token },
+      data: { token, email: userEmail },
     } = await fetchData.post<TUserData>(APIRoute.Login, {
       email,
       password,
@@ -52,9 +57,25 @@ const login = createAsyncThunk<
 
     setToken(token);
     dispatch(requireAuth(AuthStatus.Auth));
+    dispatch(setUserEmail(userEmail));
   } catch (error) {
     dispatch(requireAuth(AuthStatus.NoAuth));
   }
 });
 
-export { loadOffers, checkAuthStatus, login };
+const logout = createAsyncThunk<
+  void,
+  undefined,
+  { dispatch: TAppDispatch; state: TRootState; extra: AxiosInstance }
+>('user/login', async (_arg, { dispatch, extra: fetchData }) => {
+  try {
+    await fetchData.delete(APIRoute.Logout);
+
+    dropToken();
+    dispatch(requireAuth(AuthStatus.NoAuth));
+  } catch (error) {
+    dispatch(requireAuth(AuthStatus.Unknown));
+  }
+});
+
+export { loadOffers, checkAuthStatus, login, logout };
