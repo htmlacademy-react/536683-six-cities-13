@@ -1,5 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
+  addComment,
   changeLoadingStatus,
   changeLocation,
   fetchComments,
@@ -43,6 +44,9 @@ const reducer = createReducer(initialState, (builder) => [
   }),
   builder.addCase(fetchNearPlaces, (state, action) => {
     state.nearPlaces = action.payload;
+  }),
+  builder.addCase(addComment, (state, action) => {
+    state.comments.push(action.payload);
   }),
   builder.addCase(changeLoadingStatus, (state, action) => {
     state.loadingStatus = action.payload;

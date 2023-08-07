@@ -4,6 +4,7 @@ import { TOffer } from '../types/offer';
 import { TAppDispatch, TRootState } from '../types/state';
 import { AxiosInstance } from 'axios';
 import {
+  addComment,
   changeLoadingStatus,
   fetchComments,
   fetchDetails,
@@ -20,6 +21,7 @@ import { store } from '.';
 import { TOfferId } from '../types/offer-id';
 import { TDetail } from '../types/details';
 import { TComment } from '../types/review';
+import { TReviewForm } from '../components/review-form/review-form';
 
 const clearError = createAsyncThunk('app/clearError', () => {
   setTimeout(() => {
@@ -119,4 +121,31 @@ const logout = createAsyncThunk<
   }
 });
 
-export { loadOffers, checkAuthStatus, login, logout, clearError, loadDetails };
+const submitComment = createAsyncThunk<
+  void,
+  TReviewForm,
+  { dispatch: TAppDispatch; state: TRootState; extra: AxiosInstance }
+>(
+  'user/login',
+  async ({ rating, comment, offerId }, { dispatch, extra: fetchData }) => {
+    const { data } = await fetchData.post<TComment>(
+      `${APIRoute.Comments}/${offerId}`,
+      {
+        rating,
+        comment,
+      }
+    );
+
+    dispatch(addComment(data));
+  }
+);
+
+export {
+  loadOffers,
+  checkAuthStatus,
+  login,
+  logout,
+  clearError,
+  loadDetails,
+  submitComment,
+};

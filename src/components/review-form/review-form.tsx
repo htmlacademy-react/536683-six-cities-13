@@ -1,17 +1,28 @@
+import { useParams } from 'react-router-dom';
 import { ReviewInfo } from '../../const';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { submitComment } from '../../store/async-actions';
 import { ReviewRating } from './review-form-rating';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 export type TReviewForm = {
+  offerId: string;
   rating: number;
   comment: string;
 };
 
+const InitialState: TReviewForm = {
+  offerId: '',
+  rating: 0,
+  comment: '',
+};
+
 const ReviewForm = () => {
-  const [reviewInfo, setReviewInfo] = useState<TReviewForm>({
-    rating: 0,
-    comment: '',
-  });
+  const dispatch = useAppDispatch();
+  const { id } = useParams();
+  const [reviewInfo, setReviewInfo] = useState<TReviewForm>(InitialState);
+  const [wasSubmitted, setWasSubmitted] = useState<boolean>(false);
+
   const isSubmitDisabled = Boolean(
     reviewInfo.comment.length < ReviewInfo.MaxCommentLength ||
       reviewInfo.rating <= ReviewInfo.MinRating
@@ -32,8 +43,11 @@ const ReviewForm = () => {
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    // eslint-disable-next-line no-console
-    console.log(reviewInfo);
+    if (id) {
+      dispatch(submitComment({ ...reviewInfo, offerId: id }));
+      setReviewInfo(InitialState);
+      setWasSubmitted((prevWasSubmitted) => !prevWasSubmitted);
+    }
   };
 
   return (
@@ -46,7 +60,10 @@ const ReviewForm = () => {
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
-      <ReviewRating onRatingChange={handleRatingChange} />
+      <ReviewRating
+        key={Number(wasSubmitted)}
+        onRatingChange={handleRatingChange}
+      />
       <textarea
         className="reviews__textarea form__textarea"
         id="review"

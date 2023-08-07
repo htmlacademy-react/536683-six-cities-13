@@ -12,6 +12,7 @@ const fetchOffers = createAction<TOffer[]>('offers/fetchOffers');
 const fetchDetails = createAction<TDetail>('offers/fetchDetails');
 const fetchComments = createAction<TComment[]>('offers/fetchComments');
 const fetchNearPlaces = createAction<TOffer[]>('offers/fetchNearPlaces');
+const addComment = createAction<TComment>('comment/addComment');
 const setError = createAction<string | null>('app/setError');
 const changeLoadingStatus = createAction<TLoadingStatus>(
   'request/changeLoadingStatus'
@@ -27,4 +28,5 @@ export {
   fetchDetails,
   fetchComments,
   fetchNearPlaces,
+  addComment,
 };
