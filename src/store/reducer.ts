@@ -2,7 +2,9 @@ import { createReducer } from '@reduxjs/toolkit';
 import {
   changeLoadingStatus,
   changeLocation,
+  fetchComments,
   fetchDetails,
+  fetchNearPlaces,
   fetchOffers,
   requireAuth,
   setError,
@@ -35,6 +37,12 @@ const reducer = createReducer(initialState, (builder) => [
   }),
   builder.addCase(fetchDetails, (state, action) => {
     state.details = action.payload;
+  }),
+  builder.addCase(fetchComments, (state, action) => {
+    state.comments = action.payload;
+  }),
+  builder.addCase(fetchNearPlaces, (state, action) => {
+    state.nearPlaces = action.payload;
   }),
   builder.addCase(changeLoadingStatus, (state, action) => {
     state.loadingStatus = action.payload;

@@ -11,8 +11,10 @@ import { Spinner } from '../../components/spinner/spinner';
 
 const OfferPage = () => {
   const { id } = useParams();
-  const currentDetails = useAppSelector((store) => store.details);
   const dispatch = useAppDispatch();
+  const currentDetails = useAppSelector((store) => store.details);
+  const currentNearPlaces = useAppSelector((store) => store.nearPlaces);
+  const currentComments = useAppSelector((store) => store.comments);
 
   useEffect(() => {
     let isMounted = true;
@@ -26,11 +28,12 @@ const OfferPage = () => {
     };
   }, [id, dispatch]);
 
-  // const currentDetails = details.find((detail) => detail.id === id);
-  // const currentReviews = reviews.find((review) => review.id === id);
-
   const pageContent = currentDetails ? (
-    <Offer offerDetails={currentDetails} />
+    <Offer
+      offerDetails={currentDetails}
+      nearPlaces={currentNearPlaces}
+      comments={currentComments}
+    />
   ) : (
     <NotFoundPage />
   );
