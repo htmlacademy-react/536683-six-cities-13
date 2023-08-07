@@ -4,6 +4,8 @@ import {
   changeRequestStatus,
   fetchOffers,
   requireAuth,
+  setError,
+  setUserEmail,
 } from './actions';
 import { AuthStatus, DEFAULT_LOCATION, RequestStatus } from '../const';
 import { TState } from '../types/state';
@@ -12,10 +14,15 @@ const initialState: TState = {
   authStatus: AuthStatus.Unknown,
   location: DEFAULT_LOCATION,
   offers: [],
+  userEmail: '',
   status: RequestStatus.Loading,
+  error: null,
 };
 
 const reducer = createReducer(initialState, (builder) => [
+  builder.addCase(setUserEmail, (state, action) => {
+    state.userEmail = action.payload;
+  }),
   builder.addCase(changeLocation, (state, action) => {
     state.location = action.payload;
   }),
@@ -27,6 +34,9 @@ const reducer = createReducer(initialState, (builder) => [
   }),
   builder.addCase(requireAuth, (state, action) => {
     state.authStatus = action.payload;
+  }),
+  builder.addCase(setError, (state, action) => {
+    state.error = action.payload;
   }),
 ]);
 

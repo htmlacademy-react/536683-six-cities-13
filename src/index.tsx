@@ -6,17 +6,20 @@ import { REVIEWS } from './mocks/reviews';
 import { NEAR_PLACES } from './mocks/near-places';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { loadOffers } from './store/async-actions';
+import { checkAuthStatus, loadOffers } from './store/async-actions';
+import { ErrorMessage } from './components/error-message/error-message';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+store.dispatch(checkAuthStatus());
 store.dispatch(loadOffers());
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ErrorMessage />
       <App nearPlaces={NEAR_PLACES} details={DETAILS} reviews={REVIEWS} />
     </Provider>
   </React.StrictMode>
