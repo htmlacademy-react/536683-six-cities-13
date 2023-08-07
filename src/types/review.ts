@@ -11,8 +11,3 @@ export type TComment = {
   rating: number;
   user: TUser;
 };
-
-export type TReview = {
-  id: string;
-  reviewComments: TComment[];
-};

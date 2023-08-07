@@ -1,10 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { APIRoute, AuthStatus, ERROR_TIMEOUT, RequestStatus } from '../const';
+import { APIRoute, AuthStatus, ERROR_TIMEOUT, LoadingStatus } from '../const';
 import { TOffer } from '../types/offer';
 import { TAppDispatch, TRootState } from '../types/state';
 import { AxiosInstance } from 'axios';
 import {
-  changeRequestStatus,
+  changeLoadingStatus,
+  fetchDetails,
   fetchOffers,
   requireAuth,
   setError,
@@ -14,6 +15,8 @@ import { TAuthData } from '../types/auth-data';
 import { TUserData } from '../types/user-data';
 import { dropToken, setToken } from '../services/token';
 import { store } from '.';
+import { TOfferId } from '../types/offer-id';
+import { TDetail } from '../types/details';
 
 const clearError = createAsyncThunk('app/clearError', () => {
   setTimeout(() => {
@@ -27,13 +30,13 @@ const loadOffers = createAsyncThunk<
   { dispatch: TAppDispatch; state: TRootState; extra: AxiosInstance }
 >('data/loadOffers', async (_arg, { dispatch, extra: fetchData }) => {
   try {
-    dispatch(changeRequestStatus(RequestStatus.Loading));
+    dispatch(changeLoadingStatus(LoadingStatus.Loading));
     const { data } = await fetchData.get<TOffer[]>(APIRoute.Offers);
 
-    dispatch(changeRequestStatus(RequestStatus.Success));
+    dispatch(changeLoadingStatus(LoadingStatus.Success));
     dispatch(fetchOffers(data));
   } catch (error) {
-    dispatch(changeRequestStatus(RequestStatus.Error));
+    dispatch(changeLoadingStatus(LoadingStatus.Idle));
   }
 });
 
@@ -51,6 +54,25 @@ const checkAuthStatus = createAsyncThunk<
     dispatch(setUserEmail(email));
   } catch {
     dispatch(requireAuth(AuthStatus.NoAuth));
+  }
+});
+
+const loadDetails = createAsyncThunk<
+  void,
+  TOfferId,
+  { dispatch: TAppDispatch; state: TRootState; extra: AxiosInstance }
+>('data/loadDetails', async ({ offerId }, { dispatch, extra: fetchData }) => {
+  try {
+    dispatch(changeLoadingStatus(LoadingStatus.Loading));
+
+    const { data } = await fetchData.get<TDetail>(
+      `${APIRoute.Offers}/${offerId}`
+    );
+
+    dispatch(changeLoadingStatus(LoadingStatus.Success));
+    dispatch(fetchDetails(data));
+  } catch (error) {
+    dispatch(changeLoadingStatus(LoadingStatus.Idle));
   }
 });
 
@@ -90,4 +112,4 @@ const logout = createAsyncThunk<
   }
 });
 
-export { loadOffers, checkAuthStatus, login, logout, clearError };
+export { loadOffers, checkAuthStatus, login, logout, clearError, loadDetails };

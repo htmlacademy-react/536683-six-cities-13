@@ -1,9 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './components/app/app';
-import { DETAILS } from './mocks/details';
-import { REVIEWS } from './mocks/reviews';
-import { NEAR_PLACES } from './mocks/near-places';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { checkAuthStatus, loadOffers } from './store/async-actions';
@@ -20,7 +17,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ErrorMessage />
-      <App nearPlaces={NEAR_PLACES} details={DETAILS} reviews={REVIEWS} />
+      <App />
     </Provider>
   </React.StrictMode>
 );

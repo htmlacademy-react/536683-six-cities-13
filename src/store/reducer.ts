@@ -1,21 +1,25 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
+  changeLoadingStatus,
   changeLocation,
-  changeRequestStatus,
+  fetchDetails,
   fetchOffers,
   requireAuth,
   setError,
   setUserEmail,
 } from './actions';
-import { AuthStatus, DEFAULT_LOCATION, RequestStatus } from '../const';
+import { AuthStatus, DEFAULT_LOCATION, LoadingStatus } from '../const';
 import { TState } from '../types/state';
 
 const initialState: TState = {
   authStatus: AuthStatus.Unknown,
   location: DEFAULT_LOCATION,
   offers: [],
+  details: null,
+  comments: [],
+  nearPlaces: [],
   userEmail: '',
-  status: RequestStatus.Loading,
+  loadingStatus: LoadingStatus.Loading,
   error: null,
 };
 
@@ -29,8 +33,11 @@ const reducer = createReducer(initialState, (builder) => [
   builder.addCase(fetchOffers, (state, action) => {
     state.offers = action.payload;
   }),
-  builder.addCase(changeRequestStatus, (state, action) => {
-    state.status = action.payload;
+  builder.addCase(fetchDetails, (state, action) => {
+    state.details = action.payload;
+  }),
+  builder.addCase(changeLoadingStatus, (state, action) => {
+    state.loadingStatus = action.payload;
   }),
   builder.addCase(requireAuth, (state, action) => {
     state.authStatus = action.payload;

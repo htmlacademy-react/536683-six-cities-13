@@ -2,19 +2,18 @@ import { useState } from 'react';
 import { TOffer } from '../../types/offer';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { LocationList } from '../../components/location-list/location-list';
-import { LOCATIONS, RequestStatus } from '../../const';
+import { LOCATIONS } from '../../const';
 import { changeLocation } from '../../store/actions';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { Cities } from '../../components/cities/cities';
-import { Spinner } from '../../components/spinner/spinner';
 import { Header } from '../../components/header/header';
 import { UserMenu } from '../../components/user-menu/user-menu';
+import { Spinner } from '../../components/spinner/spinner';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
   const locationCity = useAppSelector((store) => store.location);
   const offers = useAppSelector((store) => store.offers);
-  const status = useAppSelector((store) => store.status);
   const [hoveredOffer, setHoveredOffer] = useState<TOffer | undefined>(
     undefined
   );
@@ -33,18 +32,6 @@ const MainPage = () => {
     setHoveredOffer(currentOffer);
   };
 
-  const mainContent =
-    status === RequestStatus.Success ? (
-      <Cities
-        offers={currentLocationOffers}
-        selectedPoint={hoveredOffer}
-        locationCity={locationCity}
-        onOfferHover={handleOfferHover}
-      />
-    ) : (
-      <Spinner />
-    );
-
   return (
     <div className="page page--gray page--main">
       <Header>
@@ -59,7 +46,13 @@ const MainPage = () => {
             onLocationClick={handleLocationClick}
           />
         </div>
-        {mainContent}
+        <Spinner />
+        <Cities
+          offers={currentLocationOffers}
+          selectedPoint={hoveredOffer}
+          locationCity={locationCity}
+          onOfferHover={handleOfferHover}
+        />
       </main>
     </div>
   );
