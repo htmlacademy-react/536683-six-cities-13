@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { APIRoute, AuthStatus, RequestStatus } from '../const';
+import { APIRoute, AuthStatus, ERROR_TIMEOUT, RequestStatus } from '../const';
 import { TOffer } from '../types/offer';
 import { TAppDispatch, TRootState } from '../types/state';
 import { AxiosInstance } from 'axios';
@@ -7,11 +7,19 @@ import {
   changeRequestStatus,
   fetchOffers,
   requireAuth,
+  setError,
   setUserEmail,
 } from './actions';
 import { TAuthData } from '../types/auth-data';
 import { TUserData } from '../types/user-data';
 import { dropToken, setToken } from '../services/token';
+import { store } from '.';
+
+const clearError = createAsyncThunk('app/clearError', () => {
+  setTimeout(() => {
+    store.dispatch(setError(null));
+  }, ERROR_TIMEOUT);
+});
 
 const loadOffers = createAsyncThunk<
   void,
@@ -82,4 +90,4 @@ const logout = createAsyncThunk<
   }
 });
 
-export { loadOffers, checkAuthStatus, login, logout };
+export { loadOffers, checkAuthStatus, login, logout, clearError };

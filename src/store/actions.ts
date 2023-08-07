@@ -7,6 +7,7 @@ const requireAuth = createAction<AuthStatus>('user/requireAuth');
 const setUserEmail = createAction<string>('user/setUserEmail');
 const changeLocation = createAction<string>('nav/changeLocation');
 const fetchOffers = createAction<TOffer[]>('offers/fetchOffers');
+const setError = createAction<string | null>('app/setError');
 const changeRequestStatus = createAction<TRequestStatus>(
   'request/changeRequestStatus'
 );
@@ -17,4 +18,5 @@ export {
   changeLocation,
   fetchOffers,
   changeRequestStatus,
+  setError,
 };

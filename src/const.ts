@@ -72,6 +72,8 @@ const LOCATIONS: string[] = [
   'Dusseldorf',
 ];
 
+const ERROR_TIMEOUT = 2000;
+
 const DEFAULT_LOCATION = 'Paris';
 
 const SORT_TYPES: string[] = [
@@ -106,4 +108,5 @@ export {
   SORT_TYPES,
   BASE_URL,
   REQUEST_TIMEOUT,
+  ERROR_TIMEOUT,
 };

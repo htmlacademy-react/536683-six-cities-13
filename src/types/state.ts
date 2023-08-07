@@ -12,4 +12,5 @@ export type TState = {
   location: string;
   offers: TOffer[];
   status: TRequestStatus;
+  error: string | null;
 };
