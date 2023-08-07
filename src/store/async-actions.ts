@@ -35,8 +35,12 @@ const checkAuthStatus = createAsyncThunk<
   { dispatch: TAppDispatch; state: TRootState; extra: AxiosInstance }
 >('user/checkAuthStatus', async (_arg, { dispatch, extra: fetchData }) => {
   try {
-    await fetchData.get(APIRoute.Login);
+    const {
+      data: { email },
+    } = await fetchData.get<TUserData>(APIRoute.Login);
+
     dispatch(requireAuth(AuthStatus.Auth));
+    dispatch(setUserEmail(email));
   } catch {
     dispatch(requireAuth(AuthStatus.NoAuth));
   }

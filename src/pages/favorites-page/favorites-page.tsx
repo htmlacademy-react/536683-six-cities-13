@@ -1,5 +1,6 @@
 import { Footer } from '../../components/footer/footer';
 import { Header } from '../../components/header/header';
+import { UserMenu } from '../../components/user-menu/user-menu';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { getUniqueFavoriteCities } from '../../utils';
 import { Favorites } from './favorites';
@@ -15,7 +16,9 @@ const FavoritesPage = () => {
 
   return (
     <div className="page">
-      <Header />
+      <Header>
+        <UserMenu />
+      </Header>
       {favoritesContent}
       <Footer />
     </div>
