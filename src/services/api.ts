@@ -7,7 +7,7 @@ import axios, {
 import { BASE_URL, REQUEST_TIMEOUT } from '../const';
 import { getToken } from './token';
 import { StatusCodes } from 'http-status-codes';
-import { handleError } from './process-error';
+import { handleError } from './handle-error';
 
 const StatusCodesMap: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
@@ -36,9 +36,9 @@ const createApi = (): AxiosInstance => {
 
   api.interceptors.response.use(
     (response) => response,
-    (error: AxiosError<{ error: string }>) => {
+    (error: AxiosError<{ message: string }>) => {
       if (error.response && shouldDisplayError(error.response)) {
-        handleError(error.response.data.error);
+        handleError(error.response.data.message);
       }
 
       throw error;

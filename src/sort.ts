@@ -13,6 +13,8 @@ type TSort = {
   [k: string]: (offers: TOffer[]) => TOffer[];
 };
 
+const DEFAULT_SORT_TYPE = 'Popular';
+
 const Sort: TSort = {
   Popular: (offers: TOffer[]) => [...offers],
   'Price: low to high': (offers: TOffer[]) =>
@@ -22,4 +24,4 @@ const Sort: TSort = {
   'Top rated first': (offers: TOffer[]) => [...offers].sort(sortTopToLowRating),
 };
 
-export { Sort };
+export { Sort, DEFAULT_SORT_TYPE };

@@ -1,7 +1,7 @@
 import { OffersSorting } from '../offers-sorting/offers-soritng';
 import { TOffer } from '../../types/offer';
 import { OfferCardMain } from '../offer-card/offer-card-main';
-import { Sort } from '../../sort';
+import { DEFAULT_SORT_TYPE, Sort } from '../../sort';
 import { useState } from 'react';
 
 type TOfferListProps = {
@@ -10,7 +10,8 @@ type TOfferListProps = {
 };
 
 const OfferList = ({ offers, onOfferHover }: TOfferListProps) => {
-  const [currentSortType, setCurrentSortType] = useState<string>('Popular');
+  const [currentSortType, setCurrentSortType] =
+    useState<string>(DEFAULT_SORT_TYPE);
   const offerCount = offers.length;
   const [offerCity] = offers;
   const sortedOffers = Sort[currentSortType](offers);
