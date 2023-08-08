@@ -13,11 +13,15 @@ type TSort = {
   [k: string]: (offers: TOffer[]) => TOffer[];
 };
 
+const DEFAULT_SORT_TYPE = 'Popular';
+
 const Sort: TSort = {
-  '0': (offers: TOffer[]) => [...offers],
-  '1': (offers: TOffer[]) => [...offers].sort(sortLowToHighPrice),
-  '2': (offers: TOffer[]) => [...offers].sort(sortHighToLowPrice),
-  '3': (offers: TOffer[]) => [...offers].sort(sortTopToLowRating),
+  Popular: (offers: TOffer[]) => [...offers],
+  'Price: low to high': (offers: TOffer[]) =>
+    [...offers].sort(sortLowToHighPrice),
+  'Price: high to low': (offers: TOffer[]) =>
+    [...offers].sort(sortHighToLowPrice),
+  'Top rated first': (offers: TOffer[]) => [...offers].sort(sortTopToLowRating),
 };
 
-export { Sort };
+export { Sort, DEFAULT_SORT_TYPE };

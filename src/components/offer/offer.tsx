@@ -1,9 +1,9 @@
 import { MAX_NEAR_PLACES } from '../../const';
 import { TDetail } from '../../types/details';
 import { TOffer } from '../../types/offer';
-import { TReview } from '../../types/review';
+import { TComment } from '../../types/review';
 import { Map } from '../map/map';
-import { Reviews } from '../reviews/reviews';
+import { Comments } from '../comments/comments';
 import { OfferGallery } from './offer-gallery';
 import { OfferHost } from './offer-host';
 import { OfferInfo } from './offer-info';
@@ -11,11 +11,11 @@ import { OfferNearPlaces } from './offer-near-places';
 
 type TOfferProps = {
   offerDetails: TDetail;
-  reviews?: TReview;
+  comments: TComment[];
   nearPlaces: TOffer[];
 };
 
-const Offer = ({ offerDetails, reviews, nearPlaces }: TOfferProps) => {
+const Offer = ({ offerDetails, comments, nearPlaces }: TOfferProps) => {
   const { images, host, description } = offerDetails;
   const places = nearPlaces.slice(0, MAX_NEAR_PLACES);
   const [place] = places;
@@ -35,7 +35,7 @@ const Offer = ({ offerDetails, reviews, nearPlaces }: TOfferProps) => {
                 description,
               }}
             />
-            {reviews && <Reviews reviews={reviews} />}
+            <Comments comments={comments} />
           </div>
         </div>
         <section className="offer__map map">

@@ -1,10 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { APIRoute, AuthStatus, ERROR_TIMEOUT, RequestStatus } from '../const';
+import { APIRoute, AuthStatus, ERROR_TIMEOUT, LoadingStatus } from '../const';
 import { TOffer } from '../types/offer';
 import { TAppDispatch, TRootState } from '../types/state';
 import { AxiosInstance } from 'axios';
 import {
-  changeRequestStatus,
+  addComment,
+  changeLoadingStatus,
+  fetchComments,
+  fetchDetails,
+  fetchNearPlaces,
   fetchOffers,
   requireAuth,
   setError,
@@ -14,6 +18,10 @@ import { TAuthData } from '../types/auth-data';
 import { TUserData } from '../types/user-data';
 import { dropToken, setToken } from '../services/token';
 import { store } from '.';
+import { TOfferId } from '../types/offer-id';
+import { TDetail } from '../types/details';
+import { TComment } from '../types/review';
+import { TReviewForm } from '../components/review-form/review-form';
 
 const clearError = createAsyncThunk('app/clearError', () => {
   setTimeout(() => {
@@ -27,13 +35,13 @@ const loadOffers = createAsyncThunk<
   { dispatch: TAppDispatch; state: TRootState; extra: AxiosInstance }
 >('data/loadOffers', async (_arg, { dispatch, extra: fetchData }) => {
   try {
-    dispatch(changeRequestStatus(RequestStatus.Loading));
+    dispatch(changeLoadingStatus(LoadingStatus.Loading));
     const { data } = await fetchData.get<TOffer[]>(APIRoute.Offers);
 
-    dispatch(changeRequestStatus(RequestStatus.Success));
+    dispatch(changeLoadingStatus(LoadingStatus.Success));
     dispatch(fetchOffers(data));
   } catch (error) {
-    dispatch(changeRequestStatus(RequestStatus.Error));
+    dispatch(changeLoadingStatus(LoadingStatus.Idle));
   }
 });
 
@@ -52,6 +60,22 @@ const checkAuthStatus = createAsyncThunk<
   } catch {
     dispatch(requireAuth(AuthStatus.NoAuth));
   }
+});
+
+const loadDetails = createAsyncThunk<
+  void,
+  TOfferId,
+  { dispatch: TAppDispatch; state: TRootState; extra: AxiosInstance }
+>('data/loadDetails', ({ offerId }, { dispatch, extra: fetchData }) => {
+  Promise.all([
+    fetchData.get<TDetail>(`${APIRoute.Offers}/${offerId}`),
+    fetchData.get<TOffer[]>(`${APIRoute.Offers}/${offerId}${APIRoute.Nearby}`),
+    fetchData.get<TComment[]>(`${APIRoute.Comments}/${offerId}`),
+  ]).then(([{ data: details }, { data: nearPlaces }, { data: comments }]) => {
+    dispatch(fetchDetails(details));
+    dispatch(fetchComments(comments));
+    dispatch(fetchNearPlaces(nearPlaces));
+  });
 });
 
 const login = createAsyncThunk<
@@ -90,4 +114,31 @@ const logout = createAsyncThunk<
   }
 });
 
-export { loadOffers, checkAuthStatus, login, logout, clearError };
+const submitComment = createAsyncThunk<
+  void,
+  TReviewForm,
+  { dispatch: TAppDispatch; state: TRootState; extra: AxiosInstance }
+>(
+  'user/login',
+  async ({ rating, comment, offerId }, { dispatch, extra: fetchData }) => {
+    const { data } = await fetchData.post<TComment>(
+      `${APIRoute.Comments}/${offerId}`,
+      {
+        rating,
+        comment,
+      }
+    );
+
+    dispatch(addComment(data));
+  }
+);
+
+export {
+  loadOffers,
+  checkAuthStatus,
+  login,
+  logout,
+  clearError,
+  loadDetails,
+  submitComment,
+};

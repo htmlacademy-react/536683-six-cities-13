@@ -3,7 +3,7 @@ import { SORT_TYPES } from '../../const';
 import cn from 'classnames';
 
 type TOffersSortingProps = {
-  onSortTypeClick: (sortIndex: number) => void;
+  onSortTypeClick: (sortType: string) => void;
 };
 
 const OffersSorting = ({ onSortTypeClick }: TOffersSortingProps) => {
@@ -50,7 +50,7 @@ const OffersSorting = ({ onSortTypeClick }: TOffersSortingProps) => {
             onClick={() => {
               setActiveIndex(index);
               setIsOpened(false);
-              onSortTypeClick(index);
+              onSortTypeClick(sortType);
             }}
           >
             {sortType}

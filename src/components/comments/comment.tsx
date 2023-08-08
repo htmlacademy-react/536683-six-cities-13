@@ -2,7 +2,7 @@ import { TComment } from '../../types/review';
 import { getCommentDate, getMachineDate } from '../../utils';
 import { RatingReviews } from '../rating/rating-reviews';
 
-const Review = ({
+const Comment = ({
   id,
   user: { name, avatarUrl },
   date,
@@ -33,4 +33,4 @@ const Review = ({
   </li>
 );
 
-export { Review };
+export { Comment };

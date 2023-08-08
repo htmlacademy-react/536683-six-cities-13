@@ -43,10 +43,10 @@ enum ReviewInfo {
   MinRating = 0,
 }
 
-enum RequestStatus {
+enum LoadingStatus {
   Loading = 'loading',
   Success = 'success',
-  Error = 'error',
+  Idle = 'idle',
 }
 
 const REVIEW_RATINGS: TReviewRating[] = [
@@ -97,7 +97,7 @@ export {
   OfferCardClassName,
   RatingClassName,
   ReviewInfo,
-  RequestStatus,
+  LoadingStatus,
   REVIEW_RATINGS,
   PATH_MARKER_CURRENT,
   PATH_MARKER_DEFAULT,
