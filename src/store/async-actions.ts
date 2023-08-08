@@ -67,22 +67,15 @@ const loadDetails = createAsyncThunk<
   TOfferId,
   { dispatch: TAppDispatch; state: TRootState; extra: AxiosInstance }
 >('data/loadDetails', ({ offerId }, { dispatch, extra: fetchData }) => {
-  dispatch(changeLoadingStatus(LoadingStatus.Loading));
-
   Promise.all([
     fetchData.get<TDetail>(`${APIRoute.Offers}/${offerId}`),
     fetchData.get<TOffer[]>(`${APIRoute.Offers}/${offerId}${APIRoute.Nearby}`),
     fetchData.get<TComment[]>(`${APIRoute.Comments}/${offerId}`),
-  ])
-    .then(([{ data: details }, { data: nearPlaces }, { data: comments }]) => {
-      dispatch(fetchDetails(details));
-      dispatch(fetchComments(comments));
-      dispatch(fetchNearPlaces(nearPlaces));
-      dispatch(changeLoadingStatus(LoadingStatus.Success));
-    })
-    .catch(() => {
-      dispatch(changeLoadingStatus(LoadingStatus.Idle));
-    });
+  ]).then(([{ data: details }, { data: nearPlaces }, { data: comments }]) => {
+    dispatch(fetchDetails(details));
+    dispatch(fetchComments(comments));
+    dispatch(fetchNearPlaces(nearPlaces));
+  });
 });
 
 const login = createAsyncThunk<

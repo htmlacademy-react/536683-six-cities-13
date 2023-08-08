@@ -7,7 +7,6 @@ import { useAppSelector } from '../../hooks/use-app-selector';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { loadDetails } from '../../store/async-actions';
-import { Spinner } from '../../components/spinner/spinner';
 
 const OfferPage = () => {
   const { id } = useParams();
@@ -43,7 +42,6 @@ const OfferPage = () => {
       <Header>
         <UserMenu />
       </Header>
-      <Spinner />
       {pageContent}
     </div>
   );

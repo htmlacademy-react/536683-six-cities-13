@@ -8,7 +8,6 @@ import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { Cities } from '../../components/cities/cities';
 import { Header } from '../../components/header/header';
 import { UserMenu } from '../../components/user-menu/user-menu';
-import { Spinner } from '../../components/spinner/spinner';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
@@ -46,8 +45,8 @@ const MainPage = () => {
             onLocationClick={handleLocationClick}
           />
         </div>
-        <Spinner />
         <Cities
+          key={locationCity}
           offers={currentLocationOffers}
           selectedPoint={hoveredOffer}
           locationCity={locationCity}

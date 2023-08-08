@@ -10,13 +10,13 @@ type TOfferListProps = {
 };
 
 const OfferList = ({ offers, onOfferHover }: TOfferListProps) => {
-  const [currentSortIndex, setCurrentSortIndex] = useState<number>(0);
+  const [currentSortType, setCurrentSortType] = useState<string>('Popular');
   const offerCount = offers.length;
   const [offerCity] = offers;
-  const sortedOffers = Sort[currentSortIndex](offers);
+  const sortedOffers = Sort[currentSortType](offers);
 
-  const handleSortTypeClick = (sortIndex: number) => {
-    setCurrentSortIndex(sortIndex);
+  const handleSortTypeClick = (sortType: string) => {
+    setCurrentSortType(sortType);
   };
 
   return (
