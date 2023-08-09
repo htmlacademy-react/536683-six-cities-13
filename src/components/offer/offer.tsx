@@ -8,6 +8,7 @@ import { OfferGallery } from './offer-gallery';
 import { OfferHost } from './offer-host';
 import { OfferInfo } from './offer-info';
 import { OfferNearPlaces } from './offer-near-places';
+import styles from './offer.module.css';
 
 type TOfferProps = {
   offerDetails: TDetail;
@@ -38,8 +39,12 @@ const Offer = ({ offerDetails, comments, nearPlaces }: TOfferProps) => {
             <Comments comments={comments} />
           </div>
         </div>
-        <section className="offer__map map">
-          <Map city={place.city} points={places} />
+        <section className={`offer__map ${styles['offer__map--static']} map`}>
+          <Map
+            city={place.city}
+            selectedPoint={offerDetails}
+            points={[...places, offerDetails]}
+          />
         </section>
       </section>
       <div className="container">

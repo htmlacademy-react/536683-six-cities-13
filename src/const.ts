@@ -1,5 +1,16 @@
 import { TOfferCardImageSize, TReviewRating } from './types/const';
 
+const ERROR_TIMEOUT = 2000;
+const DEFAULT_LOCATION = 'Paris';
+const MAX_OFFER_GALLERY_PICTURES = 6;
+const MAX_COMMENTS = 10;
+const MAX_NEAR_PLACES = 3;
+const REQUEST_TIMEOUT = 5000;
+const BASE_URL = 'https://13.design.pages.academy/six-cities';
+const BASE_MARKER_PATH = './markup/img/';
+const PATH_MARKER_DEFAULT = `${BASE_MARKER_PATH}pin.svg`;
+const PATH_MARKER_CURRENT = `${BASE_MARKER_PATH}pin-active.svg`;
+
 enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
@@ -72,23 +83,12 @@ const LOCATIONS: string[] = [
   'Dusseldorf',
 ];
 
-const ERROR_TIMEOUT = 2000;
-
-const DEFAULT_LOCATION = 'Paris';
-
 const SORT_TYPES: string[] = [
   'Popular',
   'Price: low to high',
   'Price: high to low',
   'Top rated first',
 ];
-
-const MAX_NEAR_PLACES = 3;
-const REQUEST_TIMEOUT = 5000;
-const BASE_URL = 'https://13.design.pages.academy/six-cities';
-const BASE_MARKER_PATH = './markup/img/';
-const PATH_MARKER_DEFAULT = `${BASE_MARKER_PATH}pin.svg`;
-const PATH_MARKER_CURRENT = `${BASE_MARKER_PATH}pin-active.svg`;
 
 export {
   APIRoute,
@@ -109,4 +109,6 @@ export {
   BASE_URL,
   REQUEST_TIMEOUT,
   ERROR_TIMEOUT,
+  MAX_COMMENTS,
+  MAX_OFFER_GALLERY_PICTURES,
 };

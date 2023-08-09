@@ -4,10 +4,11 @@ import 'leaflet/dist/leaflet.css';
 import { PATH_MARKER_DEFAULT, PATH_MARKER_CURRENT } from '../../const';
 import { TCity, TOffer } from '../../types/offer';
 import { useMap } from '../../hooks/use-map';
+import { TDetail } from '../../types/details';
 
 type MapProps = {
-  points: TOffer[];
-  selectedPoint?: TOffer;
+  points: (TOffer | TDetail)[];
+  selectedPoint?: TOffer | TDetail;
   city: TCity;
 };
 

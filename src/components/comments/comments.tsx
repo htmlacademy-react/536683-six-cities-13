@@ -1,4 +1,4 @@
-import { AuthStatus } from '../../const';
+import { AuthStatus, MAX_COMMENTS } from '../../const';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { TComment } from '../../types/review';
 import { ReviewForm } from '../review-form/review-form';
@@ -17,7 +17,7 @@ const Comments = ({ comments }: TCommentsProps) => {
         Reviews · <span className="reviews__amount">{comments.length}</span>
       </h2>
       <ul className="reviews__list">
-        {comments.map((comment) => (
+        {comments.slice(0, MAX_COMMENTS).map((comment) => (
           <Comment key={comment.id} {...comment} />
         ))}
       </ul>
