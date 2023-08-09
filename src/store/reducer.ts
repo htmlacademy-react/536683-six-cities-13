@@ -47,7 +47,7 @@ const reducer = createReducer(initialState, (builder) => [
     state.nearPlaces = action.payload;
   }),
   builder.addCase(addComment, (state, action) => {
-    state.comments.push(action.payload);
+    state.comments = [action.payload, ...state.comments];
   }),
   builder.addCase(changeLoadingStatus, (state, action) => {
     state.loadingStatus = action.payload;

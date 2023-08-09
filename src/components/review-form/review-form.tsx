@@ -1,10 +1,12 @@
+import cn from 'classnames';
+import styles from './review-form.module.css';
 import { useParams } from 'react-router-dom';
 import { ReviewInfo } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { submitComment } from '../../store/async-actions';
 import { ReviewRating } from './review-form-rating';
 import { ChangeEvent, FormEvent, useState } from 'react';
-
+import { useAppSelector } from '../../hooks/use-app-selector';
 export type TReviewForm = {
   offerId: string;
   rating: number;
@@ -19,12 +21,13 @@ const InitialState: TReviewForm = {
 
 const ReviewForm = () => {
   const dispatch = useAppDispatch();
+  const isError = useAppSelector((store) => store.error);
   const { id } = useParams();
   const [reviewInfo, setReviewInfo] = useState<TReviewForm>(InitialState);
   const [wasSubmitted, setWasSubmitted] = useState<boolean>(false);
 
   const isSubmitDisabled = Boolean(
-    reviewInfo.comment.length < ReviewInfo.MaxCommentLength ||
+    reviewInfo.comment.length < ReviewInfo.MinCommentLength ||
       reviewInfo.rating <= ReviewInfo.MinRating
   );
 
@@ -52,7 +55,9 @@ const ReviewForm = () => {
 
   return (
     <form
-      className="reviews__form form"
+      className={`reviews__form form ${cn({
+        [styles['form--disabled']]: isError !== null,
+      })}`}
       action="#"
       method="post"
       onSubmit={handleFormSubmit}
@@ -71,12 +76,18 @@ const ReviewForm = () => {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={reviewInfo.comment}
         onChange={handleCommentChange}
+        minLength={ReviewInfo.MinCommentLength}
+        maxLength={ReviewInfo.MaxCommentLength}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set{' '}
           <span className="reviews__star">rating</span> and describe your stay
-          with at least <b className="reviews__text-amount">50 characters</b>.
+          with at least{' '}
+          <b className="reviews__text-amount">
+            {ReviewInfo.MinCommentLength} characters
+          </b>
+          .
         </p>
         <button
           className="reviews__submit form__submit button"

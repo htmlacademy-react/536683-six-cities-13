@@ -50,7 +50,8 @@ enum RatingClassName {
 }
 
 enum ReviewInfo {
-  MaxCommentLength = 60,
+  MinCommentLength = 50,
+  MaxCommentLength = 300,
   MinRating = 0,
 }
 
