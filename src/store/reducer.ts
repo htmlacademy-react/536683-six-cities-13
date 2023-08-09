@@ -13,6 +13,7 @@ import {
 } from './actions';
 import { AuthStatus, DEFAULT_LOCATION, LoadingStatus } from '../const';
 import { TState } from '../types/state';
+import { sortCommentsFromNewToOld } from '../utils';
 
 const initialState: TState = {
   authStatus: AuthStatus.Unknown,
@@ -40,7 +41,7 @@ const reducer = createReducer(initialState, (builder) => [
     state.details = action.payload;
   }),
   builder.addCase(fetchComments, (state, action) => {
-    state.comments = action.payload;
+    state.comments = sortCommentsFromNewToOld(action.payload);
   }),
   builder.addCase(fetchNearPlaces, (state, action) => {
     state.nearPlaces = action.payload;
