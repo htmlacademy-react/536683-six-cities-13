@@ -5,6 +5,7 @@ import {
   changeLocation,
   fetchComments,
   fetchDetails,
+  fetchFavorites,
   fetchNearPlaces,
   fetchOffers,
   requireAuth,
@@ -19,6 +20,7 @@ const initialState: TState = {
   authStatus: AuthStatus.Unknown,
   location: DEFAULT_LOCATION,
   offers: [],
+  favorites: [],
   details: null,
   comments: [],
   nearPlaces: [],
@@ -45,6 +47,9 @@ const reducer = createReducer(initialState, (builder) => [
   }),
   builder.addCase(fetchNearPlaces, (state, action) => {
     state.nearPlaces = action.payload;
+  }),
+  builder.addCase(fetchFavorites, (state, action) => {
+    state.favorites = action.payload;
   }),
   builder.addCase(addComment, (state, action) => {
     state.comments = [action.payload, ...state.comments];

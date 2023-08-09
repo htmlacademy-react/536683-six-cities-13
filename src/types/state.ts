@@ -15,6 +15,7 @@ export type TState = {
   offers: TOffer[];
   details: TDetail | null;
   comments: TComment[];
+  favorites: TOffer[];
   nearPlaces: TOffer[];
   loadingStatus: TLoadingStatus;
   error: string | null;

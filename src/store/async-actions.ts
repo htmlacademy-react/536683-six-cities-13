@@ -8,6 +8,7 @@ import {
   changeLoadingStatus,
   fetchComments,
   fetchDetails,
+  fetchFavorites,
   fetchNearPlaces,
   fetchOffers,
   requireAuth,
@@ -78,6 +79,16 @@ const loadDetails = createAsyncThunk<
   });
 });
 
+const loadFavorites = createAsyncThunk<
+  void,
+  undefined,
+  { dispatch: TAppDispatch; state: TRootState; extra: AxiosInstance }
+>('data/loadFavorites', async (_arg, { dispatch, extra: fetchData }) => {
+  const { data } = await fetchData.get<TOffer[]>(APIRoute.Favorite);
+
+  dispatch(fetchFavorites(data));
+});
+
 const login = createAsyncThunk<
   void,
   TAuthData,
@@ -141,4 +152,5 @@ export {
   clearError,
   loadDetails,
   submitComment,
+  loadFavorites,
 };
