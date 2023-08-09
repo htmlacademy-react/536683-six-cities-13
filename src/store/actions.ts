@@ -13,6 +13,7 @@ const fetchDetails = createAction<TDetail>('offers/fetchDetails');
 const fetchComments = createAction<TComment[]>('offers/fetchComments');
 const fetchNearPlaces = createAction<TOffer[]>('offers/fetchNearPlaces');
 const fetchFavorites = createAction<TOffer[]>('offers/fetchFavorites');
+const updateFavorites = createAction<TOffer>('offers/updateFavorites');
 const addComment = createAction<TComment>('comment/addComment');
 const setError = createAction<string | null>('app/setError');
 const changeLoadingStatus = createAction<TLoadingStatus>(
@@ -31,4 +32,5 @@ export {
   fetchNearPlaces,
   fetchFavorites,
   addComment,
+  updateFavorites,
 };

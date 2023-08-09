@@ -11,6 +11,7 @@ import {
   requireAuth,
   setError,
   setUserEmail,
+  updateFavorites,
 } from './actions';
 import { AuthStatus, DEFAULT_LOCATION, LoadingStatus } from '../const';
 import { TState } from '../types/state';
@@ -50,6 +51,18 @@ const reducer = createReducer(initialState, (builder) => [
   }),
   builder.addCase(fetchFavorites, (state, action) => {
     state.favorites = action.payload;
+  }),
+  builder.addCase(updateFavorites, (state, action) => {
+    const currentfavoriteIndex = state.favorites.findIndex(
+      (favorite) => favorite.id === action.payload.id
+    );
+
+    if (currentfavoriteIndex !== -1) {
+      state.offers[currentfavoriteIndex] = action.payload;
+      state.favorites.splice(currentfavoriteIndex, 1);
+    } else {
+      state.favorites.push(action.payload);
+    }
   }),
   builder.addCase(addComment, (state, action) => {
     state.comments = [action.payload, ...state.comments];

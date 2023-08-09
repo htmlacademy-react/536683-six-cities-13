@@ -9,6 +9,7 @@ const UserMenu = () => {
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector((store) => store.authStatus);
   const userEmail = useAppSelector((store) => store.userEmail);
+  const favorites = useAppSelector((store) => store.favorites);
 
   const handleLogoutClick = (evt: SyntheticEvent) => {
     evt.preventDefault();
@@ -24,7 +25,7 @@ const UserMenu = () => {
       >
         <div className="header__avatar-wrapper user__avatar-wrapper"></div>
         <span className="header__user-name user__name">{userEmail}</span>
-        <span className="header__favorite-count">3</span>
+        <span className="header__favorite-count">{favorites.length}</span>
       </Link>
     ) : (
       <Link

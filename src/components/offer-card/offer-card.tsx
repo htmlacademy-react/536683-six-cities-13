@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { TOffer } from '../../types/offer';
 import { RatingMain } from '../rating/rating-main';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { setFavorite } from '../../store/async-actions';
 
 export type TOfferCardProxyProps = Omit<
   TOfferCardProps,
@@ -28,6 +30,7 @@ const OfferCard = ({
   imageSize,
   onOfferHover,
 }: TOfferCardProps) => {
+  const dispatch = useAppDispatch();
   const {
     id,
     title,
@@ -44,6 +47,7 @@ const OfferCard = ({
     evt.preventDefault();
 
     setIsOfferFavorite((prevIsOfferFavotire) => !prevIsOfferFavotire);
+    dispatch(setFavorite({ favoriteId: id, status: Number(!isOfferFavorite) }));
   };
 
   return (
