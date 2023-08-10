@@ -2,13 +2,13 @@ import { FavoritesList } from '../../components/favorites-list/favorites-list';
 import { TOffer } from '../../types/offer';
 
 type TFavoritesProps = {
-  offers: TOffer[];
+  favorites: TOffer[];
 };
 
-const Favorites = ({ offers }: TFavoritesProps) => (
+const Favorites = ({ favorites }: TFavoritesProps) => (
   <main className="page__main page__main--favorites">
     <div className="page__favorites-container container">
-      {<FavoritesList offers={offers} />}
+      {<FavoritesList favorites={favorites} />}
     </div>
   </main>
 );

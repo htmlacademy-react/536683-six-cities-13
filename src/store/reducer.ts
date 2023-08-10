@@ -53,13 +53,17 @@ const reducer = createReducer(initialState, (builder) => [
     state.favorites = action.payload;
   }),
   builder.addCase(updateFavorites, (state, action) => {
-    const currentfavoriteIndex = state.favorites.findIndex(
+    const currentFavoriteIndex = state.favorites.findIndex(
       (favorite) => favorite.id === action.payload.id
     );
+    const currentOfferIndex = state.offers.findIndex(
+      (offer) => offer.id === action.payload.id
+    );
 
-    if (currentfavoriteIndex !== -1) {
-      state.offers[currentfavoriteIndex] = action.payload;
-      state.favorites.splice(currentfavoriteIndex, 1);
+    state.offers[currentOfferIndex].isFavorite = action.payload.isFavorite;
+
+    if (currentFavoriteIndex !== -1) {
+      state.favorites.splice(currentFavoriteIndex, 1);
     } else {
       state.favorites.push(action.payload);
     }

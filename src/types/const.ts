@@ -3,11 +3,15 @@ export type TReviewRating = {
   ratingText: string;
 };
 
-type TImageSize = {
-  width: number;
-  height: number;
+type TSize = {
+  width: number | string;
+  height: number | string;
 };
 
 export type TOfferCardImageSize = {
-  [k: string]: TImageSize;
+  [k: string]: TSize;
+};
+
+export type TFavoriteButtonSize = {
+  [k: string]: TSize;
 };

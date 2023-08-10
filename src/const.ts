@@ -1,4 +1,8 @@
-import { TOfferCardImageSize, TReviewRating } from './types/const';
+import {
+  TFavoriteButtonSize,
+  TOfferCardImageSize,
+  TReviewRating,
+} from './types/const';
 
 const ERROR_TIMEOUT = 2000;
 const DEFAULT_LOCATION = 'Paris';
@@ -49,6 +53,11 @@ enum RatingClassName {
   Reviews = 'reviews',
 }
 
+enum FavoriteButtonClassName {
+  Main = 'place-card',
+  Details = 'offer',
+}
+
 enum ReviewInfo {
   MinCommentLength = 50,
   MaxCommentLength = 300,
@@ -60,6 +69,11 @@ enum LoadingStatus {
   Success = 'success',
   Idle = 'idle',
 }
+
+const FAVORITE_BUTTON_SIZE: TFavoriteButtonSize = {
+  'place-card': { width: '18px', height: '19px' },
+  offer: { width: '31px', height: '33px' },
+};
 
 const REVIEW_RATINGS: TReviewRating[] = [
   { ratingValue: 5, ratingText: 'perfect' },
@@ -99,6 +113,7 @@ export {
   RatingClassName,
   ReviewInfo,
   LoadingStatus,
+  FavoriteButtonClassName,
   REVIEW_RATINGS,
   PATH_MARKER_CURRENT,
   PATH_MARKER_DEFAULT,
@@ -112,4 +127,5 @@ export {
   ERROR_TIMEOUT,
   MAX_COMMENTS,
   MAX_OFFER_GALLERY_PICTURES,
+  FAVORITE_BUTTON_SIZE,
 };

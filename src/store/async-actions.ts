@@ -24,7 +24,7 @@ import { TOfferId } from '../types/offer-id';
 import { TDetail } from '../types/details';
 import { TComment } from '../types/review';
 import { TReviewForm } from '../components/review-form/review-form';
-import { TFavoriteId } from '../types/favorite-id';
+import { TFavoriteData } from '../types/favorite-data';
 
 type TAsyncThunk = {
   dispatch: TAppDispatch;
@@ -95,7 +95,7 @@ const loadFavorites = createAsyncThunk<void, undefined, TAsyncThunk>(
   }
 );
 
-const setFavorite = createAsyncThunk<void, TFavoriteId, TAsyncThunk>(
+const setFavorite = createAsyncThunk<void, TFavoriteData, TAsyncThunk>(
   'data/setFavorite',
   async ({ favoriteId, status }, { dispatch, extra: fetchData }) => {
     const { data } = await fetchData.post<TOffer>(

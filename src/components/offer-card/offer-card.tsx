@@ -1,11 +1,8 @@
-import { SyntheticEvent, useState } from 'react';
-import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { TOffer } from '../../types/offer';
 import { RatingMain } from '../rating/rating-main';
-import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { setFavorite } from '../../store/async-actions';
+import { MainFavoriteButton } from '../favorite-button/main-favorite-button';
 
 export type TOfferCardProxyProps = Omit<
   TOfferCardProps,
@@ -30,7 +27,6 @@ const OfferCard = ({
   imageSize,
   onOfferHover,
 }: TOfferCardProps) => {
-  const dispatch = useAppDispatch();
   const {
     id,
     title,
@@ -41,14 +37,6 @@ const OfferCard = ({
     isPremium,
     rating,
   } = offer;
-  const [isOfferFavorite, setIsOfferFavorite] = useState<boolean>(isFavorite);
-
-  const handleFavoriteClick = (evt: SyntheticEvent) => {
-    evt.preventDefault();
-
-    setIsOfferFavorite((prevIsOfferFavotire) => !prevIsOfferFavotire);
-    dispatch(setFavorite({ favoriteId: id, status: Number(!isOfferFavorite) }));
-  };
 
   return (
     <article
@@ -77,18 +65,7 @@ const OfferCard = ({
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button
-            className={`place-card__bookmark-button ${cn({
-              'place-card__bookmark-button--active': isOfferFavorite,
-            })} button`}
-            onClick={handleFavoriteClick}
-            type="button"
-          >
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <MainFavoriteButton offerId={id} isFavorite={isFavorite} />
         </div>
         <RatingMain ratingValue={rating} />
         <h2 className="place-card__name">

@@ -3,12 +3,11 @@ import { getUniqueFavoriteCities } from '../../utils';
 import { OfferCardFavorites } from '../offer-card/offer-card-favorites';
 
 type TFavoritesListProps = {
-  offers: TOffer[];
+  favorites: TOffer[];
 };
 
-const FavoritesList = ({ offers }: TFavoritesListProps) => {
-  const cities: string[] = getUniqueFavoriteCities(offers);
-  const favorites = offers.filter((offer) => offer.isFavorite);
+const FavoritesList = ({ favorites }: TFavoritesListProps) => {
+  const cities: string[] = getUniqueFavoriteCities(favorites);
 
   return (
     <section className="favorites">

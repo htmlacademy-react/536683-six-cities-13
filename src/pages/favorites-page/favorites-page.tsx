@@ -10,7 +10,7 @@ const FavoritesPage = () => {
   const favorites = useAppSelector((store) => store.favorites);
 
   const favoritesContent = getUniqueFavoriteCities(favorites).length ? (
-    <Favorites offers={favorites} />
+    <Favorites favorites={favorites} />
   ) : (
     <FavoritesEmpty />
   );

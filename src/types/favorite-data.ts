@@ -1,4 +1,4 @@
-export type TFavoriteId = {
+export type TFavoriteData = {
   favoriteId: string;
   status: number;
 };
