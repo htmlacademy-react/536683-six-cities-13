@@ -9,14 +9,19 @@ import { OfferHost } from './offer-host';
 import { OfferInfo } from './offer-info';
 import { OfferNearPlaces } from './offer-near-places';
 import styles from './offer.module.css';
+import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 
 type TOfferProps = {
-  offerDetails: TDetail;
+  offerDetails: TDetail | null;
   comments: TComment[];
   nearPlaces: TOffer[];
 };
 
 const Offer = ({ offerDetails, comments, nearPlaces }: TOfferProps) => {
+  if (!offerDetails) {
+    return <NotFoundPage />;
+  }
+
   const { images, host, description } = offerDetails;
   const places = nearPlaces.slice(0, MAX_NEAR_PLACES);
   const [place] = places;

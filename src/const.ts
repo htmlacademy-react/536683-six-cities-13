@@ -4,7 +4,7 @@ import {
   TReviewRating,
 } from './types/const';
 
-const ERROR_TIMEOUT = 2000;
+const ERROR_TIMEOUT = 3000;
 const DEFAULT_LOCATION = 'Paris';
 const MAX_OFFER_GALLERY_PICTURES = 6;
 const MAX_COMMENTS = 10;

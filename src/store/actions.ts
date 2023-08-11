@@ -4,6 +4,7 @@ import { AuthStatus } from '../const';
 import { TLoadingStatus } from '../types/state';
 import { TDetail } from '../types/details';
 import { TComment } from '../types/review';
+import { TError } from '../types/error';
 
 const requireAuth = createAction<AuthStatus>('user/requireAuth');
 const setUserEmail = createAction<string>('user/setUserEmail');
@@ -15,7 +16,7 @@ const fetchNearPlaces = createAction<TOffer[]>('offers/fetchNearPlaces');
 const fetchFavorites = createAction<TOffer[]>('offers/fetchFavorites');
 const updateFavorites = createAction<TOffer>('offers/updateFavorites');
 const addComment = createAction<TComment>('comment/addComment');
-const setError = createAction<string | null>('app/setError');
+const setError = createAction<TError | null>('app/setError');
 const changeLoadingStatus = createAction<TLoadingStatus>(
   'request/changeLoadingStatus'
 );

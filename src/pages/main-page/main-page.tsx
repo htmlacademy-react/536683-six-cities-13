@@ -2,20 +2,26 @@ import { useState } from 'react';
 import { TOffer } from '../../types/offer';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { LocationList } from '../../components/location-list/location-list';
-import { LOCATIONS } from '../../const';
+import { LOCATIONS, LoadingStatus } from '../../const';
 import { changeLocation } from '../../store/actions';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { Cities } from '../../components/cities/cities';
 import { Header } from '../../components/header/header';
 import { UserMenu } from '../../components/user-menu/user-menu';
+import { Spinner } from '../../components/spinner/spinner';
 
 const MainPage = () => {
+  const loadingStatus = useAppSelector((store) => store.loadingStatus);
   const dispatch = useAppDispatch();
   const locationCity = useAppSelector((store) => store.location);
   const offers = useAppSelector((store) => store.offers);
   const [hoveredOffer, setHoveredOffer] = useState<TOffer | undefined>(
     undefined
   );
+
+  if (loadingStatus === LoadingStatus.Loading) {
+    return <Spinner />;
+  }
 
   const currentLocationOffers = offers.filter(
     (offer) => offer.city.name === locationCity

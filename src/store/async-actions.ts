@@ -72,25 +72,43 @@ const checkAuthStatus = createAsyncThunk<void, undefined, TAsyncThunk>(
 const loadDetails = createAsyncThunk<void, TOfferId, TAsyncThunk>(
   'data/loadDetails',
   ({ offerId }, { dispatch, extra: fetchData }) => {
+    dispatch(changeLoadingStatus(LoadingStatus.Loading));
     Promise.all([
       fetchData.get<TDetail>(`${APIRoute.Offers}/${offerId}`),
       fetchData.get<TOffer[]>(
         `${APIRoute.Offers}/${offerId}${APIRoute.Nearby}`
       ),
       fetchData.get<TComment[]>(`${APIRoute.Comments}/${offerId}`),
-    ]).then(([{ data: details }, { data: nearPlaces }, { data: comments }]) => {
-      dispatch(fetchDetails(details));
-      dispatch(fetchComments(comments));
-      dispatch(fetchNearPlaces(nearPlaces));
-    });
+    ])
+      .then(([{ data: details }, { data: nearPlaces }, { data: comments }]) => {
+        dispatch(changeLoadingStatus(LoadingStatus.Success));
+        dispatch(fetchDetails(details));
+        dispatch(fetchComments(comments));
+        dispatch(fetchNearPlaces(nearPlaces));
+      })
+      .catch(() => {
+        dispatch(changeLoadingStatus(LoadingStatus.Idle));
+      });
+  }
+);
+
+const updateDetails = createAsyncThunk<void, TOfferId, TAsyncThunk>(
+  'data/loadDetails',
+  async ({ offerId }, { dispatch, extra: fetchData }) => {
+    const { data } = await fetchData.get<TDetail>(
+      `${APIRoute.Offers}/${offerId}`
+    );
+
+    dispatch(fetchDetails(data));
   }
 );
 
 const loadFavorites = createAsyncThunk<void, undefined, TAsyncThunk>(
   'data/loadFavorites',
   async (_arg, { dispatch, extra: fetchData }) => {
+    dispatch(changeLoadingStatus(LoadingStatus.Loading));
     const { data } = await fetchData.get<TOffer[]>(APIRoute.Favorite);
-
+    dispatch(changeLoadingStatus(LoadingStatus.Success));
     dispatch(fetchFavorites(data));
   }
 );
@@ -165,4 +183,5 @@ export {
   submitComment,
   loadFavorites,
   setFavorite,
+  updateDetails,
 };

@@ -14,8 +14,25 @@ import {
   updateFavorites,
 } from './actions';
 import { AuthStatus, DEFAULT_LOCATION, LoadingStatus } from '../const';
-import { TState } from '../types/state';
 import { sortCommentsFromNewToOld } from '../utils';
+import { TLoadingStatus } from '../types/state';
+import { TOffer } from '../types/offer';
+import { TDetail } from '../types/details';
+import { TComment } from '../types/review';
+import { TError } from '../types/error';
+
+export type TState = {
+  authStatus: AuthStatus;
+  userEmail: string;
+  location: string;
+  offers: TOffer[];
+  details: TDetail | null;
+  comments: TComment[];
+  favorites: TOffer[];
+  nearPlaces: TOffer[];
+  loadingStatus: TLoadingStatus;
+  error: TError | null;
+};
 
 const initialState: TState = {
   authStatus: AuthStatus.Unknown,

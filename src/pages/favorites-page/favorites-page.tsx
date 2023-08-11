@@ -1,26 +1,25 @@
 import { Footer } from '../../components/footer/footer';
 import { Header } from '../../components/header/header';
+import { Spinner } from '../../components/spinner/spinner';
 import { UserMenu } from '../../components/user-menu/user-menu';
+import { LoadingStatus } from '../../const';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { getUniqueFavoriteCities } from '../../utils';
 import { Favorites } from './favorites';
-import { FavoritesEmpty } from './favorites-empty';
 
 const FavoritesPage = () => {
+  const loadingStatus = useAppSelector((store) => store.loadingStatus);
   const favorites = useAppSelector((store) => store.favorites);
 
-  const favoritesContent = getUniqueFavoriteCities(favorites).length ? (
-    <Favorites favorites={favorites} />
-  ) : (
-    <FavoritesEmpty />
-  );
+  if (loadingStatus === LoadingStatus.Loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="page">
       <Header>
         <UserMenu />
       </Header>
-      {favoritesContent}
+      <Favorites favorites={favorites} />
       <Footer />
     </div>
   );

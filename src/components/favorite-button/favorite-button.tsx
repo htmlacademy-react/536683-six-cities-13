@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { AppRoute, AuthStatus, FAVORITE_BUTTON_SIZE } from '../../const';
-import { loadDetails, setFavorite } from '../../store/async-actions';
+import { setFavorite, updateDetails } from '../../store/async-actions';
 import cn from 'classnames';
 
 type TFavoriteButtonProps = {
@@ -38,7 +38,7 @@ const FavoriteButton = ({
     dispatch(
       setFavorite({ favoriteId: offerId, status: Number(!isOfferFavorite) })
     );
-    dispatch(loadDetails({ offerId }));
+    dispatch(updateDetails({ offerId }));
   };
 
   return (
