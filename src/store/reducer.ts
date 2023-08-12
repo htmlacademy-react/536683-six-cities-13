@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeLocation, setError } from './actions';
+import { changeLocation, clearError, setError } from './actions';
 import { AuthStatus, DEFAULT_LOCATION, LoadingStatus } from '../const';
 import { TLoadingStatus } from '../types/state';
 import { TOffer } from '../types/offer';
@@ -138,6 +138,9 @@ const reducer = createReducer(initialState, (builder) => [
   }),
   builder.addCase(setError, (state, action) => {
     state.error = action.payload;
+  }),
+  builder.addCase(clearError, (state, action) => {
+    state.error = action.payload.errorInfo;
   }),
 ]);
 

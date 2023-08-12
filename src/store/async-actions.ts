@@ -1,18 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { APIRoute, ERROR_TIMEOUT, NameSpace } from '../const';
+import { APIRoute, NameSpace } from '../const';
 import { TOffer } from '../types/offer';
 import { TAppDispatch, TRootState } from '../types/state';
 import { AxiosInstance } from 'axios';
 import { TAuthData } from '../types/auth-data';
 import { TUserData } from '../types/user-data';
 import { dropToken, setToken } from '../services/token';
-import { store } from '.';
 import { TOfferId } from '../types/offer-id';
 import { TDetail } from '../types/details';
 import { TComment } from '../types/review';
 import { TReviewForm } from '../components/review-form/review-form';
 import { TFavoriteData } from '../types/favorite-data';
-import { setError } from './actions';
 
 type TAsyncThunk = {
   dispatch: TAppDispatch;
@@ -23,15 +21,6 @@ type TAsyncThunk = {
 type TEextra = {
   extra: AxiosInstance;
 };
-
-const clearError = createAsyncThunk('app/clearError', (arg) => {
-  // eslint-disable-next-line no-console
-  console.log('arg?', arg);
-
-  setTimeout(() => {
-    // store.dispatch(setError(null));
-  }, ERROR_TIMEOUT);
-});
 
 const loadOffers = createAsyncThunk<TOffer[], undefined, TEextra>(
   `${NameSpace.Offers}/loadOffers`,
@@ -162,7 +151,6 @@ export {
   checkAuthStatus,
   login,
   logout,
-  clearError,
   loadDetails,
   loadComments,
   loadNearPlaces,

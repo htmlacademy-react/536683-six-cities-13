@@ -48,6 +48,7 @@ enum NameSpace {
   Favorites = 'FAVORITES',
   Comments = 'COMMENTS',
   User = 'USER',
+  App = 'APP',
 }
 
 enum OfferCardClassName {
