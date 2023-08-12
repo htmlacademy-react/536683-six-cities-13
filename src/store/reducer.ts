@@ -1,25 +1,23 @@
 import { createReducer } from '@reduxjs/toolkit';
-import {
-  addComment,
-  changeLoadingStatus,
-  changeLocation,
-  fetchComments,
-  fetchDetails,
-  fetchFavorites,
-  fetchNearPlaces,
-  fetchOffers,
-  requireAuth,
-  setError,
-  setUserEmail,
-  updateFavorites,
-} from './actions';
+import { changeLocation, setError } from './actions';
 import { AuthStatus, DEFAULT_LOCATION, LoadingStatus } from '../const';
-import { sortCommentsFromNewToOld } from '../utils';
 import { TLoadingStatus } from '../types/state';
 import { TOffer } from '../types/offer';
 import { TDetail } from '../types/details';
 import { TComment } from '../types/review';
 import { TError } from '../types/error';
+import {
+  checkAuthStatus,
+  loadComments,
+  loadDetails,
+  loadFavorites,
+  loadNearPlaces,
+  loadOffers,
+  login,
+  logout,
+  setFavorite,
+  submitComment,
+} from './async-actions';
 
 export type TState = {
   authStatus: AuthStatus;
@@ -30,7 +28,10 @@ export type TState = {
   comments: TComment[];
   favorites: TOffer[];
   nearPlaces: TOffer[];
-  loadingStatus: TLoadingStatus;
+  favoritesLoadingStatus: TLoadingStatus;
+  offersLoadingStatus: TLoadingStatus;
+  detailsLoadingStatus: TLoadingStatus;
+  commentSubmitStatus: TLoadingStatus;
   error: TError | null;
 };
 
@@ -43,33 +44,83 @@ const initialState: TState = {
   comments: [],
   nearPlaces: [],
   userEmail: '',
-  loadingStatus: LoadingStatus.Loading,
+  favoritesLoadingStatus: LoadingStatus.Idle,
+  offersLoadingStatus: LoadingStatus.Idle,
+  detailsLoadingStatus: LoadingStatus.Idle,
+  commentSubmitStatus: LoadingStatus.Idle,
   error: null,
 };
 
 const reducer = createReducer(initialState, (builder) => [
-  builder.addCase(setUserEmail, (state, action) => {
-    state.userEmail = action.payload;
-  }),
   builder.addCase(changeLocation, (state, action) => {
     state.location = action.payload;
   }),
-  builder.addCase(fetchOffers, (state, action) => {
+  builder.addCase(loadOffers.pending, (state) => {
+    state.offersLoadingStatus = LoadingStatus.Loading;
+  }),
+  builder.addCase(loadOffers.fulfilled, (state, action) => {
+    state.offersLoadingStatus = LoadingStatus.Success;
     state.offers = action.payload;
   }),
-  builder.addCase(fetchDetails, (state, action) => {
-    state.details = action.payload;
+  builder.addCase(loadFavorites.pending, (state) => {
+    state.favoritesLoadingStatus = LoadingStatus.Loading;
   }),
-  builder.addCase(fetchComments, (state, action) => {
-    state.comments = sortCommentsFromNewToOld(action.payload);
-  }),
-  builder.addCase(fetchNearPlaces, (state, action) => {
-    state.nearPlaces = action.payload;
-  }),
-  builder.addCase(fetchFavorites, (state, action) => {
+  builder.addCase(loadFavorites.fulfilled, (state, action) => {
+    state.favoritesLoadingStatus = LoadingStatus.Success;
     state.favorites = action.payload;
   }),
-  builder.addCase(updateFavorites, (state, action) => {
+  builder.addCase(loadDetails.pending, (state) => {
+    state.detailsLoadingStatus = LoadingStatus.Loading;
+  }),
+  builder.addCase(loadDetails.fulfilled, (state, action) => {
+    state.detailsLoadingStatus = LoadingStatus.Success;
+    state.details = action.payload;
+  }),
+  builder.addCase(loadComments.fulfilled, (state, action) => {
+    state.comments = action.payload;
+  }),
+  builder.addCase(loadNearPlaces.fulfilled, (state, action) => {
+    state.nearPlaces = action.payload;
+  }),
+  builder.addCase(submitComment.pending, (state) => {
+    state.commentSubmitStatus = LoadingStatus.Loading;
+  }),
+  builder.addCase(submitComment.fulfilled, (state, action) => {
+    state.commentSubmitStatus = LoadingStatus.Success;
+    state.comments = [action.payload, ...state.comments];
+  }),
+  builder.addCase(submitComment.rejected, (state) => {
+    state.commentSubmitStatus = LoadingStatus.Error;
+  }),
+  builder.addCase(login.pending, (state) => {
+    state.authStatus = AuthStatus.Unknown;
+  }),
+  builder.addCase(login.fulfilled, (state, action) => {
+    state.authStatus = AuthStatus.Auth;
+    state.userEmail = action.payload;
+  }),
+  builder.addCase(login.rejected, (state) => {
+    state.authStatus = AuthStatus.Unknown;
+  }),
+  builder.addCase(logout.fulfilled, (state) => {
+    state.authStatus = AuthStatus.NoAuth;
+    state.userEmail = '';
+  }),
+  builder.addCase(logout.rejected, (state) => {
+    state.authStatus = AuthStatus.Unknown;
+  }),
+  builder.addCase(checkAuthStatus.pending, (state) => {
+    state.authStatus = AuthStatus.Unknown;
+  }),
+  builder.addCase(checkAuthStatus.fulfilled, (state, action) => {
+    state.authStatus = AuthStatus.Auth;
+    state.userEmail = action.payload;
+  }),
+  builder.addCase(checkAuthStatus.rejected, (state) => {
+    state.authStatus = AuthStatus.Unknown;
+  }),
+  //TODO refactor below
+  builder.addCase(setFavorite.fulfilled, (state, action) => {
     const currentFavoriteIndex = state.favorites.findIndex(
       (favorite) => favorite.id === action.payload.id
     );
@@ -84,15 +135,6 @@ const reducer = createReducer(initialState, (builder) => [
     } else {
       state.favorites.push(action.payload);
     }
-  }),
-  builder.addCase(addComment, (state, action) => {
-    state.comments = [action.payload, ...state.comments];
-  }),
-  builder.addCase(changeLoadingStatus, (state, action) => {
-    state.loadingStatus = action.payload;
-  }),
-  builder.addCase(requireAuth, (state, action) => {
-    state.authStatus = action.payload;
   }),
   builder.addCase(setError, (state, action) => {
     state.error = action.payload;

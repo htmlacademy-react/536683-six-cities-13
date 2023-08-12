@@ -5,14 +5,18 @@ import { UserMenu } from '../../components/user-menu/user-menu';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { loadDetails } from '../../store/async-actions';
+import {
+  loadComments,
+  loadDetails,
+  loadNearPlaces,
+} from '../../store/async-actions';
 import { Spinner } from '../../components/spinner/spinner';
 import { LoadingStatus } from '../../const';
 
 const OfferPage = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const loadingStatus = useAppSelector((store) => store.loadingStatus);
+  const loadingStatus = useAppSelector((store) => store.detailsLoadingStatus);
   const currentDetails = useAppSelector((store) => store.details);
   const currentNearPlaces = useAppSelector((store) => store.nearPlaces);
   const currentComments = useAppSelector((store) => store.comments);
@@ -22,6 +26,8 @@ const OfferPage = () => {
 
     if (isMounted && id) {
       dispatch(loadDetails({ offerId: id }));
+      dispatch(loadComments({ offerId: id }));
+      dispatch(loadNearPlaces({ offerId: id }));
     }
 
     return () => {

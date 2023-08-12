@@ -18,13 +18,12 @@ type TOfferProps = {
 };
 
 const Offer = ({ offerDetails, comments, nearPlaces }: TOfferProps) => {
-  if (!offerDetails || !comments.length || !nearPlaces.length) {
+  if (!offerDetails) {
     return <NotFoundPage />;
   }
 
   const { images, host, description } = offerDetails;
   const places = nearPlaces.slice(0, MAX_NEAR_PLACES);
-  const [place] = places;
 
   return (
     <main className="page__main page__main--offer">
@@ -46,7 +45,7 @@ const Offer = ({ offerDetails, comments, nearPlaces }: TOfferProps) => {
         </div>
         <section className={`offer__map ${styles['offer__map--static']} map`}>
           <Map
-            city={place.city}
+            city={offerDetails.city}
             selectedPoint={offerDetails}
             points={[...places, offerDetails]}
           />

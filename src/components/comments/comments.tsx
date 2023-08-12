@@ -11,6 +11,10 @@ type TCommentsProps = {
 const Comments = ({ comments }: TCommentsProps) => {
   const authStatus = useAppSelector((store) => store.authStatus);
 
+  if (!comments.length) {
+    return null;
+  }
+
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">

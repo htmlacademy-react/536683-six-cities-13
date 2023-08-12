@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import styles from './review-form.module.css';
 import { useParams } from 'react-router-dom';
-import { ReviewInfo } from '../../const';
+import { LoadingStatus, ReviewInfo } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { submitComment } from '../../store/async-actions';
 import { ReviewRating } from './review-form-rating';
@@ -21,11 +21,11 @@ const InitialState: TReviewForm = {
 
 const ReviewForm = () => {
   const dispatch = useAppDispatch();
-  const isError = useAppSelector((store) => store.error);
+  const commentSubmitStatus = useAppSelector(
+    (store) => store.commentSubmitStatus
+  );
   const { id } = useParams();
   const [reviewInfo, setReviewInfo] = useState<TReviewForm>(InitialState);
-  const [wasSubmitted, setWasSubmitted] = useState<boolean>(false);
-
   const isSubmitDisabled = Boolean(
     reviewInfo.comment.length < ReviewInfo.MinCommentLength ||
       reviewInfo.rating <= ReviewInfo.MinRating
@@ -49,14 +49,14 @@ const ReviewForm = () => {
     if (id) {
       dispatch(submitComment({ ...reviewInfo, offerId: id }));
       setReviewInfo(InitialState);
-      setWasSubmitted((prevWasSubmitted) => !prevWasSubmitted);
     }
   };
 
   return (
     <form
       className={`reviews__form form ${cn({
-        [styles['form--disabled']]: isError !== null,
+        [styles['form--disabled']]:
+          commentSubmitStatus === LoadingStatus.Loading,
       })}`}
       action="#"
       method="post"
@@ -66,7 +66,7 @@ const ReviewForm = () => {
         Your review
       </label>
       <ReviewRating
-        key={Number(wasSubmitted)}
+        key={commentSubmitStatus}
         onRatingChange={handleRatingChange}
       />
       <textarea

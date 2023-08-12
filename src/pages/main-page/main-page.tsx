@@ -11,7 +11,7 @@ import { UserMenu } from '../../components/user-menu/user-menu';
 import { Spinner } from '../../components/spinner/spinner';
 
 const MainPage = () => {
-  const loadingStatus = useAppSelector((store) => store.loadingStatus);
+  const loadingStatus = useAppSelector((store) => store.offersLoadingStatus);
   const dispatch = useAppDispatch();
   const locationCity = useAppSelector((store) => store.location);
   const offers = useAppSelector((store) => store.offers);

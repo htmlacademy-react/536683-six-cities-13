@@ -1,5 +1,6 @@
 import { SyntheticEvent } from 'react';
 import cn from 'classnames';
+import { handleError } from '../../services/handle-error';
 
 type TLocationListProps = {
   locations: string[];
@@ -23,7 +24,7 @@ const LocationList = ({
             })}`}
             onClick={(evt: SyntheticEvent) => {
               evt.preventDefault();
-
+              handleError({ message: 'test' });
               onLocationClick(location);
             }}
           >

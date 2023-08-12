@@ -7,7 +7,7 @@ import { useAppSelector } from '../../hooks/use-app-selector';
 import { Favorites } from './favorites';
 
 const FavoritesPage = () => {
-  const loadingStatus = useAppSelector((store) => store.loadingStatus);
+  const loadingStatus = useAppSelector((store) => store.favoritesLoadingStatus);
   const favorites = useAppSelector((store) => store.favorites);
 
   if (loadingStatus === LoadingStatus.Loading) {

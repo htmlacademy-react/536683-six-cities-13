@@ -1,21 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { APIRoute, AuthStatus, ERROR_TIMEOUT, LoadingStatus } from '../const';
+import { APIRoute, ERROR_TIMEOUT, NameSpace } from '../const';
 import { TOffer } from '../types/offer';
 import { TAppDispatch, TRootState } from '../types/state';
 import { AxiosInstance } from 'axios';
-import {
-  addComment,
-  changeLoadingStatus,
-  fetchComments,
-  fetchDetails,
-  fetchFavorites,
-  fetchNearPlaces,
-  fetchOffers,
-  requireAuth,
-  setError,
-  setUserEmail,
-  updateFavorites,
-} from './actions';
 import { TAuthData } from '../types/auth-data';
 import { TUserData } from '../types/user-data';
 import { dropToken, setToken } from '../services/token';
@@ -25,6 +12,7 @@ import { TDetail } from '../types/details';
 import { TComment } from '../types/review';
 import { TReviewForm } from '../components/review-form/review-form';
 import { TFavoriteData } from '../types/favorite-data';
+import { setError } from './actions';
 
 type TAsyncThunk = {
   dispatch: TAppDispatch;
@@ -32,135 +20,78 @@ type TAsyncThunk = {
   extra: AxiosInstance;
 };
 
-const clearError = createAsyncThunk('app/clearError', () => {
+type TEextra = {
+  extra: AxiosInstance;
+};
+
+const clearError = createAsyncThunk('app/clearError', (arg) => {
+  // eslint-disable-next-line no-console
+  console.log('arg?', arg);
+
   setTimeout(() => {
-    store.dispatch(setError(null));
+    // store.dispatch(setError(null));
   }, ERROR_TIMEOUT);
 });
 
-const loadOffers = createAsyncThunk<void, undefined, TAsyncThunk>(
-  'data/loadOffers',
-  async (_arg, { dispatch, extra: fetchData }) => {
-    try {
-      dispatch(changeLoadingStatus(LoadingStatus.Loading));
-      const { data } = await fetchData.get<TOffer[]>(APIRoute.Offers);
+const loadOffers = createAsyncThunk<TOffer[], undefined, TEextra>(
+  `${NameSpace.Offers}/loadOffers`,
+  async (_arg, { extra: fetchData }) => {
+    const { data } = await fetchData.get<TOffer[]>(APIRoute.Offers);
 
-      dispatch(changeLoadingStatus(LoadingStatus.Success));
-      dispatch(fetchOffers(data));
-    } catch (error) {
-      dispatch(changeLoadingStatus(LoadingStatus.Idle));
-    }
+    return data;
   }
 );
 
-const checkAuthStatus = createAsyncThunk<void, undefined, TAsyncThunk>(
-  'user/checkAuthStatus',
-  async (_arg, { dispatch, extra: fetchData }) => {
-    try {
-      const {
-        data: { email },
-      } = await fetchData.get<TUserData>(APIRoute.Login);
+const checkAuthStatus = createAsyncThunk<string, undefined, TEextra>(
+  `${NameSpace.User}/checkAuthStatus`,
+  async (_arg, { extra: fetchData }) => {
+    const {
+      data: { email },
+    } = await fetchData.get<TUserData>(APIRoute.Login);
 
-      dispatch(requireAuth(AuthStatus.Auth));
-      dispatch(setUserEmail(email));
-    } catch {
-      dispatch(requireAuth(AuthStatus.NoAuth));
-    }
+    return email;
   }
 );
 
-const loadDetails = createAsyncThunk<void, TOfferId, TAsyncThunk>(
-  'data/loadDetails',
-  ({ offerId }, { dispatch, extra: fetchData }) => {
-    dispatch(changeLoadingStatus(LoadingStatus.Loading));
-    Promise.all([
-      fetchData.get<TDetail>(`${APIRoute.Offers}/${offerId}`),
-      fetchData.get<TOffer[]>(
-        `${APIRoute.Offers}/${offerId}${APIRoute.Nearby}`
-      ),
-      fetchData.get<TComment[]>(`${APIRoute.Comments}/${offerId}`),
-    ])
-      .then(([{ data: details }, { data: nearPlaces }, { data: comments }]) => {
-        dispatch(changeLoadingStatus(LoadingStatus.Success));
-        dispatch(fetchDetails(details));
-        dispatch(fetchComments(comments));
-        dispatch(fetchNearPlaces(nearPlaces));
-      })
-      .catch(() => {
-        dispatch(changeLoadingStatus(LoadingStatus.Idle));
-      });
+const login = createAsyncThunk<string, TAuthData, TEextra>(
+  `${NameSpace.User}/login`,
+  async ({ email, password }, { extra: fetchData }) => {
+    const {
+      data: { token, email: userEmail },
+    } = await fetchData.post<TUserData>(APIRoute.Login, {
+      email,
+      password,
+    });
+
+    setToken(token);
+
+    return userEmail;
   }
 );
 
-const updateDetails = createAsyncThunk<void, TOfferId, TAsyncThunk>(
-  'data/loadDetails',
-  async ({ offerId }, { dispatch, extra: fetchData }) => {
+const logout = createAsyncThunk<void, undefined, TEextra>(
+  `${NameSpace.User}/logout`,
+  async (_arg, { extra: fetchData }) => {
+    await fetchData.delete(APIRoute.Logout);
+
+    dropToken();
+  }
+);
+
+const updateDetails = createAsyncThunk<TDetail, TOfferId, TAsyncThunk>(
+  `${NameSpace.Offer}/loadDetailsTEMP`,
+  async ({ offerId }, { extra: fetchData }) => {
     const { data } = await fetchData.get<TDetail>(
       `${APIRoute.Offers}/${offerId}`
     );
 
-    dispatch(fetchDetails(data));
+    return data;
   }
 );
 
-const loadFavorites = createAsyncThunk<void, undefined, TAsyncThunk>(
-  'data/loadFavorites',
-  async (_arg, { dispatch, extra: fetchData }) => {
-    dispatch(changeLoadingStatus(LoadingStatus.Loading));
-    const { data } = await fetchData.get<TOffer[]>(APIRoute.Favorite);
-    dispatch(changeLoadingStatus(LoadingStatus.Success));
-    dispatch(fetchFavorites(data));
-  }
-);
-
-const setFavorite = createAsyncThunk<void, TFavoriteData, TAsyncThunk>(
-  'data/setFavorite',
-  async ({ favoriteId, status }, { dispatch, extra: fetchData }) => {
-    const { data } = await fetchData.post<TOffer>(
-      `${APIRoute.Favorite}/${favoriteId}/${status}`
-    );
-
-    dispatch(updateFavorites(data));
-  }
-);
-
-const login = createAsyncThunk<void, TAuthData, TAsyncThunk>(
-  'user/login',
-  async ({ email, password }, { dispatch, extra: fetchData }) => {
-    try {
-      const {
-        data: { token, email: userEmail },
-      } = await fetchData.post<TUserData>(APIRoute.Login, {
-        email,
-        password,
-      });
-
-      setToken(token);
-      dispatch(requireAuth(AuthStatus.Auth));
-      dispatch(setUserEmail(userEmail));
-    } catch (error) {
-      dispatch(requireAuth(AuthStatus.NoAuth));
-    }
-  }
-);
-
-const logout = createAsyncThunk<void, undefined, TAsyncThunk>(
-  'user/login',
-  async (_arg, { dispatch, extra: fetchData }) => {
-    try {
-      await fetchData.delete(APIRoute.Logout);
-
-      dropToken();
-      dispatch(requireAuth(AuthStatus.NoAuth));
-    } catch (error) {
-      dispatch(requireAuth(AuthStatus.Unknown));
-    }
-  }
-);
-
-const submitComment = createAsyncThunk<void, TReviewForm, TAsyncThunk>(
-  'user/login',
-  async ({ rating, comment, offerId }, { dispatch, extra: fetchData }) => {
+const submitComment = createAsyncThunk<TComment, TReviewForm, TEextra>(
+  `${NameSpace.Comments}/submitComment`,
+  async ({ rating, comment, offerId }, { extra: fetchData }) => {
     const { data } = await fetchData.post<TComment>(
       `${APIRoute.Comments}/${offerId}`,
       {
@@ -169,7 +100,60 @@ const submitComment = createAsyncThunk<void, TReviewForm, TAsyncThunk>(
       }
     );
 
-    dispatch(addComment(data));
+    return data;
+  }
+);
+
+const loadDetails = createAsyncThunk<TDetail, TOfferId, TEextra>(
+  `${NameSpace.Offer}/loadDetails`,
+  async ({ offerId }, { extra: fetchData }) => {
+    const { data } = await fetchData.get<TDetail>(
+      `${APIRoute.Offers}/${offerId}`
+    );
+
+    return data;
+  }
+);
+
+const loadComments = createAsyncThunk<TComment[], TOfferId, TEextra>(
+  `${NameSpace.Comments}/loadComments`,
+  async ({ offerId }, { extra: fetchData }) => {
+    const { data } = await fetchData.get<TComment[]>(
+      `${APIRoute.Comments}/${offerId}`
+    );
+
+    return data;
+  }
+);
+
+const loadNearPlaces = createAsyncThunk<TOffer[], TOfferId, TEextra>(
+  `${NameSpace.NearPlaces}/loadNearPlaces`,
+  async ({ offerId }, { extra: fetchData }) => {
+    const { data } = await fetchData.get<TOffer[]>(
+      `${APIRoute.Offers}/${offerId}${APIRoute.Nearby}`
+    );
+
+    return data;
+  }
+);
+
+const loadFavorites = createAsyncThunk<TOffer[], undefined, TEextra>(
+  `${NameSpace.Favorites}/loadFavorites`,
+  async (_arg, { extra: fetchData }) => {
+    const { data } = await fetchData.get<TOffer[]>(APIRoute.Favorite);
+
+    return data;
+  }
+);
+
+const setFavorite = createAsyncThunk<TOffer, TFavoriteData, TEextra>(
+  `${NameSpace.Favorites}/setFavorite`,
+  async ({ favoriteId, status }, { extra: fetchData }) => {
+    const { data } = await fetchData.post<TOffer>(
+      `${APIRoute.Favorite}/${favoriteId}/${status}`
+    );
+
+    return data;
   }
 );
 
@@ -180,6 +164,8 @@ export {
   logout,
   clearError,
   loadDetails,
+  loadComments,
+  loadNearPlaces,
   submitComment,
   loadFavorites,
   setFavorite,

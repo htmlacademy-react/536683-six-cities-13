@@ -41,6 +41,15 @@ enum AuthStatus {
   Unknown = 'UNKNOWN',
 }
 
+enum NameSpace {
+  Offers = 'OFFERS',
+  Offer = 'OFFER',
+  NearPlaces = 'NEAR_PLACES',
+  Favorites = 'FAVORITES',
+  Comments = 'COMMENTS',
+  User = 'USER',
+}
+
 enum OfferCardClassName {
   Favorites = 'favorites',
   Main = 'cities',
@@ -67,6 +76,7 @@ enum ReviewInfo {
 enum LoadingStatus {
   Loading = 'loading',
   Success = 'success',
+  Error = 'error',
   Idle = 'idle',
 }
 
@@ -109,6 +119,7 @@ export {
   APIRoute,
   AppRoute,
   AuthStatus,
+  NameSpace,
   OfferCardClassName,
   RatingClassName,
   ReviewInfo,
