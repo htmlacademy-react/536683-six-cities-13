@@ -1,12 +1,33 @@
+import { useEffect } from 'react';
 import { FavoritesList } from '../../components/favorites-list/favorites-list';
-import { TOffer } from '../../types/offer';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { FavoritesEmpty } from './favorites-empty';
+import { loadFavorites } from '../../store/async-actions';
+import { LoadingStatus } from '../../const';
+import { Spinner } from '../../components/spinner/spinner';
 
-type TFavoritesProps = {
-  favorites: TOffer[];
-};
+const Favorites = () => {
+  const dispatch = useAppDispatch();
+  const loadingStatus = useAppSelector((store) => store.favoritesLoadingStatus);
+  const favorites = useAppSelector((store) => store.favorites);
 
-const Favorites = ({ favorites }: TFavoritesProps) => {
+  useEffect(() => {
+    let isMounted = true;
+
+    if (isMounted) {
+      dispatch(loadFavorites());
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [dispatch]);
+
+  if (loadingStatus === LoadingStatus.Loading) {
+    return <Spinner />;
+  }
+
   if (!favorites.length) {
     return <FavoritesEmpty />;
   }
