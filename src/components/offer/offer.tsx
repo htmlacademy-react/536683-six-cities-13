@@ -18,7 +18,7 @@ type TOfferProps = {
 };
 
 const Offer = ({ offerDetails, comments, nearPlaces }: TOfferProps) => {
-  if (!offerDetails) {
+  if (!offerDetails || !nearPlaces) {
     return <NotFoundPage />;
   }
 

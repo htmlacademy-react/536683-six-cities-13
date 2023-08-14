@@ -12,12 +12,16 @@ import {
 } from '../../store/async-actions';
 import { Spinner } from '../../components/spinner/spinner';
 import { LoadingStatus } from '../../const';
+import {
+  getOffer,
+  getOfferLoadingStatus,
+} from '../../store/offer-process/selectors';
 
 const OfferPage = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const loadingStatus = useAppSelector((store) => store.detailsLoadingStatus);
-  const currentDetails = useAppSelector((store) => store.details);
+  const loadingStatus = useAppSelector(getOfferLoadingStatus);
+  const currentDetails = useAppSelector(getOffer);
   const currentNearPlaces = useAppSelector((store) => store.nearPlaces);
   const currentComments = useAppSelector((store) => store.comments);
 

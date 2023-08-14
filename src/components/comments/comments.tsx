@@ -1,5 +1,6 @@
 import { AuthStatus, MAX_COMMENTS } from '../../const';
 import { useAppSelector } from '../../hooks/use-app-selector';
+import { getAuthStatus } from '../../store/user-process/selectors';
 import { TComment } from '../../types/review';
 import { sortCommentsFromNewToOld } from '../../utils';
 import { ReviewForm } from '../review-form/review-form';
@@ -10,7 +11,7 @@ type TCommentsProps = {
 };
 
 const Comments = ({ comments }: TCommentsProps) => {
-  const authStatus = useAppSelector((store) => store.authStatus);
+  const authStatus = useAppSelector(getAuthStatus);
 
   if (!comments.length) {
     return null;

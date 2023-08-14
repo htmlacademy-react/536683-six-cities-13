@@ -4,7 +4,7 @@ import { TOffer } from '../../types/offer';
 import { Map } from '../map/map';
 import { OfferList } from '../offer-list/offer-list';
 import { CitiesEmpty } from './cities-empty';
-import { getOffers } from '../../store/offer-process/selectors';
+import { getOffers } from '../../store/offers-process/selectors';
 
 type TCitiesProps = {
   locationCity: string;

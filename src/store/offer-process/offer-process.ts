@@ -1,27 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { LoadingStatus, NameSpace } from '../../const';
 import { TState } from '../reducer';
-import { loadOffers } from '../async-actions';
+import { LoadingStatus, NameSpace } from '../../const';
+import { loadDetails } from '../async-actions';
 
-type TOffersProcessState = Pick<TState, 'offersLoadingStatus' | 'offers'>;
+type TOfferProcess = Pick<TState, 'details' | 'detailsLoadingStatus'>;
 
-const initialState: TOffersProcessState = {
-  offers: [],
-  offersLoadingStatus: LoadingStatus.Idle,
+const initialState: TOfferProcess = {
+  details: null,
+  detailsLoadingStatus: LoadingStatus.Idle,
 };
 
-export const offersProcess = createSlice({
-  name: NameSpace.Offers,
+export const offerProcess = createSlice({
+  name: NameSpace.Offer,
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(loadOffers.pending, (state) => {
-        state.offersLoadingStatus = LoadingStatus.Loading;
+      .addCase(loadDetails.pending, (state) => {
+        state.detailsLoadingStatus = LoadingStatus.Loading;
       })
-      .addCase(loadOffers.fulfilled, (state, action) => {
-        state.offersLoadingStatus = LoadingStatus.Success;
-        state.offers = action.payload;
+      .addCase(loadDetails.fulfilled, (state, action) => {
+        state.detailsLoadingStatus = LoadingStatus.Success;
+        state.details = action.payload;
       });
   },
 });

@@ -8,7 +8,7 @@ import { UserMenu } from '../../components/user-menu/user-menu';
 import { Spinner } from '../../components/spinner/spinner';
 import { getCurrentLocation } from '../../store/app-process/selectors';
 import { changeLocation } from '../../store/app-process/app-process';
-import { getOffersLoadingStatus } from '../../store/offer-process/selectors';
+import { getOffersLoadingStatus } from '../../store/offers-process/selectors';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
