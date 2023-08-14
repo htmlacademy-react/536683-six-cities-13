@@ -6,7 +6,7 @@ type TOfferNearPlacesProps = {
 };
 
 const OfferNearPlaces = ({ nearPlaces }: TOfferNearPlacesProps) => {
-  if (!nearPlaces.length) {
+  if (!nearPlaces?.length) {
     return null;
   }
 

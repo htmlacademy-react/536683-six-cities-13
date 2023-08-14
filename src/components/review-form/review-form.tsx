@@ -7,6 +7,7 @@ import { submitComment } from '../../store/async-actions';
 import { ReviewRating } from './review-form-rating';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useAppSelector } from '../../hooks/use-app-selector';
+import { getCommentSubmitStatus } from '../../store/comments-process/selectors';
 export type TReviewForm = {
   offerId: string;
   rating: number;
@@ -21,9 +22,7 @@ const InitialState: TReviewForm = {
 
 const ReviewForm = () => {
   const dispatch = useAppDispatch();
-  const commentSubmitStatus = useAppSelector(
-    (store) => store.commentSubmitStatus
-  );
+  const commentSubmitStatus = useAppSelector(getCommentSubmitStatus);
   const { id } = useParams();
   const [reviewInfo, setReviewInfo] = useState<TReviewForm>(InitialState);
   const isSubmitDisabled = Boolean(

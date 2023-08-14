@@ -13,7 +13,7 @@ type TCommentsProps = {
 const Comments = ({ comments }: TCommentsProps) => {
   const authStatus = useAppSelector(getAuthStatus);
 
-  if (!comments.length) {
+  if (!comments?.length) {
     return null;
   }
 

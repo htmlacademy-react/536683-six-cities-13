@@ -5,14 +5,7 @@ import { TOffer } from '../types/offer';
 import { TDetail } from '../types/details';
 import { TComment } from '../types/review';
 import { TError } from '../types/error';
-import {
-  loadComments,
-  loadFavorites,
-  loadNearPlaces,
-  loadOffers,
-  setFavorite,
-  submitComment,
-} from './async-actions';
+import { loadFavorites, setFavorite } from './async-actions';
 
 export type TState = {
   authStatus: AuthStatus;
@@ -47,13 +40,6 @@ const initialState: TState = {
 };
 
 const reducer = createReducer(initialState, (builder) => [
-  builder.addCase(loadOffers.pending, (state) => {
-    state.offersLoadingStatus = LoadingStatus.Loading;
-  }),
-  builder.addCase(loadOffers.fulfilled, (state, action) => {
-    state.offersLoadingStatus = LoadingStatus.Success;
-    state.offers = action.payload;
-  }),
   builder.addCase(loadFavorites.pending, (state) => {
     state.favoritesLoadingStatus = LoadingStatus.Loading;
   }),
@@ -61,24 +47,6 @@ const reducer = createReducer(initialState, (builder) => [
     state.favoritesLoadingStatus = LoadingStatus.Success;
     state.favorites = action.payload;
   }),
-
-  builder.addCase(loadComments.fulfilled, (state, action) => {
-    state.comments = action.payload;
-  }),
-  builder.addCase(loadNearPlaces.fulfilled, (state, action) => {
-    state.nearPlaces = action.payload;
-  }),
-  builder.addCase(submitComment.pending, (state) => {
-    state.commentSubmitStatus = LoadingStatus.Loading;
-  }),
-  builder.addCase(submitComment.fulfilled, (state, action) => {
-    state.commentSubmitStatus = LoadingStatus.Success;
-    state.comments = [action.payload, ...state.comments];
-  }),
-  builder.addCase(submitComment.rejected, (state) => {
-    state.commentSubmitStatus = LoadingStatus.Error;
-  }),
-
   //TODO refactor below
   builder.addCase(setFavorite.fulfilled, (state, action) => {
     const currentFavoriteIndex = state.favorites.findIndex(

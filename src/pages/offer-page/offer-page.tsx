@@ -16,14 +16,16 @@ import {
   getOffer,
   getOfferLoadingStatus,
 } from '../../store/offer-process/selectors';
+import { getNearPlaces } from '../../store/near-places-process/selectors';
+import { getComments } from '../../store/comments-process/selectors';
 
 const OfferPage = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const loadingStatus = useAppSelector(getOfferLoadingStatus);
   const currentDetails = useAppSelector(getOffer);
-  const currentNearPlaces = useAppSelector((store) => store.nearPlaces);
-  const currentComments = useAppSelector((store) => store.comments);
+  const currentNearPlaces = useAppSelector(getNearPlaces);
+  const currentComments = useAppSelector(getComments);
 
   useEffect(() => {
     let isMounted = true;
