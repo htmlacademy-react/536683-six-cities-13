@@ -4,13 +4,14 @@ import { TOffer } from '../../types/offer';
 import { Map } from '../map/map';
 import { OfferList } from '../offer-list/offer-list';
 import { CitiesEmpty } from './cities-empty';
+import { getOffers } from '../../store/offer-process/selectors';
 
 type TCitiesProps = {
   locationCity: string;
 };
 
 const Cities = ({ locationCity }: TCitiesProps) => {
-  const offers = useAppSelector((store) => store.offers);
+  const offers = useAppSelector(getOffers);
   const [hoveredOffer, setHoveredOffer] = useState<TOffer | undefined>(
     undefined
   );

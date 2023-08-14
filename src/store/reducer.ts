@@ -1,5 +1,4 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeLocation, clearError, setError } from './actions';
 import { AuthStatus, DEFAULT_LOCATION, LoadingStatus } from '../const';
 import { TLoadingStatus } from '../types/state';
 import { TOffer } from '../types/offer';
@@ -7,14 +6,11 @@ import { TDetail } from '../types/details';
 import { TComment } from '../types/review';
 import { TError } from '../types/error';
 import {
-  checkAuthStatus,
   loadComments,
   loadDetails,
   loadFavorites,
   loadNearPlaces,
-  loadOffers,
-  login,
-  logout,
+  // loadOffers,
   setFavorite,
   submitComment,
 } from './async-actions';
@@ -52,16 +48,6 @@ const initialState: TState = {
 };
 
 const reducer = createReducer(initialState, (builder) => [
-  builder.addCase(changeLocation, (state, action) => {
-    state.location = action.payload;
-  }),
-  builder.addCase(loadOffers.pending, (state) => {
-    state.offersLoadingStatus = LoadingStatus.Loading;
-  }),
-  builder.addCase(loadOffers.fulfilled, (state, action) => {
-    state.offersLoadingStatus = LoadingStatus.Success;
-    state.offers = action.payload;
-  }),
   builder.addCase(loadFavorites.pending, (state) => {
     state.favoritesLoadingStatus = LoadingStatus.Loading;
   }),
@@ -92,33 +78,6 @@ const reducer = createReducer(initialState, (builder) => [
   builder.addCase(submitComment.rejected, (state) => {
     state.commentSubmitStatus = LoadingStatus.Error;
   }),
-  builder.addCase(login.pending, (state) => {
-    state.authStatus = AuthStatus.Unknown;
-  }),
-  builder.addCase(login.fulfilled, (state, action) => {
-    state.authStatus = AuthStatus.Auth;
-    state.userEmail = action.payload;
-  }),
-  builder.addCase(login.rejected, (state) => {
-    state.authStatus = AuthStatus.Unknown;
-  }),
-  builder.addCase(logout.fulfilled, (state) => {
-    state.authStatus = AuthStatus.NoAuth;
-    state.userEmail = '';
-  }),
-  builder.addCase(logout.rejected, (state) => {
-    state.authStatus = AuthStatus.Unknown;
-  }),
-  builder.addCase(checkAuthStatus.pending, (state) => {
-    state.authStatus = AuthStatus.Unknown;
-  }),
-  builder.addCase(checkAuthStatus.fulfilled, (state, action) => {
-    state.authStatus = AuthStatus.Auth;
-    state.userEmail = action.payload;
-  }),
-  builder.addCase(checkAuthStatus.rejected, (state) => {
-    state.authStatus = AuthStatus.Unknown;
-  }),
   //TODO refactor below
   builder.addCase(setFavorite.fulfilled, (state, action) => {
     const currentFavoriteIndex = state.favorites.findIndex(
@@ -135,12 +94,6 @@ const reducer = createReducer(initialState, (builder) => [
     } else {
       state.favorites.push(action.payload);
     }
-  }),
-  builder.addCase(setError, (state, action) => {
-    state.error = action.payload;
-  }),
-  builder.addCase(clearError, (state, action) => {
-    state.error = action.payload.errorInfo;
   }),
 ]);
 

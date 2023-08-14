@@ -5,11 +5,13 @@ import { AppRoute, AuthStatus } from '../../const';
 import { Navigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { login } from '../../store/async-actions';
+import { getAuthStatus } from '../../store/user-process/selectors';
+import { getCurrentLocation } from '../../store/app-process/selectors';
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
-  const authStatus = useAppSelector((store) => store.authStatus);
-  const currentLocation = useAppSelector((store) => store.location);
+  const authStatus = useAppSelector(getAuthStatus);
+  const currentLocation = useAppSelector(getCurrentLocation);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 

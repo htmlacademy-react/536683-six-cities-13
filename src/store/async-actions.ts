@@ -10,8 +10,11 @@ import { TDetail } from '../types/details';
 import { TComment } from '../types/review';
 import { TReviewForm } from '../components/review-form/review-form';
 import { TFavoriteData } from '../types/favorite-data';
+import { TAppDispatch, TRootState } from '../types/state';
 
 type TEextra = {
+  dispatch: TAppDispatch;
+  state: TRootState;
   extra: AxiosInstance;
 };
 
