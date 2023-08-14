@@ -3,7 +3,7 @@ export type TReviewRating = {
   ratingText: string;
 };
 
-type TSize = {
+export type TSize = {
   width: number | string;
   height: number | string;
 };

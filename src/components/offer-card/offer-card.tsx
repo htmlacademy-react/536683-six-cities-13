@@ -3,6 +3,7 @@ import { AppRoute } from '../../const';
 import { TOffer } from '../../types/offer';
 import { RatingMain } from '../rating/rating-main';
 import { MainFavoriteButton } from '../favorite-button/main-favorite-button';
+import { TSize } from '../../types/const';
 
 export type TOfferCardProxyProps = Omit<
   TOfferCardProps,
@@ -17,7 +18,7 @@ export type TImageSize = {
 export type TOfferCardProps = {
   offer: TOffer;
   className: string;
-  imageSize: TImageSize;
+  imageSize: TSize;
   onOfferHover?: (offerId: string) => void;
 };
 

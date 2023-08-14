@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { APIRoute, NameSpace } from '../const';
 import { TOffer } from '../types/offer';
-import { TAppDispatch, TRootState } from '../types/state';
 import { AxiosInstance } from 'axios';
 import { TAuthData } from '../types/auth-data';
 import { TUserData } from '../types/user-data';
@@ -11,12 +10,6 @@ import { TDetail } from '../types/details';
 import { TComment } from '../types/review';
 import { TReviewForm } from '../components/review-form/review-form';
 import { TFavoriteData } from '../types/favorite-data';
-
-type TAsyncThunk = {
-  dispatch: TAppDispatch;
-  state: TRootState;
-  extra: AxiosInstance;
-};
 
 type TEextra = {
   extra: AxiosInstance;
@@ -64,17 +57,6 @@ const logout = createAsyncThunk<void, undefined, TEextra>(
     await fetchData.delete(APIRoute.Logout);
 
     dropToken();
-  }
-);
-
-const updateDetails = createAsyncThunk<TDetail, TOfferId, TAsyncThunk>(
-  `${NameSpace.Offer}/loadDetailsTEMP`,
-  async ({ offerId }, { extra: fetchData }) => {
-    const { data } = await fetchData.get<TDetail>(
-      `${APIRoute.Offers}/${offerId}`
-    );
-
-    return data;
   }
 );
 
@@ -157,5 +139,4 @@ export {
   submitComment,
   loadFavorites,
   setFavorite,
-  updateDetails,
 };
