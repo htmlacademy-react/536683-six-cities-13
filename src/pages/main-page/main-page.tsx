@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { TOffer } from '../../types/offer';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { LocationList } from '../../components/location-list/location-list';
 import { LOCATIONS, LoadingStatus } from '../../const';
@@ -14,27 +12,13 @@ const MainPage = () => {
   const loadingStatus = useAppSelector((store) => store.offersLoadingStatus);
   const dispatch = useAppDispatch();
   const locationCity = useAppSelector((store) => store.location);
-  const offers = useAppSelector((store) => store.offers);
-  const [hoveredOffer, setHoveredOffer] = useState<TOffer | undefined>(
-    undefined
-  );
 
   if (loadingStatus === LoadingStatus.Loading) {
     return <Spinner />;
   }
 
-  const currentLocationOffers = offers.filter(
-    (offer) => offer.city.name === locationCity
-  );
-
   const handleLocationClick = (location: string) => {
     dispatch(changeLocation(location));
-  };
-
-  const handleOfferHover = (offerId: string) => {
-    const currentOffer = offers.find((offer) => offer.id === offerId);
-
-    setHoveredOffer(currentOffer);
   };
 
   return (
@@ -51,13 +35,7 @@ const MainPage = () => {
             onLocationClick={handleLocationClick}
           />
         </div>
-        <Cities
-          key={locationCity}
-          offers={currentLocationOffers}
-          selectedPoint={hoveredOffer}
-          locationCity={locationCity}
-          onOfferHover={handleOfferHover}
-        />
+        <Cities key={locationCity} locationCity={locationCity} />
       </main>
     </div>
   );
