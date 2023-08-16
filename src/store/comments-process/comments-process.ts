@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { LoadingStatus, NameSpace } from '../../const';
-import { TState } from '../reducer';
 import { loadComments, submitComment } from '../async-actions';
+import { TState } from '../../types/state';
 
 type TCommentsProcess = Pick<TState, 'comments' | 'commentSubmitStatus'>;
 

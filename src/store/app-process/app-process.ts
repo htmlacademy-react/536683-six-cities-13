@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TState } from '../reducer';
 import { DEFAULT_LOCATION, NameSpace } from '../../const';
 import { TError } from '../../types/error';
+import { TState } from '../../types/state';
 
 type TAppProcessState = Pick<TState, 'location' | 'error'>;
 

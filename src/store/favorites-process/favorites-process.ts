@@ -1,16 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { LoadingStatus, NameSpace } from '../../const';
-import { TState } from '../reducer';
 import { loadFavorites, setFavorite } from '../async-actions';
+import { TState } from '../../types/state';
 
-type TFavoritesProcess = Pick<
-  TState,
-  'favorites' | 'favoritesLoadingStatus' | 'offers'
->;
+type TFavoritesProcess = Pick<TState, 'favorites' | 'favoritesLoadingStatus'>;
 
 const initialState: TFavoritesProcess = {
   favorites: [],
-  offers: [],
   favoritesLoadingStatus: LoadingStatus.Idle,
 };
 
@@ -26,6 +22,9 @@ export const favoritesProcess = createSlice({
       .addCase(loadFavorites.fulfilled, (state, action) => {
         state.favoritesLoadingStatus = LoadingStatus.Success;
         state.favorites = action.payload;
+      })
+      .addCase(loadFavorites.rejected, (state) => {
+        state.favoritesLoadingStatus = LoadingStatus.Error;
       })
       .addCase(setFavorite.fulfilled, (state, action) => {
         const currentFavoriteIndex = state.favorites.findIndex(

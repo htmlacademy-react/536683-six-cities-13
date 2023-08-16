@@ -32,7 +32,7 @@ const Favorites = () => {
     return <Spinner />;
   }
 
-  if (!favorites.length) {
+  if (loadingStatus === LoadingStatus.Error) {
     return <FavoritesEmpty />;
   }
 

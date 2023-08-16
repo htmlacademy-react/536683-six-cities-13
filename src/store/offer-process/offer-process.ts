@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { TState } from '../reducer';
 import { LoadingStatus, NameSpace } from '../../const';
 import { loadDetails } from '../async-actions';
+import { TState } from '../../types/state';
 
 type TOfferProcess = Pick<TState, 'details' | 'detailsLoadingStatus'>;
 
@@ -22,6 +22,9 @@ export const offerProcess = createSlice({
       .addCase(loadDetails.fulfilled, (state, action) => {
         state.detailsLoadingStatus = LoadingStatus.Success;
         state.details = action.payload;
+      })
+      .addCase(loadDetails.rejected, (state) => {
+        state.detailsLoadingStatus = LoadingStatus.Error;
       });
   },
 });
