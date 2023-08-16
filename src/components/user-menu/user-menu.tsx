@@ -4,11 +4,17 @@ import { useAppSelector } from '../../hooks/use-app-selector';
 import { SyntheticEvent } from 'react';
 import { logout } from '../../store/async-actions';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import {
+  getAuthStatus,
+  getUserEmail,
+} from '../../store/user-process/selectors';
+import { getFavorites } from '../../store/favorites-process/selectors';
 
 const UserMenu = () => {
   const dispatch = useAppDispatch();
-  const authStatus = useAppSelector((store) => store.authStatus);
-  const userEmail = useAppSelector((store) => store.userEmail);
+  const authStatus = useAppSelector(getAuthStatus);
+  const userEmail = useAppSelector(getUserEmail);
+  const favorites = useAppSelector(getFavorites);
 
   const handleLogoutClick = (evt: SyntheticEvent) => {
     evt.preventDefault();
@@ -24,7 +30,7 @@ const UserMenu = () => {
       >
         <div className="header__avatar-wrapper user__avatar-wrapper"></div>
         <span className="header__user-name user__name">{userEmail}</span>
-        <span className="header__favorite-count">3</span>
+        <span className="header__favorite-count">{favorites.length}</span>
       </Link>
     ) : (
       <Link

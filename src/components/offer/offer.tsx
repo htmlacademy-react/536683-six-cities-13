@@ -8,17 +8,22 @@ import { OfferGallery } from './offer-gallery';
 import { OfferHost } from './offer-host';
 import { OfferInfo } from './offer-info';
 import { OfferNearPlaces } from './offer-near-places';
+import styles from './offer.module.css';
+import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 
 type TOfferProps = {
-  offerDetails: TDetail;
+  offerDetails: TDetail | null;
   comments: TComment[];
   nearPlaces: TOffer[];
 };
 
 const Offer = ({ offerDetails, comments, nearPlaces }: TOfferProps) => {
+  if (!offerDetails || !nearPlaces) {
+    return <NotFoundPage />;
+  }
+
   const { images, host, description } = offerDetails;
   const places = nearPlaces.slice(0, MAX_NEAR_PLACES);
-  const [place] = places;
 
   return (
     <main className="page__main page__main--offer">
@@ -38,8 +43,12 @@ const Offer = ({ offerDetails, comments, nearPlaces }: TOfferProps) => {
             <Comments comments={comments} />
           </div>
         </div>
-        <section className="offer__map map">
-          <Map city={place.city} points={places} />
+        <section className={`offer__map ${styles['offer__map--static']} map`}>
+          <Map
+            city={offerDetails.city}
+            selectedPoint={offerDetails}
+            points={[...places, offerDetails]}
+          />
         </section>
       </section>
       <div className="container">

@@ -1,4 +1,19 @@
-import { TOfferCardImageSize, TReviewRating } from './types/const';
+import {
+  TFavoriteButtonSize,
+  TOfferCardImageSize,
+  TReviewRating,
+} from './types/const';
+
+const ERROR_TIMEOUT = 3000;
+const DEFAULT_LOCATION = 'Paris';
+const MAX_OFFER_GALLERY_PICTURES = 6;
+const MAX_COMMENTS = 10;
+const MAX_NEAR_PLACES = 3;
+const REQUEST_TIMEOUT = 5000;
+const BASE_URL = 'https://13.design.pages.academy/six-cities';
+const BASE_MARKER_PATH = './markup/img/';
+const PATH_MARKER_DEFAULT = `${BASE_MARKER_PATH}pin.svg`;
+const PATH_MARKER_CURRENT = `${BASE_MARKER_PATH}pin-active.svg`;
 
 enum AppRoute {
   Login = '/login',
@@ -26,6 +41,16 @@ enum AuthStatus {
   Unknown = 'UNKNOWN',
 }
 
+enum NameSpace {
+  Offers = 'OFFERS',
+  Offer = 'OFFER',
+  NearPlaces = 'NEAR_PLACES',
+  Favorites = 'FAVORITES',
+  Comments = 'COMMENTS',
+  User = 'USER',
+  App = 'APP',
+}
+
 enum OfferCardClassName {
   Favorites = 'favorites',
   Main = 'cities',
@@ -38,16 +63,28 @@ enum RatingClassName {
   Reviews = 'reviews',
 }
 
+enum FavoriteButtonClassName {
+  Main = 'place-card',
+  Details = 'offer',
+}
+
 enum ReviewInfo {
-  MaxCommentLength = 60,
+  MinCommentLength = 50,
+  MaxCommentLength = 300,
   MinRating = 0,
 }
 
 enum LoadingStatus {
   Loading = 'loading',
   Success = 'success',
+  Error = 'error',
   Idle = 'idle',
 }
+
+const FAVORITE_BUTTON_SIZE: TFavoriteButtonSize = {
+  'place-card': { width: '18px', height: '19px' },
+  offer: { width: '31px', height: '33px' },
+};
 
 const REVIEW_RATINGS: TReviewRating[] = [
   { ratingValue: 5, ratingText: 'perfect' },
@@ -72,10 +109,6 @@ const LOCATIONS: string[] = [
   'Dusseldorf',
 ];
 
-const ERROR_TIMEOUT = 2000;
-
-const DEFAULT_LOCATION = 'Paris';
-
 const SORT_TYPES: string[] = [
   'Popular',
   'Price: low to high',
@@ -83,21 +116,16 @@ const SORT_TYPES: string[] = [
   'Top rated first',
 ];
 
-const MAX_NEAR_PLACES = 3;
-const REQUEST_TIMEOUT = 5000;
-const BASE_URL = 'https://13.design.pages.academy/six-cities';
-const BASE_MARKER_PATH = './markup/img/';
-const PATH_MARKER_DEFAULT = `${BASE_MARKER_PATH}pin.svg`;
-const PATH_MARKER_CURRENT = `${BASE_MARKER_PATH}pin-active.svg`;
-
 export {
   APIRoute,
   AppRoute,
   AuthStatus,
+  NameSpace,
   OfferCardClassName,
   RatingClassName,
   ReviewInfo,
   LoadingStatus,
+  FavoriteButtonClassName,
   REVIEW_RATINGS,
   PATH_MARKER_CURRENT,
   PATH_MARKER_DEFAULT,
@@ -109,4 +137,7 @@ export {
   BASE_URL,
   REQUEST_TIMEOUT,
   ERROR_TIMEOUT,
+  MAX_COMMENTS,
+  MAX_OFFER_GALLERY_PICTURES,
+  FAVORITE_BUTTON_SIZE,
 };

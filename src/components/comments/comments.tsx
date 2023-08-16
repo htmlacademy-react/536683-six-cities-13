@@ -1,6 +1,8 @@
-import { AuthStatus } from '../../const';
+import { AuthStatus, MAX_COMMENTS } from '../../const';
 import { useAppSelector } from '../../hooks/use-app-selector';
+import { getAuthStatus } from '../../store/user-process/selectors';
 import { TComment } from '../../types/review';
+import { sortCommentsFromNewToOld } from '../../utils';
 import { ReviewForm } from '../review-form/review-form';
 import { Comment } from './comment';
 
@@ -9,7 +11,16 @@ type TCommentsProps = {
 };
 
 const Comments = ({ comments }: TCommentsProps) => {
-  const authStatus = useAppSelector((store) => store.authStatus);
+  const authStatus = useAppSelector(getAuthStatus);
+
+  if (!comments?.length) {
+    return null;
+  }
+
+  const sortedComments = sortCommentsFromNewToOld([...comments]).slice(
+    0,
+    MAX_COMMENTS
+  );
 
   return (
     <section className="offer__reviews reviews">
@@ -17,7 +28,7 @@ const Comments = ({ comments }: TCommentsProps) => {
         Reviews · <span className="reviews__amount">{comments.length}</span>
       </h2>
       <ul className="reviews__list">
-        {comments.map((comment) => (
+        {sortedComments.map((comment) => (
           <Comment key={comment.id} {...comment} />
         ))}
       </ul>

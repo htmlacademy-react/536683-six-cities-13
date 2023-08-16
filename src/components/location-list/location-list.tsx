@@ -23,7 +23,6 @@ const LocationList = ({
             })}`}
             onClick={(evt: SyntheticEvent) => {
               evt.preventDefault();
-
               onLocationClick(location);
             }}
           >

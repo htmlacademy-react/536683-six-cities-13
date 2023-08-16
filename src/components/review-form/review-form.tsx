@@ -1,10 +1,13 @@
+import cn from 'classnames';
+import styles from './review-form.module.css';
 import { useParams } from 'react-router-dom';
-import { ReviewInfo } from '../../const';
+import { LoadingStatus, ReviewInfo } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { submitComment } from '../../store/async-actions';
 import { ReviewRating } from './review-form-rating';
 import { ChangeEvent, FormEvent, useState } from 'react';
-
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { getCommentSubmitStatus } from '../../store/comments-process/selectors';
 export type TReviewForm = {
   offerId: string;
   rating: number;
@@ -19,12 +22,11 @@ const InitialState: TReviewForm = {
 
 const ReviewForm = () => {
   const dispatch = useAppDispatch();
+  const commentSubmitStatus = useAppSelector(getCommentSubmitStatus);
   const { id } = useParams();
   const [reviewInfo, setReviewInfo] = useState<TReviewForm>(InitialState);
-  const [wasSubmitted, setWasSubmitted] = useState<boolean>(false);
-
   const isSubmitDisabled = Boolean(
-    reviewInfo.comment.length < ReviewInfo.MaxCommentLength ||
+    reviewInfo.comment.length < ReviewInfo.MinCommentLength ||
       reviewInfo.rating <= ReviewInfo.MinRating
   );
 
@@ -46,13 +48,15 @@ const ReviewForm = () => {
     if (id) {
       dispatch(submitComment({ ...reviewInfo, offerId: id }));
       setReviewInfo(InitialState);
-      setWasSubmitted((prevWasSubmitted) => !prevWasSubmitted);
     }
   };
 
   return (
     <form
-      className="reviews__form form"
+      className={`reviews__form form ${cn({
+        [styles['form--disabled']]:
+          commentSubmitStatus === LoadingStatus.Loading,
+      })}`}
       action="#"
       method="post"
       onSubmit={handleFormSubmit}
@@ -61,7 +65,7 @@ const ReviewForm = () => {
         Your review
       </label>
       <ReviewRating
-        key={Number(wasSubmitted)}
+        key={commentSubmitStatus}
         onRatingChange={handleRatingChange}
       />
       <textarea
@@ -71,12 +75,18 @@ const ReviewForm = () => {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={reviewInfo.comment}
         onChange={handleCommentChange}
+        minLength={ReviewInfo.MinCommentLength}
+        maxLength={ReviewInfo.MaxCommentLength}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set{' '}
           <span className="reviews__star">rating</span> and describe your stay
-          with at least <b className="reviews__text-amount">50 characters</b>.
+          with at least{' '}
+          <b className="reviews__text-amount">
+            {ReviewInfo.MinCommentLength} characters
+          </b>
+          .
         </p>
         <button
           className="reviews__submit form__submit button"

@@ -1,34 +1,26 @@
-import { useState } from 'react';
-import { TOffer } from '../../types/offer';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { LocationList } from '../../components/location-list/location-list';
-import { LOCATIONS } from '../../const';
-import { changeLocation } from '../../store/actions';
+import { LOCATIONS, LoadingStatus } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { Cities } from '../../components/cities/cities';
 import { Header } from '../../components/header/header';
 import { UserMenu } from '../../components/user-menu/user-menu';
+import { Spinner } from '../../components/spinner/spinner';
+import { getCurrentLocation } from '../../store/app-process/selectors';
+import { changeLocation } from '../../store/app-process/app-process';
+import { getOffersLoadingStatus } from '../../store/offers-process/selectors';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
-  const locationCity = useAppSelector((store) => store.location);
-  const offers = useAppSelector((store) => store.offers);
-  const [hoveredOffer, setHoveredOffer] = useState<TOffer | undefined>(
-    undefined
-  );
+  const loadingStatus = useAppSelector(getOffersLoadingStatus);
+  const locationCity = useAppSelector(getCurrentLocation);
 
-  const currentLocationOffers = offers.filter(
-    (offer) => offer.city.name === locationCity
-  );
+  if (loadingStatus === LoadingStatus.Loading) {
+    return <Spinner />;
+  }
 
   const handleLocationClick = (location: string) => {
     dispatch(changeLocation(location));
-  };
-
-  const handleOfferHover = (offerId: string) => {
-    const currentOffer = offers.find((offer) => offer.id === offerId);
-
-    setHoveredOffer(currentOffer);
   };
 
   return (
@@ -45,13 +37,7 @@ const MainPage = () => {
             onLocationClick={handleLocationClick}
           />
         </div>
-        <Cities
-          key={locationCity}
-          offers={currentLocationOffers}
-          selectedPoint={hoveredOffer}
-          locationCity={locationCity}
-          onOfferHover={handleOfferHover}
-        />
+        <Cities key={locationCity} locationCity={locationCity} />
       </main>
     </div>
   );

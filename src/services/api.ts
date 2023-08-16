@@ -8,6 +8,7 @@ import { BASE_URL, REQUEST_TIMEOUT } from '../const';
 import { getToken } from './token';
 import { StatusCodes } from 'http-status-codes';
 import { handleError } from './handle-error';
+import { TError } from '../types/error';
 
 const StatusCodesMap: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
@@ -38,7 +39,12 @@ const createApi = (): AxiosInstance => {
     (response) => response,
     (error: AxiosError<{ message: string }>) => {
       if (error.response && shouldDisplayError(error.response)) {
-        handleError(error.response.data.message);
+        const errorMessage: TError = {
+          message: error.response.data.message,
+          messageStatus: error.message,
+        };
+
+        handleError(errorMessage);
       }
 
       throw error;
