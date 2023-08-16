@@ -1,7 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { LoadingStatus, NameSpace } from '../../const';
 import { TState } from '../reducer';
 import { loadOffers } from '../async-actions';
+import { TFavoriteData } from '../../types/favorite-data';
 
 type TOffersProcessState = Pick<TState, 'offersLoadingStatus' | 'offers'>;
 
@@ -13,7 +14,17 @@ const initialState: TOffersProcessState = {
 export const offersProcess = createSlice({
   name: NameSpace.Offers,
   initialState,
-  reducers: {},
+  reducers: {
+    updateFavoriteOffer: (state, action: PayloadAction<TFavoriteData>) => {
+      const currentOfferIndex = state.offers.findIndex(
+        (offer) => offer.id === action.payload.favoriteId
+      );
+
+      state.offers[currentOfferIndex].isFavorite = Boolean(
+        action.payload.status
+      );
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(loadOffers.pending, (state) => {
@@ -25,3 +36,5 @@ export const offersProcess = createSlice({
       });
   },
 });
+
+export const { updateFavoriteOffer } = offersProcess.actions;

@@ -4,12 +4,17 @@ import { useAppSelector } from '../../hooks/use-app-selector';
 import { SyntheticEvent } from 'react';
 import { logout } from '../../store/async-actions';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import {
+  getAuthStatus,
+  getUserEmail,
+} from '../../store/user-process/selectors';
+import { getFavorites } from '../../store/favorites-process/selectors';
 
 const UserMenu = () => {
   const dispatch = useAppDispatch();
-  const authStatus = useAppSelector((store) => store.authStatus);
-  const userEmail = useAppSelector((store) => store.userEmail);
-  const favorites = useAppSelector((store) => store.favorites);
+  const authStatus = useAppSelector(getAuthStatus);
+  const userEmail = useAppSelector(getUserEmail);
+  const favorites = useAppSelector(getFavorites);
 
   const handleLogoutClick = (evt: SyntheticEvent) => {
     evt.preventDefault();

@@ -6,11 +6,15 @@ import { FavoritesEmpty } from './favorites-empty';
 import { loadFavorites } from '../../store/async-actions';
 import { LoadingStatus } from '../../const';
 import { Spinner } from '../../components/spinner/spinner';
+import {
+  getFavorites,
+  getFavoritesLoadingStatus,
+} from '../../store/favorites-process/selectors';
 
 const Favorites = () => {
   const dispatch = useAppDispatch();
-  const loadingStatus = useAppSelector((store) => store.favoritesLoadingStatus);
-  const favorites = useAppSelector((store) => store.favorites);
+  const favorites = useAppSelector(getFavorites);
+  const loadingStatus = useAppSelector(getFavoritesLoadingStatus);
 
   useEffect(() => {
     let isMounted = true;
