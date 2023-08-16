@@ -9,7 +9,6 @@ import { OfferHost } from './offer-host';
 import { OfferInfo } from './offer-info';
 import { OfferNearPlaces } from './offer-near-places';
 import styles from './offer.module.css';
-import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 
 type TOfferProps = {
   offerDetails: TDetail | null;
@@ -19,7 +18,7 @@ type TOfferProps = {
 
 const Offer = ({ offerDetails, comments, nearPlaces }: TOfferProps) => {
   if (!offerDetails || !nearPlaces) {
-    return <NotFoundPage />;
+    return null;
   }
 
   const { images, host, description } = offerDetails;

@@ -4,7 +4,11 @@ import { TOffer } from '../../types/offer';
 import { Map } from '../map/map';
 import { OfferList } from '../offer-list/offer-list';
 import { CitiesEmpty } from './cities-empty';
-import { getOffers } from '../../store/offers-process/selectors';
+import {
+  getOffers,
+  getOffersLoadingStatus,
+} from '../../store/offers-process/selectors';
+import { LoadingStatus } from '../../const';
 
 type TCitiesProps = {
   locationCity: string;
@@ -12,9 +16,19 @@ type TCitiesProps = {
 
 const Cities = ({ locationCity }: TCitiesProps) => {
   const offers = useAppSelector(getOffers);
+  const loadingStatus = useAppSelector(getOffersLoadingStatus);
   const [hoveredOffer, setHoveredOffer] = useState<TOffer | undefined>(
     undefined
   );
+
+  if (loadingStatus === LoadingStatus.Error) {
+    return (
+      <div className="cities">
+        <CitiesEmpty locationCity={locationCity} />;
+      </div>
+    );
+  }
+
   const currentLocationOffers = offers.filter(
     (offer) => offer.city.name === locationCity
   );
@@ -26,27 +40,25 @@ const Cities = ({ locationCity }: TCitiesProps) => {
     setHoveredOffer(currentOffer);
   };
 
-  const citiesContent = currentLocationOffers.length ? (
-    <div className="cities__places-container container">
-      <OfferList
-        offers={currentLocationOffers}
-        onOfferHover={handleOfferHover}
-      />
-      <div className="cities__right-section">
-        <section className="cities__map map">
-          <Map
-            city={currentLocationOffer.city}
-            points={currentLocationOffers}
-            selectedPoint={hoveredOffer}
-          />
-        </section>
+  return (
+    <div className="cities">
+      <div className="cities__places-container container">
+        <OfferList
+          offers={currentLocationOffers}
+          onOfferHover={handleOfferHover}
+        />
+        <div className="cities__right-section">
+          <section className="cities__map map">
+            <Map
+              city={currentLocationOffer.city}
+              points={currentLocationOffers}
+              selectedPoint={hoveredOffer}
+            />
+          </section>
+        </div>
       </div>
     </div>
-  ) : (
-    <CitiesEmpty locationCity={locationCity} />
   );
-
-  return <div className="cities">{citiesContent}</div>;
 };
 
 export { Cities };

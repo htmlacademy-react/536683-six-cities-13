@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { LoadingStatus, NameSpace } from '../../const';
-import { TState } from '../reducer';
 import { loadOffers } from '../async-actions';
 import { TFavoriteData } from '../../types/favorite-data';
+import { TState } from '../../types/state';
 
 type TOffersProcessState = Pick<TState, 'offersLoadingStatus' | 'offers'>;
 
@@ -33,6 +33,9 @@ export const offersProcess = createSlice({
       .addCase(loadOffers.fulfilled, (state, action) => {
         state.offersLoadingStatus = LoadingStatus.Success;
         state.offers = action.payload;
+      })
+      .addCase(loadOffers.rejected, (state) => {
+        state.offersLoadingStatus = LoadingStatus.Error;
       });
   },
 });

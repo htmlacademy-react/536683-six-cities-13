@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AuthStatus, NameSpace } from '../../const';
-import { TState } from '../reducer';
 import { checkAuthStatus, login, logout } from '../async-actions';
+import { TState } from '../../types/state';
 
 type TUserProcessState = Pick<TState, 'userEmail' | 'authStatus'>;
 

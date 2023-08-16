@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { TState } from '../reducer';
 import { NameSpace } from '../../const';
 import { loadNearPlaces } from '../async-actions';
+import { TState } from '../../types/state';
 
 type TNearPlacesProcess = Pick<TState, 'nearPlaces'>;
 

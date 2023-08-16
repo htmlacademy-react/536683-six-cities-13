@@ -18,6 +18,7 @@ import {
 } from '../../store/offer-process/selectors';
 import { getNearPlaces } from '../../store/near-places-process/selectors';
 import { getComments } from '../../store/comments-process/selectors';
+import { NotFoundPage } from '../not-found-page/not-found-page';
 
 const OfferPage = () => {
   const { id } = useParams();
@@ -43,6 +44,10 @@ const OfferPage = () => {
 
   if (loadingStatus === LoadingStatus.Loading) {
     return <Spinner />;
+  }
+
+  if (loadingStatus === LoadingStatus.Error) {
+    return <NotFoundPage />;
   }
 
   return (
