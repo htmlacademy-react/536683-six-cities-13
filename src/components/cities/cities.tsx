@@ -34,7 +34,7 @@ const Cities = ({ locationCity }: TCitiesProps) => {
   );
   const [currentLocationOffer] = currentLocationOffers;
 
-  const handleOfferHover = (offerId: string) => {
+  const handleOfferHover = (offerId: string | null) => {
     const currentOffer = offers.find((offer) => offer.id === offerId);
 
     setHoveredOffer(currentOffer);

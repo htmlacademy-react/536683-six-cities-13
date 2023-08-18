@@ -19,7 +19,7 @@ export type TOfferCardProps = {
   offer: TOffer;
   className: string;
   imageSize: TSize;
-  onOfferHover?: (offerId: string) => void;
+  onOfferHover?: (offerId: string | null) => void;
 };
 
 const OfferCard = ({
@@ -43,6 +43,7 @@ const OfferCard = ({
     <article
       className={`${className}__card place-card`}
       onMouseEnter={() => onOfferHover?.(id)}
+      onMouseLeave={() => onOfferHover?.(null)}
     >
       {isPremium && (
         <div className="place-card__mark">

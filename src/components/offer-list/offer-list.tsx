@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 type TOfferListProps = {
   offers: TOffer[];
-  onOfferHover: (offerId: string) => void;
+  onOfferHover: (offerId: string | null) => void;
 };
 
 const OfferList = ({ offers, onOfferHover }: TOfferListProps) => {
