@@ -2,7 +2,7 @@ import { OffersSorting } from '../offers-sorting/offers-soritng';
 import { TOffer } from '../../types/offer';
 import { OfferCardMain } from '../offer-card/offer-card-main';
 import { DEFAULT_SORT_TYPE, Sort } from '../../sort';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 type TOfferListProps = {
   offers: TOffer[];
@@ -16,9 +16,9 @@ const OfferList = ({ offers, onOfferHover }: TOfferListProps) => {
   const [offerCity] = offers;
   const sortedOffers = Sort[currentSortType](offers);
 
-  const handleSortTypeClick = (sortType: string) => {
+  const handleSortTypeClick = useCallback((sortType: string) => {
     setCurrentSortType(sortType);
-  };
+  }, []);
 
   return (
     <section className="cities__places places">

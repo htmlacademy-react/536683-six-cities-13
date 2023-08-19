@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { SORT_TYPES } from '../../const';
 import cn from 'classnames';
 
@@ -6,7 +6,7 @@ type TOffersSortingProps = {
   onSortTypeClick: (sortType: string) => void;
 };
 
-const OffersSorting = ({ onSortTypeClick }: TOffersSortingProps) => {
+const Sorting = ({ onSortTypeClick }: TOffersSortingProps) => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const sortTypeName = SORT_TYPES[activeIndex];
@@ -60,5 +60,7 @@ const OffersSorting = ({ onSortTypeClick }: TOffersSortingProps) => {
     </form>
   );
 };
+
+const OffersSorting = memo(Sorting);
 
 export { OffersSorting };

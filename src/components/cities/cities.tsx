@@ -1,6 +1,5 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { TOffer } from '../../types/offer';
 import { Map } from '../map/map';
 import { OfferList } from '../offer-list/offer-list';
 import { CitiesEmpty } from './cities-empty';
@@ -17,9 +16,12 @@ type TCitiesProps = {
 const Cities = ({ locationCity }: TCitiesProps) => {
   const offers = useAppSelector(getOffers);
   const loadingStatus = useAppSelector(getOffersLoadingStatus);
-  const [hoveredOffer, setHoveredOffer] = useState<TOffer | undefined>(
-    undefined
-  );
+  const [hoveredOfferId, setHoveredOfferId] = useState<string | null>(null);
+  const currentOffer = offers.find((offer) => offer.id === hoveredOfferId);
+
+  const handleOfferHover = useCallback((offerId: string | null) => {
+    setHoveredOfferId(offerId);
+  }, []);
 
   if (loadingStatus === LoadingStatus.Error) {
     return (
@@ -34,12 +36,6 @@ const Cities = ({ locationCity }: TCitiesProps) => {
   );
   const [currentLocationOffer] = currentLocationOffers;
 
-  const handleOfferHover = (offerId: string | null) => {
-    const currentOffer = offers.find((offer) => offer.id === offerId);
-
-    setHoveredOffer(currentOffer);
-  };
-
   return (
     <div className="cities">
       <div className="cities__places-container container">
@@ -52,7 +48,7 @@ const Cities = ({ locationCity }: TCitiesProps) => {
             <Map
               city={currentLocationOffer.city}
               points={currentLocationOffers}
-              selectedPoint={hoveredOffer}
+              selectedPoint={currentOffer}
             />
           </section>
         </div>
