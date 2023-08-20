@@ -1,5 +1,5 @@
-import { TOffer } from './types/offer';
-import { TComment } from './types/review';
+import { TOffer } from '../types/offer';
+import { TComment } from '../types/review';
 
 const getUniqueFavoriteCities = (offers: TOffer[]) => [
   ...offers.reduce((initial, current) => {
@@ -14,7 +14,7 @@ const getUniqueFavoriteCities = (offers: TOffer[]) => [
 const calculateRating = (rating: number): number => {
   const MAX_RATING = 5;
 
-  return (Math.round(rating) * 100) / MAX_RATING;
+  return (Math.round(Math.abs(rating)) * 100) / MAX_RATING;
 };
 
 const getCommentDate = (date: string): string => {
@@ -37,16 +37,35 @@ const getCommentDate = (date: string): string => {
   return `${months[commentDate.getMonth()]} ${commentDate.getFullYear()}`;
 };
 
-const getMachineDate = (date: string) => date.slice(0, date.indexOf('T'));
+const getMachineDate = (date: string) => {
+  const isInvalidDate = isNaN(new Date(date).getTime());
+
+  if (isInvalidDate) {
+    const isoDate = new Date().toISOString();
+
+    return isoDate.slice(0, isoDate.indexOf('T'));
+  }
+
+  return date.slice(0, date.indexOf('T'));
+};
 
 const capitalizeFirstLetter = (word: string): string =>
   `${word.charAt(0).toUpperCase()}${word.slice(1)}`;
 
-const sortCommentsFromNewToOld = (comments: TComment[]) =>
-  comments.sort(
+const sortCommentsFromNewToOld = (comments: TComment[]) => {
+  if (!comments?.length) {
+    return [];
+  }
+
+  if (comments.every((comment) => comment.date === null)) {
+    return [];
+  }
+
+  return comments.sort(
     (commentA, commentB) =>
       Number(new Date(commentB.date)) - Number(new Date(commentA.date))
   );
+};
 
 export {
   getUniqueFavoriteCities,

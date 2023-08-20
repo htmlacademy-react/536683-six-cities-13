@@ -1,4 +1,4 @@
-import { calculateRating } from '../../utils';
+import { calculateRating } from '../../utils/utils';
 
 export type TRatingProps = {
   ratingValue: number;

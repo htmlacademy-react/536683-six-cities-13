@@ -1,5 +1,5 @@
 import { TOffer } from '../../types/offer';
-import { getUniqueFavoriteCities } from '../../utils';
+import { getUniqueFavoriteCities } from '../../utils/utils';
 import { OfferCardFavorites } from '../offer-card/offer-card-favorites';
 
 type TFavoritesListProps = {

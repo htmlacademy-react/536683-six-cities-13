@@ -1,7 +1,7 @@
 import { OffersSorting } from '../offers-sorting/offers-soritng';
 import { TOffer } from '../../types/offer';
 import { OfferCardMain } from '../offer-card/offer-card-main';
-import { DEFAULT_SORT_TYPE, Sort } from '../../sort';
+import { DEFAULT_SORT_TYPE, Sort } from '../../utils/sort';
 import { useState, useCallback } from 'react';
 
 type TOfferListProps = {

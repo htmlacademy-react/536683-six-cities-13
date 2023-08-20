@@ -2,7 +2,7 @@ import { AuthStatus, MAX_COMMENTS } from '../../const';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { getAuthStatus } from '../../store/user-process/selectors';
 import { TComment } from '../../types/review';
-import { sortCommentsFromNewToOld } from '../../utils';
+import { sortCommentsFromNewToOld } from '../../utils/utils';
 import { ReviewForm } from '../review-form/review-form';
 import { Comment } from './comment';
 

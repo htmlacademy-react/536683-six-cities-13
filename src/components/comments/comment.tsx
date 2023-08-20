@@ -1,5 +1,5 @@
 import { TComment } from '../../types/review';
-import { getCommentDate, getMachineDate } from '../../utils';
+import { getCommentDate, getMachineDate } from '../../utils/utils';
 import { RatingReviews } from '../rating/rating-reviews';
 
 const Comment = ({
