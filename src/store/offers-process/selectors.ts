@@ -4,11 +4,11 @@ import { TOffer } from '../../types/offer';
 import { TLoadingStatus, TRootState } from '../../types/state';
 
 export const getOffersLoadingStatus = createSelector(
-  (state: TRootState) => state[NameSpace.Offers],
+  (state: Pick<TRootState, NameSpace.Offers>) => state[NameSpace.Offers],
   (state): TLoadingStatus => state.offersLoadingStatus
 );
 
 export const getOffers = createSelector(
-  (state: TRootState) => state[NameSpace.Offers],
+  (state: Pick<TRootState, NameSpace.Offers>) => state[NameSpace.Offers],
   (state): TOffer[] => state.offers
 );

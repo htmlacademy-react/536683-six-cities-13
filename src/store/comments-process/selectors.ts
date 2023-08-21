@@ -4,10 +4,10 @@ import { TComment } from '../../types/review';
 import { TLoadingStatus, TRootState } from '../../types/state';
 
 export const getComments = createSelector(
-  (state: TRootState) => state[NameSpace.Comments],
+  (state: Pick<TRootState, NameSpace.Comments>) => state[NameSpace.Comments],
   (state): TComment[] => state.comments
 );
 export const getCommentSubmitStatus = createSelector(
-  (state: TRootState) => state[NameSpace.Comments],
+  (state: Pick<TRootState, NameSpace.Comments>) => state[NameSpace.Comments],
   (state): TLoadingStatus => state.commentSubmitStatus
 );

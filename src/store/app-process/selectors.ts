@@ -4,11 +4,11 @@ import { TError } from '../../types/error';
 import { TRootState } from '../../types/state';
 
 export const getCurrentLocation = createSelector(
-  (state: TRootState) => state[NameSpace.App],
+  (state: Pick<TRootState, NameSpace.App>) => state[NameSpace.App],
   (state): string => state.location
 );
 
 export const getErrorInfo = createSelector(
-  (state: TRootState) => state[NameSpace.App],
+  (state: Pick<TRootState, NameSpace.App>) => state[NameSpace.App],
   (state): TError | null => state.error
 );

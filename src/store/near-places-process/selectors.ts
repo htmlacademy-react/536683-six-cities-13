@@ -4,6 +4,7 @@ import { TOffer } from '../../types/offer';
 import { TRootState } from '../../types/state';
 
 export const getNearPlaces = createSelector(
-  (state: TRootState) => state[NameSpace.NearPlaces],
+  (state: Pick<TRootState, NameSpace.NearPlaces>) =>
+    state[NameSpace.NearPlaces],
   (state): TOffer[] => state.nearPlaces
 );
