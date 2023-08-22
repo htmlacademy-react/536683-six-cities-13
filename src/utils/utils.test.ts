@@ -28,7 +28,7 @@ describe('Utility functions', () => {
     });
 
     it('should return an empty array if incoming arrays item "isFavorite" flag is "false"', () => {
-      const fakeOffers = makeFakeOffers(true);
+      const fakeOffers = makeFakeOffers({ allFalse: true });
       const correctResult: string[] = [];
       const result = getUniqueFavoriteCities(fakeOffers);
 
@@ -57,7 +57,7 @@ describe('Utility functions', () => {
     });
 
     it('should return empty array if passed argument has "null" date value', () => {
-      const fakeComments = makeFakeComments(false);
+      const fakeComments = makeFakeComments({ hasDate: false });
       const correctResult: TComment[] = [];
       const result = sortCommentsFromNewToOld(fakeComments);
 

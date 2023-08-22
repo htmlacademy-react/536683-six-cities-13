@@ -3,10 +3,14 @@ import { TOffer } from '../types/offer';
 import { TComment } from '../types/review';
 import { TDetail } from '../types/details';
 
-export const makeFakeOffers = (allFalse = false): TOffer[] =>
-  new Array(3).fill(null).map(
-    () =>
+export const makeFakeOffers = ({
+  count = 4,
+  allFalse = false,
+} = {}): TOffer[] =>
+  new Array(count).fill(null).map(
+    (_, index) =>
       ({
+        id: `${index}`,
         isFavorite: allFalse ? false : datatype.boolean(),
         city: {
           name: name.title(),
@@ -27,8 +31,11 @@ export const makeFakeOfferDetails = (
   } as TDetail;
 };
 
-export const makeFakeComments = (hasDate = true): TComment[] =>
-  new Array(3).fill(null).map(
+export const makeFakeComments = ({
+  count = 3,
+  hasDate = true,
+} = {}): TComment[] =>
+  new Array(count).fill(null).map(
     () =>
       ({
         date: hasDate ? date.recent().toISOString() : null,
