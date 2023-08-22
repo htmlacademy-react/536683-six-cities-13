@@ -18,6 +18,6 @@ describe('UserProcess selectors', () => {
   it('should return user email', () => {
     const { userEmail } = state[NameSpace.User];
     const result = getUserEmail(state);
-    expect(userEmail).toBe(result);
+    expect(result).toBe(userEmail);
   });
 });

@@ -31,6 +31,6 @@ describe('OfferProcess selectors', () => {
   it('should return offer details loading status', () => {
     const { detailsLoadingStatus } = state[NameSpace.Offer];
     const result = getOfferLoadingStatus(state);
-    expect(detailsLoadingStatus).toBe(result);
+    expect(result).toBe(detailsLoadingStatus);
   });
 });

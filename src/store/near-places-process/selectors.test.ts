@@ -12,6 +12,6 @@ describe('NearPlacesProcess selectors', () => {
   it('should return an array of near place offers', () => {
     const { nearPlaces } = state[NameSpace.NearPlaces];
     const result = getNearPlaces(state);
-    expect(nearPlaces).toEqual(result);
+    expect(result).toEqual(nearPlaces);
   });
 });

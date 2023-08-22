@@ -18,6 +18,6 @@ describe('FavoritesProcess selectors', () => {
   it('should return loading status of favorite offers', () => {
     const { favoritesLoadingStatus } = state[NameSpace.Favorites];
     const result = getFavoritesLoadingStatus(state);
-    expect(favoritesLoadingStatus).toBe(result);
+    expect(result).toBe(favoritesLoadingStatus);
   });
 });
