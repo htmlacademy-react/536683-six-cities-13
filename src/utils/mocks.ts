@@ -6,17 +6,27 @@ import { TDetail } from '../types/details';
 export const makeFakeOffers = ({
   count = 4,
   allFalse = false,
+  allFavorites = false,
 } = {}): TOffer[] =>
-  new Array(count).fill(null).map(
-    (_, index) =>
-      ({
-        id: `${index}`,
-        isFavorite: allFalse ? false : datatype.boolean(),
-        city: {
-          name: name.title(),
-        },
-      } as TOffer)
-  );
+  new Array(count).fill(null).map((_, index) => {
+    let isFavorite = false;
+
+    if (!allFalse) {
+      isFavorite = datatype.boolean();
+    }
+
+    if (allFavorites) {
+      isFavorite = true;
+    }
+
+    return {
+      id: `${index}`,
+      isFavorite,
+      city: {
+        name: name.title(),
+      },
+    } as TOffer;
+  });
 
 export const makeFakeOfferDetails = (
   shouldReturnNull = false
