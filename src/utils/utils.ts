@@ -17,6 +17,17 @@ const calculateRating = (rating: number): number => {
   return (Math.round(Math.abs(rating)) * 100) / MAX_RATING;
 };
 
+const declension = (number: number, titles: string) => {
+  const titlesArray = titles.split('|');
+  const cases = [2, 0, 1, 1, 1, 2];
+
+  return titlesArray[
+    number % 100 > 4 && number % 100 < 20
+      ? 2
+      : cases[number % 10 < 5 ? number % 10 : 5]
+  ];
+};
+
 const getCommentDate = (date: string): string => {
   const months = [
     'January',
@@ -74,4 +85,5 @@ export {
   getCommentDate,
   getMachineDate,
   sortCommentsFromNewToOld,
+  declension,
 };

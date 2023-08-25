@@ -4,6 +4,7 @@ import { TOffer } from '../../types/offer';
 import { RatingMain } from '../rating/rating-main';
 import { MainFavoriteButton } from '../favorite-button/main-favorite-button';
 import { TSize } from '../../types/const';
+import { capitalizeFirstLetter } from '../../utils/utils';
 
 export type TOfferCardProxyProps = Omit<
   TOfferCardProps,
@@ -73,7 +74,7 @@ const OfferCard = ({
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{capitalizeFirstLetter(type)}</p>
       </div>
     </article>
   );

@@ -8,10 +8,16 @@ import { UserMenu } from '../../components/user-menu/user-menu';
 import { Spinner } from '../../components/spinner/spinner';
 import { getCurrentLocation } from '../../store/app-process/selectors';
 import { changeLocation } from '../../store/app-process/app-process';
-import { getOffersLoadingStatus } from '../../store/offers-process/selectors';
+import {
+  getOffers,
+  getOffersLoadingStatus,
+} from '../../store/offers-process/selectors';
+import cn from 'classnames';
+import { CitiesEmpty } from '../../components/cities/cities-empty';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
+  const offers = useAppSelector(getOffers);
   const loadingStatus = useAppSelector(getOffersLoadingStatus);
   const locationCity = useAppSelector(getCurrentLocation);
 
@@ -28,7 +34,11 @@ const MainPage = () => {
       <Header>
         <UserMenu />
       </Header>
-      <main className="page__main page__main--index">
+      <main
+        className={`page__main page__main--index ${cn({
+          'page__main--index-empty': !offers.length,
+        })}`}
+      >
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <LocationList
@@ -37,7 +47,18 @@ const MainPage = () => {
             onLocationClick={handleLocationClick}
           />
         </div>
-        <Cities key={locationCity} locationCity={locationCity} />
+        <div className="cities">
+          {(loadingStatus === LoadingStatus.Error || !offers.length) && (
+            <CitiesEmpty locationCity={locationCity} />
+          )}
+          {offers.length > 1 && (
+            <Cities
+              key={locationCity}
+              offers={offers}
+              locationCity={locationCity}
+            />
+          )}
+        </div>
       </main>
     </div>
   );

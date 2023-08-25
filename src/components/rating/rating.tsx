@@ -19,9 +19,7 @@ const Rating = ({
       <span className="visually-hidden">Rating</span>
     </div>
     {showDigits && (
-      <span className="offer__rating-value rating__value">
-        {Math.round(ratingValue)}
-      </span>
+      <span className="offer__rating-value rating__value">{ratingValue}</span>
     )}
   </div>
 );
