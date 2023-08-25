@@ -2,6 +2,16 @@ import { name, lorem, date, datatype } from 'faker';
 import { TOffer } from '../types/offer';
 import { TComment } from '../types/review';
 import { TDetail } from '../types/details';
+import { ThunkDispatch } from 'redux-thunk';
+import { createApi } from '../services/api';
+import { TRootState } from '../types/state';
+import { Action } from '@reduxjs/toolkit';
+
+export type TAppThunkDispatch = ThunkDispatch<
+  TRootState,
+  ReturnType<typeof createApi>,
+  Action
+>;
 
 export const makeFakeOffers = ({
   count = 4,
@@ -51,3 +61,6 @@ export const makeFakeComments = ({
         date: hasDate ? date.recent().toISOString() : null,
       } as TComment)
   );
+
+export const extractActionTypes = (actions: Action<string>[]) =>
+  actions.map(({ type }) => type);
