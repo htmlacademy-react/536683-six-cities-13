@@ -1,17 +1,25 @@
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
-import { checkAuthStatus, loadOffers, login, logout } from './async-actions';
+import {
+  checkAuthStatus,
+  loadDetails,
+  loadOffers,
+  login,
+  logout,
+} from './async-actions';
 import { TRootState } from '../types/state';
 import { APIRoute, NameSpace } from '../const';
 import {
   TAppThunkDispatch,
   extractActionTypes,
+  makeFakeOfferDetails,
   makeFakeOffers,
 } from '../utils/mocks';
 import { Action } from '@reduxjs/toolkit';
 import * as tokenStore from '../services/token';
 import axios from 'axios';
+import { TDetail } from '../types/details';
 
 const mocks = vi.hoisted(() => ({
   get: vi.fn(),
@@ -175,6 +183,44 @@ describe('Async actions', () => {
       expect(actions).toEqual([
         loadOffers.pending.type,
         loadOffers.rejected.type,
+      ]);
+    });
+  });
+
+  describe('Action: "loadDetails"', () => {
+    it('should dispatch "loadDetails.pending" and "loadDetails.fulfilled" and update "details" field with thunk "loadDetails"', async () => {
+      const fakeOfferId = '100500';
+      const fakeResponse = makeFakeOfferDetails() as TDetail;
+      mockAxiosAdapter
+        .onGet(`${APIRoute.Offers}/${fakeOfferId}`)
+        .reply(200, fakeResponse);
+
+      await store.dispatch(loadDetails({ offerId: fakeOfferId }));
+      const recievedActions = store.getActions();
+      const extractedActionTypes = extractActionTypes(recievedActions);
+      const loadDetailsActionFulfilled = recievedActions.at(1) as ReturnType<
+        typeof loadDetails.fulfilled
+      >;
+      const { payload } = loadDetailsActionFulfilled;
+
+      expect(extractedActionTypes).toEqual([
+        loadDetails.pending.type,
+        loadDetails.fulfilled.type,
+      ]);
+
+      expect(payload).toEqual(fakeResponse);
+    });
+
+    it('should dispatch "loadDetails.pending" and "loadDetails.rejected" with thunk "loadDetails"', async () => {
+      const fakeOfferId = '100500';
+      mockAxiosAdapter.onGet(`${APIRoute.Offers}/${fakeOfferId}`).reply(400);
+
+      await store.dispatch(loadDetails({ offerId: fakeOfferId }));
+      const actions = extractActionTypes(store.getActions());
+
+      expect(actions).toEqual([
+        loadDetails.pending.type,
+        loadDetails.rejected.type,
       ]);
     });
   });
