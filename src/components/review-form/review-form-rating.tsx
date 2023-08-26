@@ -1,40 +1,37 @@
-import React, { ChangeEvent } from 'react';
-import { REVIEW_RATINGS } from '../../const';
+import React from 'react';
+import { LoadingStatus, REVIEW_RATINGS } from '../../const';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { getCommentSubmitStatus } from '../../store/comments-process/selectors';
 
 type TReviewRating = {
   onRatingChange: (rating: number) => void;
+  selectedRating: number;
 };
 
-const ReviewRating = ({ onRatingChange }: TReviewRating) => {
-  const handleRatingChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const rating = Number(target.value);
-
-    onRatingChange(rating);
-  };
+const ReviewRating = ({ selectedRating, onRatingChange }: TReviewRating) => {
+  const commentSubmitStatus = useAppSelector(getCommentSubmitStatus);
 
   return (
-    <div
-      onChange={handleRatingChange}
-      className="reviews__rating-form form__rating"
-    >
+    <div className="reviews__rating-form form__rating">
       {REVIEW_RATINGS.map((reviewRating) => {
         const { ratingValue, ratingText } = reviewRating;
-        const ratingId =
-          ratingValue < 2 ? `${ratingValue}-star` : `${ratingValue}-stars`;
 
         return (
           <React.Fragment key={ratingText}>
             <input
+              onChange={() => onRatingChange?.(ratingValue)}
               className="form__rating-input visually-hidden"
               name="rating"
-              id={ratingId}
+              id={`${ratingValue}-stars`}
               type="radio"
               value={ratingValue}
+              checked={selectedRating === ratingValue}
+              disabled={commentSubmitStatus === LoadingStatus.Loading}
             />
             <label
-              htmlFor={ratingId}
+              htmlFor={`${ratingValue}-stars`}
               className="reviews__rating-label form__rating-label"
-              title="perfect"
+              title={ratingText}
             >
               <svg className="form__star-image" width={37} height={33}>
                 <use xlinkHref="#icon-star" />

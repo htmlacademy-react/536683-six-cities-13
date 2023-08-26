@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { LocationList } from '../../components/location-list/location-list';
-import { LOCATIONS, LoadingStatus } from '../../const';
+import { AuthStatus, LOCATIONS, LoadingStatus } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { Cities } from '../../components/cities/cities';
 import { Header } from '../../components/header/header';
@@ -14,12 +14,28 @@ import {
 } from '../../store/offers-process/selectors';
 import cn from 'classnames';
 import { CitiesEmpty } from '../../components/cities/cities-empty';
+import { loadFavorites } from '../../store/async-actions';
+import { getAuthStatus } from '../../store/user-process/selectors';
+import { useEffect } from 'react';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
+  const authStatus = useAppSelector(getAuthStatus);
   const offers = useAppSelector(getOffers);
   const loadingStatus = useAppSelector(getOffersLoadingStatus);
   const locationCity = useAppSelector(getCurrentLocation);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    if (isMounted && authStatus === AuthStatus.Auth) {
+      dispatch(loadFavorites());
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [dispatch, authStatus]);
 
   if (loadingStatus === LoadingStatus.Loading) {
     return <Spinner />;
@@ -51,7 +67,7 @@ const MainPage = () => {
           {(loadingStatus === LoadingStatus.Error || !offers.length) && (
             <CitiesEmpty locationCity={locationCity} />
           )}
-          {offers.length > 1 && (
+          {offers.length > 0 && (
             <Cities
               key={locationCity}
               offers={offers}

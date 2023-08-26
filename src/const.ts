@@ -71,7 +71,6 @@ enum FavoriteButtonClassName {
 enum ReviewInfo {
   MinCommentLength = 50,
   MaxCommentLength = 300,
-  MinRating = 0,
 }
 
 enum LoadingStatus {

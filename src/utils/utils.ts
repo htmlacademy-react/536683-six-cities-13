@@ -1,3 +1,4 @@
+import { LOCATIONS } from '../const';
 import { TOffer } from '../types/offer';
 import { TComment } from '../types/review';
 
@@ -16,6 +17,9 @@ const calculateRating = (rating: number): number => {
 
   return (Math.round(Math.abs(rating)) * 100) / MAX_RATING;
 };
+
+const getRandomLocation = () =>
+  LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)];
 
 const declension = (number: number, titles: string) => {
   const titlesArray = titles.split('|');
@@ -86,4 +90,5 @@ export {
   getMachineDate,
   sortCommentsFromNewToOld,
   declension,
+  getRandomLocation,
 };

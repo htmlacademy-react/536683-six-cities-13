@@ -2,18 +2,23 @@ import { FormEvent, useRef } from 'react';
 import { Header } from '../../components/header/header';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { AppRoute, AuthStatus } from '../../const';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { login } from '../../store/async-actions';
 import { getAuthStatus } from '../../store/user-process/selectors';
-import { getCurrentLocation } from '../../store/app-process/selectors';
+import { getRandomLocation } from '../../utils/utils';
+import { changeLocation } from '../../store/app-process/app-process';
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector(getAuthStatus);
-  const currentLocation = useAppSelector(getCurrentLocation);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const randomLocation = getRandomLocation();
+
+  const handleRandomLocationClick = () => {
+    dispatch(changeLocation(randomLocation));
+  };
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -76,9 +81,13 @@ const LoginPage = () => {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>{currentLocation}</span>
-              </a>
+              <Link
+                className="locations__item-link"
+                to={AppRoute.Root}
+                onClick={handleRandomLocationClick}
+              >
+                {randomLocation}
+              </Link>
             </div>
           </section>
         </div>

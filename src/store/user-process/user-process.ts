@@ -41,7 +41,7 @@ export const userProcess = createSlice({
         state.userEmail = action.payload;
       })
       .addCase(checkAuthStatus.rejected, (state) => {
-        state.authStatus = AuthStatus.Unknown;
+        state.authStatus = AuthStatus.NoAuth;
       });
   },
 });

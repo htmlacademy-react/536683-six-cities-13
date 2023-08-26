@@ -10,27 +10,29 @@ import {
 } from '../../store/favorites-process/selectors';
 import { Favorites } from './favorites';
 import { loadFavorites } from '../../store/async-actions';
-import { LoadingStatus } from '../../const';
+import { AuthStatus, LoadingStatus } from '../../const';
 import { Spinner } from '../../components/spinner/spinner';
 import { FavoritesEmpty } from './favorites-empty';
 import cn from 'classnames';
+import { getAuthStatus } from '../../store/user-process/selectors';
 
 const FavoritesPage = () => {
   const dispatch = useAppDispatch();
+  const authStatus = useAppSelector(getAuthStatus);
   const favorites = useAppSelector(getFavorites);
   const loadingStatus = useAppSelector(getFavoritesLoadingStatus);
 
   useEffect(() => {
     let isMounted = true;
 
-    if (isMounted) {
+    if (isMounted && authStatus === AuthStatus.Auth) {
       dispatch(loadFavorites());
     }
 
     return () => {
       isMounted = false;
     };
-  }, [dispatch]);
+  }, [dispatch, authStatus]);
 
   if (loadingStatus === LoadingStatus.Loading) {
     return <Spinner />;
@@ -45,9 +47,10 @@ const FavoritesPage = () => {
       <Header>
         <UserMenu />
       </Header>
-      {loadingStatus === LoadingStatus.Error ||
-        (!favorites.length && <FavoritesEmpty />)}
-      {favorites.length > 1 && <Favorites favorites={favorites} />}
+      {(loadingStatus === LoadingStatus.Error || !favorites.length) && (
+        <FavoritesEmpty />
+      )}
+      {favorites.length > 0 && <Favorites favorites={favorites} />}
       <Footer />
     </div>
   );
