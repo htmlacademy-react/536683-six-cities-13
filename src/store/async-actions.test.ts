@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import {
   checkAuthStatus,
   loadDetails,
+  loadNearPlaces,
   loadOffers,
   login,
   logout,
@@ -221,6 +222,46 @@ describe('Async actions', () => {
       expect(actions).toEqual([
         loadDetails.pending.type,
         loadDetails.rejected.type,
+      ]);
+    });
+  });
+
+  describe('Action: "loadNearPlaces"', () => {
+    it('should dispatch "loadNearPlaces.pending" and "loadNearPlaces.fulfilled" and update "details" field with thunk "loadNearPlaces"', async () => {
+      const fakeOfferId = '100500';
+      const fakeResponse = makeFakeOffers();
+      mockAxiosAdapter
+        .onGet(`${APIRoute.Offers}/${fakeOfferId}${APIRoute.Nearby}`)
+        .reply(200, fakeResponse);
+
+      await store.dispatch(loadNearPlaces({ offerId: fakeOfferId }));
+      const recievedActions = store.getActions();
+      const extractedActionTypes = extractActionTypes(recievedActions);
+      const loadNearPlacesActionFulfilled = recievedActions.at(1) as ReturnType<
+        typeof loadNearPlaces.fulfilled
+      >;
+      const { payload } = loadNearPlacesActionFulfilled;
+
+      expect(extractedActionTypes).toEqual([
+        loadNearPlaces.pending.type,
+        loadNearPlaces.fulfilled.type,
+      ]);
+
+      expect(payload).toEqual(fakeResponse);
+    });
+
+    it('should dispatch "loadNearPlaces.pending" and "loadNearPlaces.rejected" with thunk "loadNearPlaces"', async () => {
+      const fakeOfferId = '100500';
+      mockAxiosAdapter
+        .onGet(`${APIRoute.Offers}/${fakeOfferId}${APIRoute.Nearby}`)
+        .reply(400);
+
+      await store.dispatch(loadNearPlaces({ offerId: fakeOfferId }));
+      const actions = extractActionTypes(store.getActions());
+
+      expect(actions).toEqual([
+        loadNearPlaces.pending.type,
+        loadNearPlaces.rejected.type,
       ]);
     });
   });
