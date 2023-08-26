@@ -4,10 +4,12 @@ import thunk from 'redux-thunk';
 import {
   checkAuthStatus,
   loadDetails,
+  loadFavorites,
   loadNearPlaces,
   loadOffers,
   login,
   logout,
+  setFavorite,
 } from './async-actions';
 import { TRootState } from '../types/state';
 import { APIRoute, NameSpace } from '../const';
@@ -262,6 +264,80 @@ describe('Async actions', () => {
       expect(actions).toEqual([
         loadNearPlaces.pending.type,
         loadNearPlaces.rejected.type,
+      ]);
+    });
+  });
+
+  describe('Action: "loadFavorites"', () => {
+    it('should dispatch "loadFavorites.pending" and "loadFavorites.fulfilled" and update "favorites" field with thunk "loadFavorites"', async () => {
+      const fakeResponse = makeFakeOffers({ allFavorites: true });
+      mockAxiosAdapter.onGet(APIRoute.Favorite).reply(200, fakeResponse);
+
+      await store.dispatch(loadFavorites());
+      const recievedActions = store.getActions();
+      const extractedActionTypes = extractActionTypes(recievedActions);
+      const loadFavoritesActionFulfilled = recievedActions.at(1) as ReturnType<
+        typeof loadFavorites.fulfilled
+      >;
+      const { payload } = loadFavoritesActionFulfilled;
+
+      expect(extractedActionTypes).toEqual([
+        loadFavorites.pending.type,
+        loadFavorites.fulfilled.type,
+      ]);
+
+      expect(payload).toEqual(fakeResponse);
+    });
+
+    it('should dispatch "setFavorite.pending" and "setFavorite.fulfilled" and update "favorite" item with thunk "setFavorite"', async () => {
+      const fakeFavoriteId = '100500';
+      const fakeFavoriteStatus = 1;
+      const fakeUpdatedFavorite = makeFakeOffers({
+        allFavorites: true,
+        count: 1,
+      })[0];
+
+      mockAxiosAdapter
+        .onPost(`${APIRoute.Favorite}/${fakeFavoriteId}/${fakeFavoriteStatus}`)
+        .reply(200, fakeUpdatedFavorite);
+
+      await store.dispatch(
+        setFavorite({ favoriteId: fakeFavoriteId, status: fakeFavoriteStatus })
+      );
+      const recievedActions = store.getActions();
+      const extractedActionTypes = extractActionTypes(recievedActions);
+      const setFavoriteActionFulfilled = recievedActions.at(1) as ReturnType<
+        typeof setFavorite.fulfilled
+      >;
+      const { payload } = setFavoriteActionFulfilled;
+
+      expect(extractedActionTypes).toEqual([
+        setFavorite.pending.type,
+        setFavorite.fulfilled.type,
+      ]);
+      expect(payload).toEqual(fakeUpdatedFavorite);
+    });
+
+    it('should dispatch "setFavorite.pending" and "setFavorite.rejected" with thunk "setFavorite"', async () => {
+      const fakeFavoriteId = '100500';
+      const fakeFavoriteStatus = 1;
+      const fakeUpdatedFavorite = makeFakeOffers({
+        allFavorites: true,
+        count: 1,
+      })[0];
+
+      mockAxiosAdapter
+        .onPost(`${APIRoute.Favorite}/${fakeFavoriteId}/${fakeFavoriteStatus}`)
+        .reply(400, fakeUpdatedFavorite);
+
+      await store.dispatch(
+        setFavorite({ favoriteId: fakeFavoriteId, status: fakeFavoriteStatus })
+      );
+      const actions = extractActionTypes(store.getActions());
+
+      expect(actions).toEqual([
+        setFavorite.pending.type,
+        setFavorite.rejected.type,
       ]);
     });
   });
