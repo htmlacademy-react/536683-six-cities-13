@@ -1,10 +1,14 @@
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
-import { checkAuthStatus, login, logout } from './async-actions';
+import { checkAuthStatus, loadOffers, login, logout } from './async-actions';
 import { TRootState } from '../types/state';
-import { APIRoute } from '../const';
-import { TAppThunkDispatch, extractActionTypes } from '../utils/mocks';
+import { APIRoute, NameSpace } from '../const';
+import {
+  TAppThunkDispatch,
+  extractActionTypes,
+  makeFakeOffers,
+} from '../utils/mocks';
 import { Action } from '@reduxjs/toolkit';
 import * as tokenStore from '../services/token';
 import axios from 'axios';
@@ -46,11 +50,11 @@ describe('Async actions', () => {
 
   beforeEach(() => {
     store = mockStoreCreator({
-      OFFERS: { offers: [] },
+      [NameSpace.Offers]: { offers: [] },
     });
   });
 
-  describe('Action: checkAuthStatus', () => {
+  describe('Action: "checkAuthStatus"', () => {
     it('should dispatch "checkAuthStatus.pending", "checkAuthStatus.fulfilled" with thunk "checkAuthStatus"', async () => {
       const fakeResponse = { email: 'check@gmail.ru' };
       mockAxiosAdapter.onGet(APIRoute.Login).reply(200, fakeResponse);
@@ -78,7 +82,7 @@ describe('Async actions', () => {
     });
   });
 
-  describe('Action: Login', () => {
+  describe('Action: "login"', () => {
     it('should dispatch "login.pending", "login.fulfilled" with thunk "login"', async () => {
       const fakeRequest = { email: 'fake@gmail.ru', password: '100500' };
       const fakeResponse = { token: 'fake', email: 'check@gmail.ru' };
@@ -113,7 +117,7 @@ describe('Async actions', () => {
     });
   });
 
-  describe('Action: Logout', () => {
+  describe('Action: "logout"', () => {
     it('should dispatch "logout.pending", "logout.fulfilled" with thunk "logout"', async () => {
       mockAxiosAdapter.onDelete(APIRoute.Logout).reply(200);
 
@@ -139,6 +143,39 @@ describe('Async actions', () => {
       const actions = extractActionTypes(store.getActions());
 
       expect(actions).toEqual([logout.pending.type, logout.rejected.type]);
+    });
+  });
+
+  describe('Action: "loadOffers"', () => {
+    it('should dispatch "loadOffers.pending" and "loadOffers.fulfilled" and update "offers" field with thunk "loadOffers"', async () => {
+      const fakeResponse = makeFakeOffers();
+      mockAxiosAdapter.onGet(APIRoute.Offers).reply(200, fakeResponse);
+
+      await store.dispatch(loadOffers());
+      const recievedActions = store.getActions();
+      const extractedActionTypes = extractActionTypes(recievedActions);
+      const loadOffersActionFulfilled = recievedActions.at(1) as ReturnType<
+        typeof loadOffers.fulfilled
+      >;
+      const { payload } = loadOffersActionFulfilled;
+
+      expect(extractedActionTypes).toEqual([
+        loadOffers.pending.type,
+        loadOffers.fulfilled.type,
+      ]);
+      expect(payload).toEqual(fakeResponse);
+    });
+
+    it('should dispatch "loadOffers.pending" and "loadOffers.rejected"  with thunk "loadOffers"', async () => {
+      mockAxiosAdapter.onGet(APIRoute.Offers).reply(400, []);
+
+      await store.dispatch(loadOffers());
+      const actions = extractActionTypes(store.getActions());
+
+      expect(actions).toEqual([
+        loadOffers.pending.type,
+        loadOffers.rejected.type,
+      ]);
     });
   });
 });
