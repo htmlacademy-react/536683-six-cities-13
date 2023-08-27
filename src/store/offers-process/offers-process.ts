@@ -20,9 +20,11 @@ export const offersProcess = createSlice({
         (offer) => offer.id === action.payload.favoriteId
       );
 
-      state.offers[currentOfferIndex].isFavorite = Boolean(
-        action.payload.status
-      );
+      if (currentOfferIndex !== -1) {
+        state.offers[currentOfferIndex].isFavorite = Boolean(
+          action.payload.status
+        );
+      }
     },
   },
   extraReducers(builder) {

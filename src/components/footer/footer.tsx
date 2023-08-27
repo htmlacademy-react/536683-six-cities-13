@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 
 const Footer = () => (
-  <footer className="footer container">
+  <footer className="footer container" data-testid="footer-container">
     <Link className="footer__logo-link" to={AppRoute.Root}>
       <img
         className="footer__logo"

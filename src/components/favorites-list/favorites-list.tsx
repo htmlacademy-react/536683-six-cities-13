@@ -1,5 +1,5 @@
 import { TOffer } from '../../types/offer';
-import { getUniqueFavoriteCities } from '../../utils';
+import { getUniqueFavoriteCities } from '../../utils/utils';
 import { OfferCardFavorites } from '../offer-card/offer-card-favorites';
 
 type TFavoritesListProps = {
@@ -10,11 +10,15 @@ const FavoritesList = ({ favorites }: TFavoritesListProps) => {
   const cities: string[] = getUniqueFavoriteCities(favorites);
 
   return (
-    <section className="favorites">
+    <section className="favorites" data-testid="favorites-container">
       <h1 className="favorites__title">Saved listing</h1>
       <ul className="favorites__list">
         {cities.map((city) => (
-          <li key={city} className="favorites__locations-items">
+          <li
+            key={city}
+            className="favorites__locations-items"
+            data-testid="favorite-city"
+          >
             <div className="favorites__locations locations locations--current">
               <div className="locations__item">
                 <a className="locations__item-link" href="#">

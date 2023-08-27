@@ -4,6 +4,7 @@ import { TOffer } from '../../types/offer';
 import { RatingMain } from '../rating/rating-main';
 import { MainFavoriteButton } from '../favorite-button/main-favorite-button';
 import { TSize } from '../../types/const';
+import { capitalizeFirstLetter } from '../../utils/utils';
 
 export type TOfferCardProxyProps = Omit<
   TOfferCardProps,
@@ -19,7 +20,7 @@ export type TOfferCardProps = {
   offer: TOffer;
   className: string;
   imageSize: TSize;
-  onOfferHover?: (offerId: string) => void;
+  onOfferHover?: (offerId: string | null) => void;
 };
 
 const OfferCard = ({
@@ -43,6 +44,8 @@ const OfferCard = ({
     <article
       className={`${className}__card place-card`}
       onMouseEnter={() => onOfferHover?.(id)}
+      onMouseLeave={() => onOfferHover?.(null)}
+      data-testid="offer-card"
     >
       {isPremium && (
         <div className="place-card__mark">
@@ -72,7 +75,7 @@ const OfferCard = ({
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{capitalizeFirstLetter(type)}</p>
       </div>
     </article>
   );

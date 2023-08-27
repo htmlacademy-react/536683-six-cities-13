@@ -1,4 +1,4 @@
-import { TOffer } from './types/offer';
+import { TOffer } from '../types/offer';
 
 const sortLowToHighPrice = (aOffer: TOffer, bOffer: TOffer) =>
   aOffer.price - bOffer.price;

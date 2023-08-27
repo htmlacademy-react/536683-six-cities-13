@@ -1,61 +1,42 @@
-import { useState } from 'react';
-import { useAppSelector } from '../../hooks/use-app-selector';
-import { TOffer } from '../../types/offer';
+import { useState, useCallback } from 'react';
 import { Map } from '../map/map';
 import { OfferList } from '../offer-list/offer-list';
-import { CitiesEmpty } from './cities-empty';
-import {
-  getOffers,
-  getOffersLoadingStatus,
-} from '../../store/offers-process/selectors';
-import { LoadingStatus } from '../../const';
+import { TOffer } from '../../types/offer';
 
 type TCitiesProps = {
   locationCity: string;
+  offers: TOffer[];
 };
 
-const Cities = ({ locationCity }: TCitiesProps) => {
-  const offers = useAppSelector(getOffers);
-  const loadingStatus = useAppSelector(getOffersLoadingStatus);
-  const [hoveredOffer, setHoveredOffer] = useState<TOffer | undefined>(
-    undefined
-  );
+const Cities = ({ locationCity, offers }: TCitiesProps) => {
+  const [hoveredOfferId, setHoveredOfferId] = useState<string | null>(null);
+  const currentOffer = offers.find((offer) => offer.id === hoveredOfferId);
 
-  if (loadingStatus === LoadingStatus.Error) {
-    return (
-      <div className="cities">
-        <CitiesEmpty locationCity={locationCity} />;
-      </div>
-    );
-  }
+  const handleOfferHover = useCallback((offerId: string | null) => {
+    setHoveredOfferId(offerId);
+  }, []);
 
   const currentLocationOffers = offers.filter(
     (offer) => offer.city.name === locationCity
   );
   const [currentLocationOffer] = currentLocationOffers;
 
-  const handleOfferHover = (offerId: string) => {
-    const currentOffer = offers.find((offer) => offer.id === offerId);
-
-    setHoveredOffer(currentOffer);
-  };
-
   return (
-    <div className="cities">
-      <div className="cities__places-container container">
-        <OfferList
-          offers={currentLocationOffers}
-          onOfferHover={handleOfferHover}
-        />
-        <div className="cities__right-section">
-          <section className="cities__map map">
+    <div className="cities__places-container container">
+      <OfferList
+        offers={currentLocationOffers}
+        onOfferHover={handleOfferHover}
+      />
+      <div className="cities__right-section">
+        <section className="cities__map map">
+          {currentLocationOffer?.city && (
             <Map
               city={currentLocationOffer.city}
               points={currentLocationOffers}
-              selectedPoint={hoveredOffer}
+              selectedPoint={currentOffer}
             />
-          </section>
-        </div>
+          )}
+        </section>
       </div>
     </div>
   );

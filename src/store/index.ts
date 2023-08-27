@@ -3,7 +3,7 @@ import { createApi } from '../services/api';
 import { timeout } from './middlewares/timeout';
 import { rootReducer } from './root-reducer';
 
-export const fetchData = createApi();
+export const fetchData = createApi?.();
 
 const store = configureStore({
   reducer: rootReducer,

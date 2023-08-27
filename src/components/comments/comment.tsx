@@ -1,5 +1,5 @@
 import { TComment } from '../../types/review';
-import { getCommentDate, getMachineDate } from '../../utils';
+import { getCommentDate, getMachineDate } from '../../utils/utils';
 import { RatingReviews } from '../rating/rating-reviews';
 
 const Comment = ({
@@ -9,7 +9,7 @@ const Comment = ({
   rating,
   comment,
 }: TComment) => (
-  <li key={id} className="reviews__item">
+  <li key={id} className="reviews__item" data-testid="comment">
     <div className="reviews__user user">
       <div className="reviews__avatar-wrapper user__avatar-wrapper">
         <img

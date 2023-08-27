@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { SORT_TYPES } from '../../const';
 import cn from 'classnames';
 
@@ -6,7 +6,7 @@ type TOffersSortingProps = {
   onSortTypeClick: (sortType: string) => void;
 };
 
-const OffersSorting = ({ onSortTypeClick }: TOffersSortingProps) => {
+const Sorting = ({ onSortTypeClick }: TOffersSortingProps) => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const sortTypeName = SORT_TYPES[activeIndex];
@@ -18,7 +18,12 @@ const OffersSorting = ({ onSortTypeClick }: TOffersSortingProps) => {
   const arrowStyle = isOpened ? 'translateY(-50%) rotate(-180deg)' : '';
 
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form
+      className="places__sorting"
+      action="#"
+      method="get"
+      data-testid="sorting"
+    >
       <span className="places__sorting-caption">Sort by </span>
       <span
         className="places__sorting-type"
@@ -52,6 +57,7 @@ const OffersSorting = ({ onSortTypeClick }: TOffersSortingProps) => {
               setIsOpened(false);
               onSortTypeClick(sortType);
             }}
+            data-testid="sort-type-item"
           >
             {sortType}
           </li>
@@ -60,5 +66,7 @@ const OffersSorting = ({ onSortTypeClick }: TOffersSortingProps) => {
     </form>
   );
 };
+
+const OffersSorting = memo(Sorting);
 
 export { OffersSorting };

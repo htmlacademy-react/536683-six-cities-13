@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import cn from 'classnames';
 
 type TOfferHostProps = {
@@ -9,7 +10,7 @@ type TOfferHostProps = {
   };
 };
 
-const OfferHost = ({ hostInfo }: TOfferHostProps) => {
+const Host = ({ hostInfo }: TOfferHostProps) => {
   const { isPro, name, avatarUrl, description } = hostInfo;
 
   return (
@@ -38,5 +39,7 @@ const OfferHost = ({ hostInfo }: TOfferHostProps) => {
     </div>
   );
 };
+
+const OfferHost = memo(Host);
 
 export { OfferHost };

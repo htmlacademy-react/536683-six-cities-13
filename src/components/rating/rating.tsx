@@ -1,4 +1,4 @@
-import { calculateRating } from '../../utils';
+import { calculateRating } from '../../utils/utils';
 
 export type TRatingProps = {
   ratingValue: number;
@@ -13,15 +13,16 @@ const Rating = ({
   className,
   showDigits = false,
 }: TRatingProps) => (
-  <div className={`${className}__rating rating`}>
+  <div className={`${className}__rating rating`} data-testid="rating">
     <div className={`${className}__stars rating__stars`}>
-      <span style={{ width: `${calculateRating(ratingValue)}%` }} />
+      <span
+        style={{ width: `${calculateRating(ratingValue)}%` }}
+        data-testid="rating-width"
+      />
       <span className="visually-hidden">Rating</span>
     </div>
     {showDigits && (
-      <span className="offer__rating-value rating__value">
-        {Math.round(ratingValue)}
-      </span>
+      <span className="offer__rating-value rating__value">{ratingValue}</span>
     )}
   </div>
 );

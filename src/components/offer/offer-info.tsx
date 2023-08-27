@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { TDetail } from '../../types/details';
 import { DetailsFavoriteButton } from '../favorite-button/details-favorite-button';
 import { RatingOffer } from '../rating/rating-offer';
@@ -8,7 +9,7 @@ type TOfferInfoProps = {
   offer: TDetail;
 };
 
-const OfferInfo = ({ offer }: TOfferInfoProps) => {
+const Info = ({ offer }: TOfferInfoProps) => {
   const {
     id,
     rating,
@@ -44,5 +45,7 @@ const OfferInfo = ({ offer }: TOfferInfoProps) => {
     </>
   );
 };
+
+const OfferInfo = memo(Info);
 
 export { OfferInfo };
