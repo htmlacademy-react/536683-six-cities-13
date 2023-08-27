@@ -32,6 +32,7 @@ export const makeFakeOffers = ({
     return {
       id: `${index}`,
       isFavorite,
+      type: name.title(),
       city: {
         name: name.title(),
       },
@@ -58,7 +59,11 @@ export const makeFakeComments = ({
   new Array(count).fill(null).map(
     () =>
       ({
+        id: name.title(),
         date: hasDate ? date.recent().toISOString() : null,
+        user: {
+          name: name.title(),
+        },
       } as TComment)
   );
 

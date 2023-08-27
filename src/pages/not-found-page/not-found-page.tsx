@@ -3,7 +3,10 @@ import styles from './not-found-page.module.css';
 import { AppRoute } from '../../const';
 
 const NotFoundPage = () => (
-  <div className={`page ${styles['page--not-found']}`}>
+  <div
+    className={`page ${styles['page--not-found']}`}
+    data-testid="not-found-page"
+  >
     <main className="page__main page__main--favorites page__main--favorites-empty">
       <div className="page__favorites-container container">
         <section

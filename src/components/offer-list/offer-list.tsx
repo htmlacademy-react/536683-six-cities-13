@@ -29,7 +29,7 @@ const OfferList = ({ offers, onOfferHover }: TOfferListProps) => {
   const sortedOffers = Sort[currentSortType](offers);
 
   return (
-    <section className="cities__places places">
+    <section className="cities__places places" data-testid="cities-container">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">
         {offerCount} {declension(offerCount, PLACES_TITLES)} to stay in{' '}

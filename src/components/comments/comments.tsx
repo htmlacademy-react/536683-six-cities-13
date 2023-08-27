@@ -23,7 +23,7 @@ const Comments = ({ comments }: TCommentsProps) => {
   );
 
   return (
-    <section className="offer__reviews reviews">
+    <section className="offer__reviews reviews" data-testid="comments">
       <h2 className="reviews__title">
         Reviews · <span className="reviews__amount">{comments.length}</span>
       </h2>

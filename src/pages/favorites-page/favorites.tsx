@@ -6,7 +6,10 @@ type TFavoritesProps = {
 };
 
 const Favorites = ({ favorites }: TFavoritesProps) => (
-  <main className="page__main page__main--favorites">
+  <main
+    className="page__main page__main--favorites"
+    data-testid="favorites-main"
+  >
     <div className="page__favorites-container container">
       {<FavoritesList favorites={favorites} />}
     </div>

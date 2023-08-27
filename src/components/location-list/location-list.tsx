@@ -12,10 +12,14 @@ const LocationList = ({
   currentLocation,
   onLocationClick,
 }: TLocationListProps) => (
-  <section className="locations container">
+  <section className="locations container" data-testid="locations">
     <ul className="locations__list tabs__list">
       {locations.map((location) => (
-        <li key={location} className="locations__item">
+        <li
+          key={location}
+          className="locations__item"
+          data-testid="location-item"
+        >
           <a
             href="#"
             className={`locations__item-link tabs__item ${cn({

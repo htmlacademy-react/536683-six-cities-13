@@ -18,7 +18,12 @@ const Sorting = ({ onSortTypeClick }: TOffersSortingProps) => {
   const arrowStyle = isOpened ? 'translateY(-50%) rotate(-180deg)' : '';
 
   return (
-    <form className="places__sorting" action="#" method="get">
+    <form
+      className="places__sorting"
+      action="#"
+      method="get"
+      data-testid="sorting"
+    >
       <span className="places__sorting-caption">Sort by </span>
       <span
         className="places__sorting-type"
@@ -52,6 +57,7 @@ const Sorting = ({ onSortTypeClick }: TOffersSortingProps) => {
               setIsOpened(false);
               onSortTypeClick(sortType);
             }}
+            data-testid="sort-type-item"
           >
             {sortType}
           </li>
