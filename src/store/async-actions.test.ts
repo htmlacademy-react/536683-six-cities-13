@@ -3,6 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
 import {
   checkAuthStatus,
+  loadComments,
   loadDetails,
   loadFavorites,
   loadNearPlaces,
@@ -10,12 +11,14 @@ import {
   login,
   logout,
   setFavorite,
+  submitComment,
 } from './async-actions';
 import { TRootState } from '../types/state';
 import { APIRoute, NameSpace } from '../const';
 import {
   TAppThunkDispatch,
   extractActionTypes,
+  makeFakeComments,
   makeFakeOfferDetails,
   makeFakeOffers,
 } from '../utils/mocks';
@@ -338,6 +341,95 @@ describe('Async actions', () => {
       expect(actions).toEqual([
         setFavorite.pending.type,
         setFavorite.rejected.type,
+      ]);
+    });
+  });
+
+  describe('Action: "loadComments"', () => {
+    it('should dispatch "loadComments.pending" and "loadComments.fulfilled" and update "comments" field with thunk "loadComments"', async () => {
+      const fakeOfferId = '100500';
+      const fakeResponse = makeFakeComments();
+      mockAxiosAdapter
+        .onGet(`${APIRoute.Comments}/${fakeOfferId}`)
+        .reply(200, fakeResponse);
+
+      await store.dispatch(loadComments({ offerId: fakeOfferId }));
+      const recievedActions = store.getActions();
+      const extractedActionTypes = extractActionTypes(recievedActions);
+      const loadCommentsActionFulfilled = recievedActions.at(1) as ReturnType<
+        typeof loadComments.fulfilled
+      >;
+      const { payload } = loadCommentsActionFulfilled;
+
+      expect(extractedActionTypes).toEqual([
+        loadComments.pending.type,
+        loadComments.fulfilled.type,
+      ]);
+      expect(payload).toEqual(fakeResponse);
+    });
+
+    it('should dispatch "loadComments.pending" and "loadComments.rejected" with thunk "loadComments"', async () => {
+      const fakeOfferId = '100500';
+      mockAxiosAdapter
+        .onGet(`${APIRoute.Comments}/${fakeOfferId}`)
+        .reply(400, []);
+
+      await store.dispatch(loadComments({ offerId: fakeOfferId }));
+      const extractedActionTypes = extractActionTypes(store.getActions());
+
+      expect(extractedActionTypes).toEqual([
+        loadComments.pending.type,
+        loadComments.rejected.type,
+      ]);
+    });
+  });
+
+  describe('Action: "submitComment"', () => {
+    it('should dispatch "submitComment.pending" and "submitComment.fulfilled" and post new comments with thunk "submitComment"', async () => {
+      const fakeOfferId = '100500';
+      const newFakeComment = {
+        offerId: fakeOfferId,
+        rating: 5,
+        comment: 'lorem loremloremloremlorem loremlorem lorem',
+      };
+
+      mockAxiosAdapter
+        .onPost(`${APIRoute.Comments}/${fakeOfferId}`)
+        .reply(200, newFakeComment);
+
+      await store.dispatch(submitComment(newFakeComment));
+      const recievedActions = store.getActions();
+      const extractedActionTypes = extractActionTypes(recievedActions);
+      const submitCommentActionFulfilled = recievedActions.at(1) as ReturnType<
+        typeof loadComments.fulfilled
+      >;
+      const { payload } = submitCommentActionFulfilled;
+
+      expect(extractedActionTypes).toEqual([
+        submitComment.pending.type,
+        submitComment.fulfilled.type,
+      ]);
+      expect(payload).toEqual(newFakeComment);
+    });
+
+    it('should dispatch "submitComment.pending" and "submitComment.rejected" with thunk "submitComment"', async () => {
+      const fakeOfferId = '100500';
+      const newFakeComment = {
+        offerId: fakeOfferId,
+        rating: 5,
+        comment: 'lorem loremloremloremlorem loremlorem lorem',
+      };
+      mockAxiosAdapter
+        .onPost(`${APIRoute.Comments}/${fakeOfferId}`)
+        .reply(400, []);
+
+      await store.dispatch(submitComment(newFakeComment));
+
+      const extractedActionTypes = extractActionTypes(store.getActions());
+
+      expect(extractedActionTypes).toEqual([
+        submitComment.pending.type,
+        submitComment.rejected.type,
       ]);
     });
   });
