@@ -67,7 +67,8 @@ const LoginPage = () => {
                   name="password"
                   placeholder="Password"
                   required
-                  pattern="[a-z]{1}[0-9]{1}"
+                  pattern="\d+[a-zA-Z]+|[a-zA-Z]+\d+"
+                  minLength={2}
                   ref={passwordRef}
                 />
               </div>

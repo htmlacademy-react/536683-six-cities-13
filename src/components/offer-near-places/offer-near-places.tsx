@@ -1,5 +1,5 @@
 import { TOffer } from '../../types/offer';
-import { OfferCardNearPlace } from '../offer-card/offer-card-near-place';
+import { OfferCardNearPlace } from '../offer-card-near-place/offer-card-near-place';
 
 type TOfferNearPlacesProps = {
   nearPlaces: TOffer[];

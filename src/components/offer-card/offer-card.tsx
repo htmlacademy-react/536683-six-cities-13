@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { TOffer } from '../../types/offer';
-import { RatingMain } from '../rating/rating-main';
-import { MainFavoriteButton } from '../favorite-button/main-favorite-button';
+import { RatingMain } from '../rating-main/rating-main';
+import { MainFavoriteButton } from '../main-favorite-button/main-favorite-button';
 import { TSize } from '../../types/const';
 import { capitalizeFirstLetter } from '../../utils/utils';
 

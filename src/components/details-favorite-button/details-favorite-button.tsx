@@ -1,5 +1,8 @@
 import { FavoriteButtonClassName } from '../../const';
-import { FavoriteButton, TProxyFavoriteButtonProps } from './favorite-button';
+import {
+  FavoriteButton,
+  TProxyFavoriteButtonProps,
+} from '../favorite-button/favorite-button';
 
 const DetailsFavoriteButton = ({
   offerId,

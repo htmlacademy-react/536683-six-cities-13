@@ -4,10 +4,10 @@ import { TOffer } from '../../types/offer';
 import { TComment } from '../../types/review';
 import { Map } from '../map/map';
 import { Comments } from '../comments/comments';
-import { OfferGallery } from './offer-gallery';
-import { OfferHost } from './offer-host';
-import { OfferInfo } from './offer-info';
-import { OfferNearPlaces } from './offer-near-places';
+import { OfferGallery } from '../offer-gallery/offer-gallery';
+import { OfferHost } from '../offer-host/offer-host';
+import { OfferInfo } from '../offer-info/offer-info';
+import { OfferNearPlaces } from '../offer-near-places/offer-near-places';
 import styles from './offer.module.css';
 
 type TOfferProps = {

@@ -8,11 +8,11 @@ import {
   getFavorites,
   getFavoritesLoadingStatus,
 } from '../../store/favorites-process/selectors';
-import { Favorites } from './favorites';
+import { Favorites } from '../favorites/favorites';
 import { loadFavorites } from '../../store/async-actions';
 import { AuthStatus, LoadingStatus } from '../../const';
 import { Spinner } from '../../components/spinner/spinner';
-import { FavoritesEmpty } from './favorites-empty';
+import { FavoritesEmpty } from '../favorites-empty/favorites-empty';
 import cn from 'classnames';
 import { getAuthStatus } from '../../store/user-process/selectors';
 

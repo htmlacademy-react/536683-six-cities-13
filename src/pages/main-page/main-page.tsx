@@ -13,7 +13,7 @@ import {
   getOffersLoadingStatus,
 } from '../../store/offers-process/selectors';
 import cn from 'classnames';
-import { CitiesEmpty } from '../../components/cities/cities-empty';
+import { CitiesEmpty } from '../../components/cities-empty/cities-empty';
 import { loadFavorites } from '../../store/async-actions';
 import { getAuthStatus } from '../../store/user-process/selectors';
 import { useEffect } from 'react';

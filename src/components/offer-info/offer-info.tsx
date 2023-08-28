@@ -1,9 +1,9 @@
 import { memo } from 'react';
 import { TDetail } from '../../types/details';
-import { DetailsFavoriteButton } from '../favorite-button/details-favorite-button';
-import { RatingOffer } from '../rating/rating-offer';
-import { OfferFeatures } from './offer-features';
-import { OfferGoods } from './offer-goods';
+import { DetailsFavoriteButton } from '../details-favorite-button/details-favorite-button';
+import { RatingOffer } from '../rating-offer/rating-offer';
+import { OfferFeatures } from '../offer-features/offer-features';
+import { OfferGoods } from '../offer-goods/offer-goods';
 
 type TOfferInfoProps = {
   offer: TDetail;
