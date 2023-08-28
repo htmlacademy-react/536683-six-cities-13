@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { OFFER_CARD_IMAGE_SIZE, OfferCardClassName } from '../../const';
-import { OfferCard, TOfferCardProxyProps } from './offer-card';
+import { OfferCard, TOfferCardProxyProps } from '../offer-card/offer-card';
 
 const Card = (props: TOfferCardProxyProps) => {
   const { ...restProps } = props;

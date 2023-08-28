@@ -1,5 +1,5 @@
 import { RatingClassName } from '../../const';
-import { Rating, TRatingProxyProps } from './rating';
+import { Rating, TRatingProxyProps } from '../rating/rating';
 
 const RatingOffer = ({ ratingValue }: TRatingProxyProps) => (
   <Rating
