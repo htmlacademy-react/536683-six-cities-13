@@ -11,11 +11,6 @@ export type TOfferCardProxyProps = Omit<
   'className' | 'imageSize'
 >;
 
-export type TImageSize = {
-  width: number;
-  height: number;
-};
-
 export type TOfferCardProps = {
   offer: TOffer;
   className: string;
