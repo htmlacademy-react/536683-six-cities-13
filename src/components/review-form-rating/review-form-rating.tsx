@@ -12,7 +12,10 @@ const ReviewRating = ({ selectedRating, onRatingChange }: TReviewRating) => {
   const commentSubmitStatus = useAppSelector(getCommentSubmitStatus);
 
   return (
-    <div className="reviews__rating-form form__rating">
+    <div
+      className="reviews__rating-form form__rating"
+      data-testid="review-rating-container"
+    >
       {REVIEW_RATINGS.map((reviewRating) => {
         const { ratingValue, ratingText } = reviewRating;
 
@@ -27,6 +30,7 @@ const ReviewRating = ({ selectedRating, onRatingChange }: TReviewRating) => {
               value={ratingValue}
               checked={selectedRating === ratingValue}
               disabled={commentSubmitStatus === LoadingStatus.Loading}
+              data-testid="review-rating-item"
             />
             <label
               htmlFor={`${ratingValue}-stars`}

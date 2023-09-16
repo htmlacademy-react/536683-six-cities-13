@@ -54,6 +54,7 @@ const FavoriteButton = ({
       })} button`}
       onClick={handleFavoriteClick}
       type="button"
+      data-testid="favorite-button"
     >
       <svg className={`${className}__bookmark-icon`} style={buttonSize}>
         <use xlinkHref="#icon-bookmark"></use>

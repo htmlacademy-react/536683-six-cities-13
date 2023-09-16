@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { LoadingStatus, ReviewInfo } from '../../const';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { submitComment } from '../../store/async-actions';
-import { ReviewRating } from './review-form-rating';
+import { ReviewRating } from '../review-form-rating/review-form-rating';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { getCommentSubmitStatus } from '../../store/comments-process/selectors';
@@ -68,6 +68,7 @@ const ReviewForm = () => {
       action="#"
       method="post"
       onSubmit={handleFormSubmit}
+      data-testid="reviews-form"
     >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
@@ -86,6 +87,7 @@ const ReviewForm = () => {
         minLength={MinCommentLength}
         maxLength={MaxCommentLength}
         disabled={commentSubmitStatus === LoadingStatus.Loading}
+        data-testid="reviews-textarea"
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -98,6 +100,7 @@ const ReviewForm = () => {
           className="reviews__submit form__submit button"
           type="submit"
           disabled={!isValid || commentSubmitStatus === LoadingStatus.Loading}
+          data-testid="reviews-submit"
         >
           {commentSubmitStatus === LoadingStatus.Loading
             ? 'Waiting...'

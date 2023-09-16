@@ -30,7 +30,7 @@ const Info = ({ offer }: TOfferInfoProps) => {
           <span>Premium</span>
         </div>
       )}
-      <div className="offer__name-wrapper">
+      <div className="offer__name-wrapper" data-testid="offer-info">
         <h1 className="offer__name">{title}</h1>
         <DetailsFavoriteButton offerId={id} isFavorite={isFavorite} />
       </div>

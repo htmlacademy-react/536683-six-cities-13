@@ -27,15 +27,24 @@ const UserMenu = () => {
       <Link
         className="header__nav-link header__nav-link--profile"
         to={AppRoute.Favorites}
+        data-testid="user-info"
       >
         <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-        <span className="header__user-name user__name">{userEmail}</span>
-        <span className="header__favorite-count">{favorites.length}</span>
+        <span className="header__user-name user__name" data-testid="user-email">
+          {userEmail}
+        </span>
+        <span
+          className="header__favorite-count"
+          data-testid="user-favorites-count"
+        >
+          {favorites.length}
+        </span>
       </Link>
     ) : (
       <Link
         className="header__nav-link header__nav-link--profile"
         to={AppRoute.Login}
+        data-testid="sign-in"
       >
         <div className="header__avatar-wrapper user__avatar-wrapper"></div>
         <span className="header__login">Sign in</span>
@@ -43,7 +52,7 @@ const UserMenu = () => {
     );
   const userStatus =
     authStatus === AuthStatus.Auth ? (
-      <li className="header__nav-item">
+      <li className="header__nav-item" data-testid="sign-out">
         <a className="header__nav-link" href="#" onClick={handleLogoutClick}>
           <span className="header__signout">Sign out</span>
         </a>
@@ -51,7 +60,7 @@ const UserMenu = () => {
     ) : null;
 
   return (
-    <nav className="header__nav">
+    <nav className="header__nav" data-testid="user-menu">
       <ul className="header__nav-list">
         <li className="header__nav-item user">{userInfo}</li>
         {userStatus}

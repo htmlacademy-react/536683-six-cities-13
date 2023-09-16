@@ -4,7 +4,7 @@ import { Logo } from '../logo/logo';
 type THeaderProps = PropsWithChildren;
 
 const Header = ({ children }: THeaderProps) => (
-  <header className="header">
+  <header className="header" data-testid="header">
     <div className="container">
       <div className="header__wrapper">
         <div className="header__left">
