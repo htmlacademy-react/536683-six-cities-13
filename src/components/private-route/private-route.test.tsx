@@ -4,7 +4,7 @@ import { withRouter, withStore } from '../../utils/mock-components';
 import { PrivateRoute } from './private-route';
 
 describe('Component: PrivateRoute', () => {
-  it('should render correct then AuthStatus.Error', () => {
+  it('should render correct when AuthStatus.Error', () => {
     const { withStoreComponent } = withStore(<PrivateRoute />, {
       USER: { userEmail: '', authStatus: AuthStatus.Unknown },
     });
@@ -18,9 +18,11 @@ describe('Component: PrivateRoute', () => {
     expect(spinner).toBeInTheDocument();
   });
 
-  it('should render correct with children passed', () => {
-    const expectedText = 'Passed';
+  it('should render correct when AuthStatus.Auth', () => {
+    const expectedText = 'Favorites Page';
+    const unexpectedText = 'Login Page';
     const TestComponent = <div>{expectedText}</div>;
+
     const { withStoreComponent } = withStore(
       <PrivateRoute>{TestComponent}</PrivateRoute>,
       {
@@ -32,5 +34,6 @@ describe('Component: PrivateRoute', () => {
     render(preparedComponent);
 
     expect(screen.getByText(expectedText)).toBeInTheDocument();
+    expect(screen.queryByText(unexpectedText)).not.toBeInTheDocument();
   });
 });

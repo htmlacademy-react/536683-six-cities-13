@@ -29,6 +29,7 @@ const Sorting = ({ onSortTypeClick }: TOffersSortingProps) => {
         className="places__sorting-type"
         tabIndex={0}
         onClick={handleSortClick}
+        data-testid="places-sort-button"
       >
         {sortTypeName}
         <svg
@@ -36,6 +37,7 @@ const Sorting = ({ onSortTypeClick }: TOffersSortingProps) => {
           style={{ transform: arrowStyle }}
           width={7}
           height={4}
+          data-testid="places-arrow"
         >
           <use xlinkHref="#icon-arrow-select" />
         </svg>
@@ -44,6 +46,7 @@ const Sorting = ({ onSortTypeClick }: TOffersSortingProps) => {
         className={`places__options places__options--custom ${cn({
           'places__options--opened': isOpened,
         })}`}
+        data-testid="places-dropdown"
       >
         {SORT_TYPES.map((sortType, index) => (
           <li

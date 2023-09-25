@@ -100,6 +100,6 @@ describe('Component: ReviewForm', () => {
 
     const renderedSubmitButton = screen.getByTestId(reviewsSubmitTestId);
 
-    expect(renderedSubmitButton).toHaveAttribute('disabled', '');
+    expect(renderedSubmitButton).toBeDisabled();
   });
 });
