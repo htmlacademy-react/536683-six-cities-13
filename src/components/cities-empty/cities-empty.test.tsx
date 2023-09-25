@@ -3,14 +3,23 @@ import { CitiesEmpty } from './cities-empty';
 
 describe('Component: CitiesEmpty', () => {
   it('should render correct', () => {
-    const expectedText = 'Paris';
+    const expectedProps = 'Paris';
     const citiesEmptyContainerTestId = 'cities-empty-container';
 
-    render(<CitiesEmpty locationCity={expectedText} />);
+    render(<CitiesEmpty locationCity={expectedProps} />);
 
     const citiesEmptyContainer = screen.getByTestId(citiesEmptyContainerTestId);
 
     expect(citiesEmptyContainer).toBeInTheDocument();
     expect(citiesEmptyContainer).toHaveTextContent(/Paris/i);
+  });
+
+  it('should render correct with specific text', () => {
+    const expectedProps = 'Paris';
+    const expectedText = 'No places to stay available';
+
+    render(<CitiesEmpty locationCity={expectedProps} />);
+
+    expect(screen.getByText(expectedText)).toBeInTheDocument();
   });
 });

@@ -6,7 +6,7 @@ const ErrorMessage = () => {
   const error = useAppSelector(getErrorInfo);
 
   return error ? (
-    <div className={styles['error-message']}>
+    <div className={styles['error-message']} data-testid="error-message">
       {error.messageStatus && <span>{error.messageStatus}</span>}
       <span>{error.message}</span>
     </div>

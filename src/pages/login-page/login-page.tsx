@@ -36,7 +36,7 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="page page--gray page--login">
+    <div className="page page--gray page--login" data-testid="login-page">
       <Header />
       <main className="page__main page__main--login">
         <div className="page__login-container container">
@@ -57,6 +57,7 @@ const LoginPage = () => {
                   placeholder="Email"
                   required
                   ref={emailRef}
+                  data-testid="email-input"
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
@@ -70,6 +71,7 @@ const LoginPage = () => {
                   pattern="\d+[a-zA-Z]+|[a-zA-Z]+\d+"
                   minLength={2}
                   ref={passwordRef}
+                  data-testid="password-input"
                 />
               </div>
               <button

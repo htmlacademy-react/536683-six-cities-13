@@ -15,7 +15,7 @@ const OfferFeatures = ({ features }: TOfferFeaturesProps) => {
   const { type, bedrooms, maxAdults } = features;
 
   return (
-    <ul className="offer__features">
+    <ul className="offer__features" data-testid="offer-features">
       <li className="offer__feature offer__feature--entire">
         {capitalizeFirstLetter(type)}
       </li>
